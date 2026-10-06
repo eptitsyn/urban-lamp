@@ -12,6 +12,7 @@ from entity_marker.infrastructure.normalization.text import MappedNormalizer
         ("А 123 ВС 77", Profile.PLATE, "A123BC77"),
         ("А-123-ВС-77", Profile.PLATE, "A123BC77"),
         ("45 01 № 123456", Profile.IDENTIFIER, "4501123456"),
+        ("20.01 1 1973", Profile.DATE, "20.0111973"),
         ("СЕМЁН", Profile.NAME, "семен"),
         ("СЕМЕ\u0308Н", Profile.NAME, "семен"),
         ("Straße", Profile.NAME, "strasse"),

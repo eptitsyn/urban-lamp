@@ -51,7 +51,12 @@ class MappedNormalizer:
                     if char in " \t-№":
                         continue
                 if (
-                    profile in (NormalizationProfile.TAX_ID, NormalizationProfile.REFERENCE)
+                    profile
+                    in (
+                        NormalizationProfile.TAX_ID,
+                        NormalizationProfile.REFERENCE,
+                        NormalizationProfile.DATE,
+                    )
                     and char in " \t"
                 ):
                     continue

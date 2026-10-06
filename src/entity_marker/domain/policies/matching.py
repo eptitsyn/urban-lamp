@@ -46,7 +46,7 @@ FIELD_WEIGHTS = MappingProxyType(
         # Components can support one another while isolated given names stay weak.
         "first_name": 0.50,
         "middle_name": 0.50,
-        "birth_date": 0.65,
+        "birth_date": 0.70,
         "issue_date": 0.60,
         "series_number": 0.98,
         "number": 0.90,
@@ -73,7 +73,7 @@ FIELD_WEIGHTS = MappingProxyType(
 class PersonMatchingPolicy:
     def allowed_distance(self, field_name: str, value: str) -> int:
         if field_name == "birth_date":
-            return 0
+            return int(len(value) >= 8)
         if len(value) < 4:
             return 0
         return (
@@ -100,7 +100,7 @@ def allowed_distance(alias: EntityAlias, normalized: str, config: MatchingConfig
         return 0
     if not config.fuzzy_enabled or len(normalized) < config.min_fuzzy_pattern_length:
         return 0
-    # Contacts, tax IDs, dates and incoming letter numbers stay exact/normalized.
+    # Contacts, tax IDs, correspondence dates and letter numbers stay exact/normalized.
     if alias.field_name in (
         "inn",
         "email",

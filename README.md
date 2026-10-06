@@ -225,6 +225,13 @@ such as a male `Иванов` and female `Иванова` sharing a form remain 
 VIN, plate, body number, and chassis number. Documents include series, number,
 combined series/number, and issue-date aliases.
 
+Birth dates support one OCR edit after horizontal spaces are removed. For example,
+stored `20.01.1973` matches `20.01 1 1973` as a Bitap substitution of `.` with `1`.
+The reported region includes the original spaces. The same one-edit rule also
+permits digit substitutions; `--disable-fuzzy` or `--max-errors 0` disables it.
+Line breaks and excessive gaps remain barriers. Other date fields retain
+exact/normalized matching.
+
 Fuzzy distance defaults to one, with domain limits:
 
 | Field | Maximum edits |
@@ -234,7 +241,8 @@ Fuzzy distance defaults to one, with domain limits:
 | Sender full names / surnames of length ≥ 10 | 2, if global ceiling permits |
 | Document number/combined identifier of length ≥ 6 | 1 |
 | Court case-number aliases of length ≥ 6 | 1 |
-| Dates, document series, shorter values | 0 |
+| Birth-date aliases of length ≥ 8 | 1 |
+| Other dates, document series, shorter values | 0 |
 
 ```bash
 uv run entity-marker mark --text input.txt --objects objects.json --max-errors 2

@@ -114,10 +114,10 @@ def test_series_number_normalization() -> None:
     assert any(d.candidate.alias.field_name == "series_number" for d in result.rejected)
 
 
-def test_dates_are_exact_only() -> None:
+def test_birth_dates_exact_mode_rejects_changed_digits() -> None:
     catalog = ObjectCatalog(people=(Person("p", birth_date=date(1980, 1, 1)),))
     assert mark("01.01.1980", catalog).occurrences[0].field_name == "birth_date"
-    assert not mark("01.01.1981", catalog).occurrences
+    assert not mark("01.01.1981", catalog, MatchingConfig(fuzzy_enabled=False)).occurrences
 
 
 def test_disabled_fuzzy_retains_normalized_matches() -> None:
