@@ -262,7 +262,17 @@ legal entity and a sender sharing an INN. Otherwise the flat policy prioritizes 
 then score, edit distance, span length, and deterministic ordering. Consequently,
 an exact document number can beat an enclosing normalized series/number region.
 Rejected candidates remain in the evidence report. Every non-overlapping repeated
-mention is retained.
+mention is retained: if a known case number appears three times, the output contains
+three `MISC_CASE_NUMBER` regions, each with its own offsets and region ID. This applies
+to all labels in both `mark` and `mark-batch`; labels and matched values are not
+deduplicated across text positions. Each mention still passes the matching and
+ambiguity checks above.
+
+Case numbers in the form `A41-20769/2025` (Latin `A` or Cyrillic `А`) also accept
+the short year form `A41-20769/25`, in either direction. Two-digit years denote
+2000–2099. Both mentions receive `MISC_CASE_NUMBER` regions with their original
+text and offsets, including with `--disable-fuzzy`. Other digits must match;
+this year alias does not apply to incoming letter numbers or other reference formats.
 
 Rules live in immutable `MatchingConfig` and field policies. Python callers can
 supply custom thresholds, proximity limits, and field-weight overrides:

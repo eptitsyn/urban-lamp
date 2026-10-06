@@ -168,6 +168,52 @@ def test_case_number_spacing_and_address_normalization() -> None:
     ]
 
 
+@pytest.mark.parametrize("prefix", ["A", "А"])
+@pytest.mark.parametrize("year", ["25", "2025"])
+@pytest.mark.parametrize("fuzzy", [False, True])
+def test_case_number_two_and_four_digit_years(prefix: str, year: str, fuzzy: bool) -> None:
+    catalog = ObjectCatalog(miscellaneous=(Misc("m", case_number=f"{prefix}41-20769/{year}"),))
+    mentions = [
+        f"{prefix}41-20769/2025",
+        f"{prefix}41-20769/25",
+        f"{prefix.lower()}41 - 20769 / 2025",
+        f"{prefix.lower()}41 - 20769 / 25",
+    ]
+    text = "😀\r\n" + "; ".join(mentions)
+    result = mark(text, catalog, fuzzy=fuzzy)
+    assert [o.matched_text for o in result.occurrences] == mentions
+    assert {o.field_name for o in result.occurrences} == {"case_number"}
+    assert {o.entity_id for o in result.occurrences} == {"m"}
+    assert all(o.edit_distance == 0 for o in result.occurrences)
+    assert all(text[o.span.start : o.span.end] == o.matched_text for o in result.occurrences)
+
+
+@pytest.mark.parametrize("year", ["25", "2025"])
+@pytest.mark.parametrize(
+    "text",
+    [
+        "A41-20769/2026",
+        "A41-20769/26",
+        "A41-20768/25",
+        "A42-20769/2025",
+        "A41-20769/1925",
+        "A41-20769/20250",
+        "A41-20769/250",
+        "A41-20769/25-2",
+        "A41-20769/2025-2",
+        "XA41-20769/25",
+    ],
+)
+def test_case_year_aliases_do_not_change_other_digits(year: str, text: str) -> None:
+    catalog = ObjectCatalog(miscellaneous=(Misc("m", case_number=f"A41-20769/{year}"),))
+    assert not mark(text, catalog, fuzzy=True).occurrences
+
+
+def test_year_aliases_do_not_apply_to_incoming_letter_numbers() -> None:
+    catalog = ObjectCatalog(miscellaneous=(Misc("m", incoming_letter_number="A41-20769/25"),))
+    assert not mark("A41-20769/2025", catalog, fuzzy=True).occurrences
+
+
 def test_all_fields_example_cli_and_labels(tmp_path: Path) -> None:
     objects = ROOT / "examples/real_objects.json"
     text_path = ROOT / "examples/real_text.txt"

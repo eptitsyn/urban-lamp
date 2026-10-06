@@ -1,3 +1,4 @@
+import re
 from dataclasses import replace
 from datetime import date
 
@@ -216,6 +217,23 @@ class MiscAliasGenerator:
             )
             if value
         ]
+        if item.case_number:
+            # Only this case-number format has a year suffix. YY denotes 20YY;
+            # keep other reference formats and centuries literal.
+            compact = item.case_number.replace(" ", "").replace("\t", "")
+            match = re.fullmatch(r"([AАaа][0-9]+-[0-9]+/)(20[0-9]{2}|[0-9]{2})", compact)
+            if match:
+                prefix, year = match.groups()
+                alternate_year = year[2:] if len(year) == 4 else "20" + year
+                result.append(
+                    _alias(
+                        EntityType.MISC,
+                        item.id,
+                        "case_number",
+                        prefix + alternate_year,
+                        NormalizationProfile.REFERENCE,
+                    )
+                )
         for field, value in (
             ("incoming_letter_date", item.incoming_letter_date),
             ("preliminary_response_due_date", item.preliminary_response_due_date),
