@@ -221,17 +221,22 @@ class MiscAliasGenerator:
             # Only this case-number format has a year suffix. YY denotes 20YY;
             # keep other reference formats and centuries literal.
             compact = item.case_number.replace(" ", "").replace("\t", "")
-            match = re.fullmatch(r"([AАaа][0-9]+-[0-9]+/)(20[0-9]{2}|[0-9]{2})", compact)
+            match = re.fullmatch(r"([AАaа][0-9]+-)([0-9]+/)(20[0-9]{2}|[0-9]{2})", compact)
             if match:
-                prefix, year = match.groups()
+                court, number, year = match.groups()
                 alternate_year = year[2:] if len(year) == 4 else "20" + year
-                result.append(
+                result.extend(
                     _alias(
                         EntityType.MISC,
                         item.id,
                         "case_number",
-                        prefix + alternate_year,
+                        value,
                         NormalizationProfile.REFERENCE,
+                    )
+                    for value in (
+                        court + number + alternate_year,
+                        number + year,
+                        number + alternate_year,
                     )
                 )
         for field, value in (

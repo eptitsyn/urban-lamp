@@ -120,7 +120,11 @@ def test_repeated_case_numbers_and_emails_keep_separate_regions(
     case_number = f"A41-20769/{year}"
     email = "reply@example.org"
     mentions = ["A41-20769/2025", email, "a41 - 20769 / 25", "REPLY@EXAMPLE.ORG", "A41-20769/25"]
-    text = "😀\r\n" + "\r\nПовторное упоминание: ".join(mentions)
+    mentions.extend(["20769/2025", "20769/25", "20769 / 2025"])
+    damaged = ["A41-2O769/2025", "A41-20768/25", "2076/2025", "207769/25"]
+    text = "😀\r\n" + "\r\nПовторное упоминание: ".join(mentions + damaged)
+    if fuzzy:
+        mentions.extend(damaged)
     text_path = tmp_path / "v.txt"
     text_path.write_bytes(text.encode("utf-8"))
     if command == "mark":
@@ -160,7 +164,10 @@ def test_repeated_case_numbers_and_emails_keep_separate_regions(
         ["MISC_CASE_NUMBER"],
         ["MISC_REPLY_EMAIL"],
         ["MISC_CASE_NUMBER"],
-    ]
+        ["MISC_CASE_NUMBER"],
+        ["MISC_CASE_NUMBER"],
+        ["MISC_CASE_NUMBER"],
+    ] + ([["MISC_CASE_NUMBER"]] * len(damaged) if fuzzy else [])
     assert len({r["id"] for r in regions}) == len(mentions)
     assert [o["method"] for o in report["occurrences"]] == [
         "exact",
@@ -168,7 +175,10 @@ def test_repeated_case_numbers_and_emails_keep_separate_regions(
         "normalized",
         "normalized",
         "exact",
-    ]
+        "exact",
+        "exact",
+        "normalized",
+    ] + (["bitap"] * len(damaged) if fuzzy else [])
     offset = 0
     for region, occurrence, mention in zip(regions, report["occurrences"], mentions, strict=True):
         start = text.index(mention, offset)

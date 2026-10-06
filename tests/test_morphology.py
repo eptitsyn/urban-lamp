@@ -78,6 +78,75 @@ def test_unknown_name_preserved() -> None:
     assert RussianPersonInflector().forms(person) == (person,)
 
 
+@pytest.mark.parametrize("surname", ["Шиндецова", "Шиндецовой", "ШИНДЕЦОВА"])
+@pytest.mark.parametrize("fuzzy", [False, True])
+def test_predicted_surname_cases_are_separate_occurrences(surname: str, fuzzy: bool) -> None:
+    text = "😀 Шиндецова; Шиндецовой; Шиндецову; Шиндецовой."
+    result = build_handler(MatchingConfig(fuzzy_enabled=fuzzy)).handle(
+        MarkOccurrences(SourceText(text), ObjectCatalog(people=(Person("p", last_name=surname),)))
+    )
+    assert [o.matched_text for o in result.occurrences] == [
+        "Шиндецова",
+        "Шиндецовой",
+        "Шиндецову",
+        "Шиндецовой",
+    ]
+    assert {o.field_name for o in result.occurrences} == {"last_name"}
+    assert {o.entity_id for o in result.occurrences} == {"p"}
+    assert all(o.edit_distance == 0 for o in result.occurrences)
+    assert all(text[o.span.start : o.span.end] == o.matched_text for o in result.occurrences)
+
+
+def test_predicted_surname_gender_and_aligned_cases() -> None:
+    inflector = RussianPersonInflector()
+    feminine = inflector.forms(Person("f", "Анна", "Шиндецова", "Ивановна"))
+    assert {p.last_name for p in feminine} == {"Шиндецова", "Шиндецовой", "Шиндецову"}
+    assert any(
+        p.first_name == "Анне" and p.last_name == "Шиндецовой" and p.middle_name == "Ивановне"
+        for p in feminine
+    )
+    masculine = inflector.forms(Person("m", "Иван", "Шиндецов", "Иванович"))
+    assert {p.last_name for p in masculine} == {
+        "Шиндецов",
+        "Шиндецова",
+        "Шиндецову",
+        "Шиндецовым",
+        "Шиндецове",
+    }
+    ambiguous = Person("p", last_name="Шиндецову")
+    assert inflector.forms(ambiguous) == (ambiguous,)
+    conflicting = Person("p", "Анна", "Шиндецова", "Иванович")
+    assert inflector.forms(conflicting) == (conflicting,)
+
+
+def test_predicted_previous_surname_and_sender_forms() -> None:
+    catalog = ObjectCatalog(
+        people=(Person("p", "Анна", "Иванова", "Ивановна", previous_last_name="Шиндецова"),),
+        senders=(Sender("s", full_name="Шиндецова Анна Ивановна"),),
+    )
+    text = "Шиндецовой Анне Ивановне"
+    result = build_handler(MatchingConfig(fuzzy_enabled=False)).handle(
+        MarkOccurrences(SourceText(text), catalog)
+    )
+    assert {(o.entity_type.value, o.field_name, o.matched_text) for o in result.occurrences} == {
+        ("person", "previous_last_name", "Шиндецовой"),
+        ("person", "first_name", "Анне"),
+        ("person", "middle_name", "Ивановне"),
+        ("sender", "full_name", text),
+    }
+
+
+def test_fuzzy_matching_uses_predicted_surname_cases() -> None:
+    catalog = ObjectCatalog(people=(Person("p", "Анна", "Шиндецова", "Ивановна"),))
+    text = "Шинлецовой Анне Ивановне"
+    result = build_handler().handle(MarkOccurrences(SourceText(text), catalog))
+    surname = next(o for o in result.occurrences if o.field_name == "last_name")
+    assert surname.matched_text == "Шинлецовой"
+    assert surname.source_value == "Шиндецовой"
+    assert surname.method == MatchMethod.BITAP
+    assert surname.edit_distance == 1
+
+
 @pytest.mark.parametrize(
     ("person", "text"),
     [

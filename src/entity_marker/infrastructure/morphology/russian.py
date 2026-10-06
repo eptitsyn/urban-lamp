@@ -31,9 +31,10 @@ class _Analyzer(Protocol):
 
 
 class RussianPersonInflector:
-    """Dictionary-backed singular name forms, never arbitrary suffix replacement.
+    """Dictionary-backed name forms with predicted surname paradigms as fallback.
 
-    Only parses tagged Name/Surn/Patr are eligible. Unrecognized or ambiguous
+    Only parses tagged Name/Surn/Patr are eligible. Surnames absent from the
+    dictionary may use the analyzer's Surn predictions. Unsupported or ambiguous
     components stay unchanged. Case forms are aligned, not a Cartesian product.
     Dictionaries are loaded lazily and no network access occurs during matching.
     """
@@ -48,11 +49,9 @@ class RussianPersonInflector:
             return self._parse_cache[key]
         if self._analyzer is None:
             self._analyzer = cast(_Analyzer, MorphAnalyzer(lang="ru"))
-        result = tuple(
-            p
-            for p in self._analyzer.parse(word)
-            if p.is_known and {role, "sing"} <= p.tag.grammemes
-        )
+        eligible = tuple(p for p in self._analyzer.parse(word) if {role, "sing"} <= p.tag.grammemes)
+        known = tuple(p for p in eligible if p.is_known)
+        result = known or (eligible if role == "Surn" else ())
         self._parse_cache[key] = result
         return result
 

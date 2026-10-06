@@ -100,15 +100,13 @@ def allowed_distance(alias: EntityAlias, normalized: str, config: MatchingConfig
         return 0
     if not config.fuzzy_enabled or len(normalized) < config.min_fuzzy_pattern_length:
         return 0
-    # Contacts, tax IDs, dates and case/letter numbers are identity-bearing:
-    # a single changed character can designate an entirely different record.
+    # Contacts, tax IDs, dates and incoming letter numbers stay exact/normalized.
     if alias.field_name in (
         "inn",
         "email",
         "reply_email",
         "incoming_letter_date",
         "preliminary_response_due_date",
-        "case_number",
         "incoming_letter_number",
         "return_address",
         "reply_address",
@@ -133,5 +131,5 @@ def allowed_distance(alias: EntityAlias, normalized: str, config: MatchingConfig
                     alias.field_name in ("organization_name", "position") and len(normalized) >= 6
                 )
         case EntityType.MISC:
-            policy_distance = 0
+            policy_distance = int(alias.field_name == "case_number" and len(normalized) >= 6)
     return min(config.max_errors, policy_distance)

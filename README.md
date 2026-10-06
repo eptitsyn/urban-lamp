@@ -211,12 +211,15 @@ Dictionary-tagged first names, surnames, and patronymics are inflected into six
 singular cases, so `Иванову Ивану Ивановичу` produces three component matches linked
 to the same person. Senders retain their single `SENDER_FULL_NAME` field, with
 full-name aliases in two orders and compact/spaced initials for inflected surnames.
+For surnames absent from the dictionary, the analyzer's predicted surname
+paradigms are used as a fallback: `Шиндецова`, `Шиндецовой`, and `Шиндецову`
+match the same person. This also applies to previous surnames and sender names.
 
 Morphological aliases work with `--disable-fuzzy`; their match method is `exact`
 or `normalized` according to how the generated alias matches the text. The
 reported `source_value` is the matched alias, while `entity_id` links back to the
 original object. Sender initials aliases are exact/normalized only: wrong initials are
-not repaired using fuzzy edits. Unknown components are kept unchanged. Gender
+not repaired using fuzzy edits. Components without a supported parse are kept unchanged. Gender
 hints from first name and patronymic constrain surname parses; uncertain identities
 such as a male `Иванов` and female `Иванова` sharing a form remain ambiguous. Car aliases include
 VIN, plate, body number, and chassis number. Documents include series, number,
@@ -230,6 +233,7 @@ Fuzzy distance defaults to one, with domain limits:
 | Names of length ≥ 4 | 1 |
 | Sender full names / surnames of length ≥ 10 | 2, if global ceiling permits |
 | Document number/combined identifier of length ≥ 6 | 1 |
+| Court case-number aliases of length ≥ 6 | 1 |
 | Dates, document series, shorter values | 0 |
 
 ```bash
@@ -272,10 +276,17 @@ deduplicated across text positions. Each mention still passes the matching and
 ambiguity checks above.
 
 Case numbers in the form `A41-20769/2025` (Latin `A` or Cyrillic `А`) also accept
-the short year form `A41-20769/25`, in either direction. Two-digit years denote
-2000–2099. Both mentions receive `MISC_CASE_NUMBER` regions with their original
-text and offsets, including with `--disable-fuzzy`. Other digits must match;
-this year alias does not apply to incoming letter numbers or other reference formats.
+the short year form `A41-20769/25`, in either direction, plus standalone forms
+without the court prefix: `20769/2025` and `20769/25`. Two-digit years denote
+2000–2099. These forms are generated as aliases and searched with the same
+exact, normalized, and Bitap matchers as other fuzzy-enabled fields. Case-number
+aliases of length ≥ 6 allow one insertion, deletion, or substitution, capped by
+`--max-errors`; for example, `A41-2O769/25` can match `A41-20769/2025` through its
+short-year alias. Each occurrence keeps its original text and offsets.
+`--disable-fuzzy` or `--max-errors 0` disables edits while retaining the generated
+forms. Boundaries prevent matching a bare suffix inside a longer number, and
+unresolved competing case identities remain ambiguous. Pattern aliases do not
+apply to incoming letter numbers or other reference formats.
 
 Rules live in immutable `MatchingConfig` and field policies. Python callers can
 supply custom thresholds, proximity limits, and field-weight overrides:
@@ -357,10 +368,11 @@ For VS Code, install the recommended Python extensions, run `uv sync`, select
 
 ## Limits
 
-- Morphology covers dictionary-recognized Russian singular name paradigms, not
-  arbitrary phrase analysis, unknown/compound surname heuristics, or generic entity
-  discovery. Unsupported components stay unchanged. Conflicting gender hints do
-  not produce new forms.
+- Morphology covers dictionary-recognized Russian singular names and predicted
+  surname paradigms supplied by pymorphy3. First names and patronymics still require
+  dictionary entries. Unsupported components stay unchanged; conflicting gender
+  hints do not produce new forms. This is not arbitrary phrase analysis or entity
+  discovery.
 - Heuristic rules need evaluation/tuning on representative OCR data. A shared
   identifier without sufficient local evidence remains ambiguous.
 - Output uses a flat overlap policy (except identical spans in distinct roles),

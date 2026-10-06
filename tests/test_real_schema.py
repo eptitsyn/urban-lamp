@@ -150,9 +150,9 @@ def test_tax_id_normalization_without_fuzzy() -> None:
 
 
 @pytest.mark.parametrize("text", ["А40-12345/2027", "А40-12345/2026-2", "XА40-12345/2026"])
-def test_case_numbers_not_fuzzed_or_matched_inside_larger_values(text: str) -> None:
+def test_case_numbers_exact_mode_rejects_changes_and_larger_values(text: str) -> None:
     catalog = ObjectCatalog(miscellaneous=(Misc("m", case_number="А40-12345/2026"),))
-    assert not mark(text, catalog, fuzzy=True).occurrences
+    assert not mark(text, catalog, fuzzy=False).occurrences
 
 
 def test_case_number_spacing_and_address_normalization() -> None:
@@ -178,6 +178,10 @@ def test_case_number_two_and_four_digit_years(prefix: str, year: str, fuzzy: boo
         f"{prefix}41-20769/25",
         f"{prefix.lower()}41 - 20769 / 2025",
         f"{prefix.lower()}41 - 20769 / 25",
+        "20769/2025",
+        "20769/25",
+        "20769 / 2025",
+        "20769 / 25",
     ]
     text = "😀\r\n" + "; ".join(mentions)
     result = mark(text, catalog, fuzzy=fuzzy)
@@ -202,16 +206,98 @@ def test_case_number_two_and_four_digit_years(prefix: str, year: str, fuzzy: boo
         "A41-20769/25-2",
         "A41-20769/2025-2",
         "XA41-20769/25",
+        "A42 - 20769 / 2025",
+        "20768/2025",
+        "20769/26",
+        "120769/2025",
+        "20769/20250",
+        "20769/25-2",
     ],
 )
-def test_case_year_aliases_do_not_change_other_digits(year: str, text: str) -> None:
+def test_case_year_aliases_exact_mode_does_not_change_other_digits(year: str, text: str) -> None:
     catalog = ObjectCatalog(miscellaneous=(Misc("m", case_number=f"A41-20769/{year}"),))
-    assert not mark(text, catalog, fuzzy=True).occurrences
+    assert not mark(text, catalog, fuzzy=False).occurrences
 
 
 def test_year_aliases_do_not_apply_to_incoming_letter_numbers() -> None:
     catalog = ObjectCatalog(miscellaneous=(Misc("m", incoming_letter_number="A41-20769/25"),))
     assert not mark("A41-20769/2025", catalog, fuzzy=True).occurrences
+    assert not mark("20769/25", catalog, fuzzy=True).occurrences
+
+
+def test_case_number_without_court_keeps_identity_ambiguity_checks() -> None:
+    catalog = ObjectCatalog(
+        miscellaneous=(
+            Misc("m1", case_number="A41-20769/2025"),
+            Misc("m2", case_number="A42-20769/2025"),
+        )
+    )
+    result = mark("20769/2025; 20769/25", catalog)
+    assert not result.occurrences
+    assert any(d.reason == "ambiguous entity identity" for d in result.rejected)
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "A41-20768/2025",
+        "A41-2O769/25",
+        "2076/2025",
+        "207769/25",
+        "20769/26",
+    ],
+)
+def test_case_number_aliases_allow_one_fuzzy_edit(text: str) -> None:
+    catalog = ObjectCatalog(miscellaneous=(Misc("m", case_number="A41-20769/2025"),))
+    result = mark(text, catalog, fuzzy=True)
+    assert len(result.occurrences) == 1
+    occurrence = result.occurrences[0]
+    assert occurrence.matched_text == text
+    assert occurrence.field_name == "case_number"
+    assert occurrence.method == MatchMethod.BITAP
+    assert occurrence.edit_distance == 1
+
+
+@pytest.mark.parametrize(
+    "config",
+    [
+        MatchingConfig(fuzzy_enabled=False),
+        MatchingConfig(max_errors=0),
+        MatchingConfig(min_fuzzy_pattern_length=20),
+    ],
+)
+def test_case_number_fuzzy_controls_preserve_pattern_aliases(config: MatchingConfig) -> None:
+    text = "A41-20769/2025; A41-20769/25; 20769/2025; 20769/25; A41-2O769/25"
+    catalog = ObjectCatalog(miscellaneous=(Misc("m", case_number="A41-20769/2025"),))
+    result = build_handler(config).handle(MarkOccurrences(SourceText(text), catalog))
+    assert [o.matched_text for o in result.occurrences] == [
+        "A41-20769/2025",
+        "A41-20769/25",
+        "20769/2025",
+        "20769/25",
+    ]
+    assert all(o.edit_distance == 0 for o in result.occurrences)
+
+
+@pytest.mark.parametrize("text", ["A41-20769/2025-2", "20769/25-2", "A41-2O768/25"])
+def test_case_fuzzy_matching_retains_boundaries_and_distance_ceiling(text: str) -> None:
+    catalog = ObjectCatalog(miscellaneous=(Misc("m", case_number="A41-20769/2025"),))
+    result = build_handler(MatchingConfig(max_errors=2)).handle(
+        MarkOccurrences(SourceText(text), catalog)
+    )
+    assert not result.occurrences
+
+
+def test_equally_close_case_numbers_remain_ambiguous_with_fuzzy_matching() -> None:
+    catalog = ObjectCatalog(
+        miscellaneous=(
+            Misc("m1", case_number="A41-20769/2025"),
+            Misc("m2", case_number="A41-20767/2025"),
+        )
+    )
+    result = mark("A41-20768/2025", catalog, fuzzy=True)
+    assert not result.occurrences
+    assert any(d.reason == "ambiguous entity identity" for d in result.rejected)
 
 
 def test_all_fields_example_cli_and_labels(tmp_path: Path) -> None:

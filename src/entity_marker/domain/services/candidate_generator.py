@@ -42,9 +42,17 @@ def valid_field_boundary(text: str, span: TextSpan, alias: EntityAlias) -> bool:
             if following == "." and span.end + 1 < len(text) and _word(text[span.end + 1]):
                 return False
     if alias.profile == NormalizationProfile.REFERENCE:
-        if span.start and text[span.start - 1] in "/-":
+        left, right = span.start - 1, span.end
+        if alias.field_name == "case_number":
+            # Spaces around case-number separators do not end the identifier.
+            # A bare number must not match inside another court's full number.
+            while left >= 0 and text[left] in " \t":
+                left -= 1
+            while right < len(text) and text[right] in " \t":
+                right += 1
+        if left >= 0 and text[left] in "/-":
             return False
-        if span.end < len(text) and text[span.end] in "/-":
+        if right < len(text) and text[right] in "/-":
             return False
     return True
 
