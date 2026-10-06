@@ -372,6 +372,11 @@ ambiguity, local/remote evidence, overlap decisions, CLI options, and file error
 
 For VS Code, install the recommended Python extensions, run `uv sync`, select
 **Entity Marker: mark example**, and press F5. The debugger uses `.venv`.
+To debug a CSV batch, select **Entity Marker: mark-batch CSV**, press F5, and
+enter the CSV path (default: `examples/batch/input.csv`). Paths can be absolute
+or relative to the workspace. Texts are read from `txts/<versionId>.txt` beside
+the CSV; add `--txts-dir` and your folder to the configuration's `args` to override
+that location. Predictions and progress logs appear in the integrated terminal.
 `make clean` removes caches/build outputs while preserving `.venv` and examples.
 
 ## Limits

@@ -18,6 +18,22 @@
       ]
     },
     {
+      "name": "Entity Marker: mark-batch CSV",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "entity_marker",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "mark-batch",
+        "--input", "${input:batchCsv}",
+        "--pretty",
+        "-v"
+      ]
+    },
+    {
       "name": "Entity Marker: validate objects",
       "type": "debugpy",
       "request": "launch",
@@ -27,6 +43,14 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "args": ["validate", "--objects", "examples/objects.json"]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "batchCsv",
+      "type": "promptString",
+      "description": "CSV path (absolute or relative to the workspace); texts are read from txts beside the CSV",
+      "default": "examples/batch/input.csv"
     }
   ]
 }
