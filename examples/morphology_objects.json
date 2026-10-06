@@ -1,0 +1,5 @@
+{
+  "people": [
+    {"id": "p1", "first_name": "Иван", "last_name": "Иванов", "middle_name": "Иванович"}
+  ]
+}

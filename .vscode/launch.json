@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Entity Marker: mark example",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "entity_marker",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "mark",
+        "--text", "examples/input.txt",
+        "--objects", "examples/objects.json",
+        "--pretty"
+      ]
+    },
+    {
+      "name": "Entity Marker: validate objects",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "entity_marker",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": ["validate", "--objects", "examples/objects.json"]
+    }
+  ]
+}

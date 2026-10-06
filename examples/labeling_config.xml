@@ -1,0 +1,33 @@
+<View>
+  <Labels name="entities" toName="text">
+    <Label value="PERSON_BIRTH_DATE"/>
+    <Label value="DOCUMENT_ISSUE_DATE"/>
+    <Label value="DOCUMENT_SERIES_NUMBER"/>
+    <Label value="PERSON_FIRST_NAME"/>
+    <Label value="PERSON_LAST_NAME"/>
+    <Label value="PERSON_MIDDLE_NAME"/>
+    <Label value="CAR_VIN"/>
+    <Label value="CAR_LICENSE_PLATE"/>
+    <Label value="CAR_BODY_NUMBER"/>
+    <Label value="CAR_CHASSIS_NUMBER"/>
+    <Label value="DOCUMENT_SERIES"/>
+    <Label value="DOCUMENT_NUMBER"/>
+    <Label value="PERSON_PREVIOUS_LAST_NAME"/>
+    <Label value="DOCUMENT_DOCUMENT_TYPE"/>
+    <Label value="LEGAL_ENTITY_INN"/>
+    <Label value="LEGAL_ENTITY_NAME"/>
+    <Label value="SENDER_FULL_NAME"/>
+    <Label value="SENDER_POSITION"/>
+    <Label value="SENDER_ORGANIZATION_NAME"/>
+    <Label value="SENDER_RETURN_ADDRESS"/>
+    <Label value="SENDER_EMAIL"/>
+    <Label value="SENDER_INN"/>
+    <Label value="MISC_INCOMING_LETTER_NUMBER"/>
+    <Label value="MISC_CASE_NUMBER"/>
+    <Label value="MISC_INCOMING_LETTER_DATE"/>
+    <Label value="MISC_PRELIMINARY_RESPONSE_DUE_DATE"/>
+    <Label value="MISC_REPLY_EMAIL"/>
+    <Label value="MISC_REPLY_ADDRESS"/>
+  </Labels>
+  <Text name="text" value="$text"/>
+</View>

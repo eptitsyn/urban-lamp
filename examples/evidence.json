@@ -1,0 +1,344 @@
+{
+  "schema_version": 1,
+  "offset_unit": "unicode_code_points",
+  "occurrences": [
+    {
+      "entity_id": "p1",
+      "entity_type": "person",
+      "field_name": "first_name",
+      "matched_text": "Иван",
+      "source_value": "Иван",
+      "score": 0.6625,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "p1",
+              "entity_type": "person",
+              "field_name": "last_name",
+              "value": "Петров",
+              "weight": 0.65,
+              "profile": "name"
+            },
+            "span": {
+              "start": 5,
+              "end": 11
+            },
+            "matched_text": "Петров",
+            "score": {
+              "value": 0.65
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.6625
+        }
+      },
+      "region_id": "r000001",
+      "start": 0,
+      "end": 4
+    },
+    {
+      "entity_id": "p1",
+      "entity_type": "person",
+      "field_name": "last_name",
+      "matched_text": "Петров",
+      "source_value": "Петров",
+      "score": 0.775,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "p1",
+              "entity_type": "person",
+              "field_name": "first_name",
+              "value": "Иван",
+              "weight": 0.5,
+              "profile": "name"
+            },
+            "span": {
+              "start": 0,
+              "end": 4
+            },
+            "matched_text": "Иван",
+            "score": {
+              "value": 0.5
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.775
+        }
+      },
+      "region_id": "r000002",
+      "start": 5,
+      "end": 11
+    },
+    {
+      "entity_id": "c1",
+      "entity_type": "car",
+      "field_name": "license_plate",
+      "matched_text": "А123ВС77",
+      "source_value": "А123ВС77",
+      "score": 1,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "c1",
+              "entity_type": "car",
+              "field_name": "vin",
+              "value": "X7LHSRDVN12345678",
+              "weight": 1.0,
+              "profile": "vin"
+            },
+            "span": {
+              "start": 38,
+              "end": 55
+            },
+            "matched_text": "X7LHSRDVN12345678",
+            "score": {
+              "value": 1.0
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 1
+        }
+      },
+      "region_id": "r000003",
+      "start": 24,
+      "end": 32
+    },
+    {
+      "entity_id": "c1",
+      "entity_type": "car",
+      "field_name": "vin",
+      "matched_text": "X7LHSRDVN12345678",
+      "source_value": "X7LHSRDVN12345678",
+      "score": 1,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "c1",
+              "entity_type": "car",
+              "field_name": "license_plate",
+              "value": "А123ВС77",
+              "weight": 0.95,
+              "profile": "plate"
+            },
+            "span": {
+              "start": 24,
+              "end": 32
+            },
+            "matched_text": "А123ВС77",
+            "score": {
+              "value": 0.95
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 1
+        }
+      },
+      "region_id": "r000004",
+      "start": 38,
+      "end": 55
+    },
+    {
+      "entity_id": "d1",
+      "entity_type": "document",
+      "field_name": "number",
+      "matched_text": "987654",
+      "source_value": "987654",
+      "score": 0.9,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.9
+        }
+      },
+      "region_id": "r000005",
+      "start": 65,
+      "end": 71
+    },
+    {
+      "entity_id": "c1",
+      "entity_type": "car",
+      "field_name": "license_plate",
+      "matched_text": "А123ВС77",
+      "source_value": "А123ВС77",
+      "score": 0.95,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.95
+        }
+      },
+      "region_id": "r000006",
+      "start": 73,
+      "end": 81
+    }
+  ],
+  "rejected": [
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "p1",
+          "entity_type": "person",
+          "field_name": "last_name",
+          "value": "Петрова",
+          "weight": 0.65,
+          "profile": "name"
+        },
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "matched_text": "Петров",
+        "score": {
+          "value": 0.5571428571428572
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "p1",
+          "entity_type": "person",
+          "field_name": "last_name",
+          "value": "Петрове",
+          "weight": 0.65,
+          "profile": "name"
+        },
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "matched_text": "Петров",
+        "score": {
+          "value": 0.5571428571428572
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "p1",
+          "entity_type": "person",
+          "field_name": "last_name",
+          "value": "Петрову",
+          "weight": 0.65,
+          "profile": "name"
+        },
+        "span": {
+          "start": 5,
+          "end": 11
+        },
+        "matched_text": "Петров",
+        "score": {
+          "value": 0.5571428571428572
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "p1",
+          "entity_type": "person",
+          "field_name": "first_name",
+          "value": "Ивана",
+          "weight": 0.5,
+          "profile": "name"
+        },
+        "span": {
+          "start": 0,
+          "end": 4
+        },
+        "matched_text": "Иван",
+        "score": {
+          "value": 0.4
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "p1",
+          "entity_type": "person",
+          "field_name": "first_name",
+          "value": "Иване",
+          "weight": 0.5,
+          "profile": "name"
+        },
+        "span": {
+          "start": 0,
+          "end": 4
+        },
+        "matched_text": "Иван",
+        "score": {
+          "value": 0.4
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "p1",
+          "entity_type": "person",
+          "field_name": "first_name",
+          "value": "Ивану",
+          "weight": 0.5,
+          "profile": "name"
+        },
+        "span": {
+          "start": 0,
+          "end": 4
+        },
+        "matched_text": "Иван",
+        "score": {
+          "value": 0.4
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    }
+  ]
+}

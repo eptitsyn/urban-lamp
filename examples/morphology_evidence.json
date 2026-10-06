@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "offset_unit": "unicode_code_points",
+  "occurrences": [
+    {
+      "entity_id": "p1",
+      "entity_type": "person",
+      "field_name": "last_name",
+      "matched_text": "Иванов",
+      "source_value": "Иванов",
+      "score": 0.65,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.65
+        }
+      },
+      "region_id": "r000001",
+      "start": 0,
+      "end": 6
+    },
+    {
+      "entity_id": "p1",
+      "entity_type": "person",
+      "field_name": "last_name",
+      "matched_text": "Иванова",
+      "source_value": "Иванова",
+      "score": 0.65,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.65
+        }
+      },
+      "region_id": "r000002",
+      "start": 8,
+      "end": 15
+    },
+    {
+      "entity_id": "p1",
+      "entity_type": "person",
+      "field_name": "last_name",
+      "matched_text": "Иванову",
+      "source_value": "Иванову",
+      "score": 0.65,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.65
+        }
+      },
+      "region_id": "r000003",
+      "start": 17,
+      "end": 24
+    },
+    {
+      "entity_id": "p1",
+      "entity_type": "person",
+      "field_name": "last_name",
+      "matched_text": "Иванову",
+      "source_value": "Иванову",
+      "score": 0.775,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "p1",
+              "entity_type": "person",
+              "field_name": "middle_name",
+              "value": "Ивановичу",
+              "weight": 0.5,
+              "profile": "name"
+            },
+            "span": {
+              "start": 40,
+              "end": 49
+            },
+            "matched_text": "Ивановичу",
+            "score": {
+              "value": 0.5
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "p1",
+              "entity_type": "person",
+              "field_name": "first_name",
+              "value": "Ивану",
+              "weight": 0.5,
+              "profile": "name"
+            },
+            "span": {
+              "start": 34,
+              "end": 39
+            },
+            "matched_text": "Ивану",
+            "score": {
+              "value": 0.5
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.775
+        }
+      },
+      "region_id": "r000004",
+      "start": 26,
+      "end": 33
+    },
+    {
+      "entity_id": "p1",
+      "entity_type": "person",
+      "field_name": "first_name",
+      "matched_text": "Ивану",
+      "source_value": "Ивану",
+      "score": 0.6625,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "p1",
+              "entity_type": "person",
+              "field_name": "last_name",
+              "value": "Иванову",
+              "weight": 0.65,
+              "profile": "name"
+            },
+            "span": {
+              "start": 26,
+              "end": 33
+            },
+            "matched_text": "Иванову",
+            "score": {
+              "value": 0.65
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "p1",
+              "entity_type": "person",
+              "field_name": "middle_name",
+              "value": "Ивановичу",
+              "weight": 0.5,
+              "profile": "name"
+            },
+            "span": {
+              "start": 40,
+              "end": 49
+            },
+            "matched_text": "Ивановичу",
+            "score": {
+              "value": 0.5
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.6625
+        }
+      },
+      "region_id": "r000005",
+      "start": 34,
+      "end": 39
+    },
+    {
+      "entity_id": "p1",
+      "entity_type": "person",
+      "field_name": "middle_name",
+      "matched_text": "Ивановичу",
+      "source_value": "Ивановичу",
+      "score": 0.6625,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "p1",
+              "entity_type": "person",
+              "field_name": "last_name",
+              "value": "Иванову",
+              "weight": 0.65,
+              "profile": "name"
+            },
+            "span": {
+              "start": 26,
+              "end": 33
+            },
+            "matched_text": "Иванову",
+            "score": {
+              "value": 0.65
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "p1",
+              "entity_type": "person",
+              "field_name": "first_name",
+              "value": "Ивану",
+              "weight": 0.5,
+              "profile": "name"
+            },
+            "span": {
+              "start": 34,
+              "end": 39
+            },
+            "matched_text": "Ивану",
+            "score": {
+              "value": 0.5
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.6625
+        }
+      },
+      "region_id": "r000006",
+      "start": 40,
+      "end": 49
+    },
+    {
+      "entity_id": "p1",
+      "entity_type": "person",
+      "field_name": "last_name",
+      "matched_text": "Иванов",
+      "source_value": "Иванов",
+      "score": 0.65,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.65
+        }
+      },
+      "region_id": "r000007",
+      "start": 51,
+      "end": 57
+    },
+    {
+      "entity_id": "p1",
+      "entity_type": "person",
+      "field_name": "last_name",
+      "matched_text": "Иванову",
+      "source_value": "Иванову",
+      "score": 0.65,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.65
+        }
+      },
+      "region_id": "r000008",
+      "start": 64,
+      "end": 71
+    }
+  ],
+  "rejected": []
+}

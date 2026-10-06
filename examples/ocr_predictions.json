@@ -1,0 +1,42 @@
+[
+  {
+    "data": {
+      "text": "Автомобиль А 123 ВС 77 с VIN X7LHSR0VN12345678 принадлежит Птицыну Евгению Генриховичу.\n"
+    },
+    "predictions": [
+      {
+        "model_version": "entity-marker-0.4-domain-schema",
+        "result": [
+          {
+            "id": "r000001",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 11,
+              "end": 22,
+              "text": "А 123 ВС 77",
+              "labels": [
+                "CAR_LICENSE_PLATE"
+              ]
+            }
+          },
+          {
+            "id": "r000002",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 29,
+              "end": 46,
+              "text": "X7LHSR0VN12345678",
+              "labels": [
+                "CAR_VIN"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

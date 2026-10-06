@@ -1,0 +1,126 @@
+[
+  {
+    "data": {
+      "text": "Иванов; Иванова; Иванову; Иванову Ивану Ивановичу; Иванов И.И.; Иванову И. И.\n"
+    },
+    "predictions": [
+      {
+        "model_version": "entity-marker-0.4-domain-schema",
+        "result": [
+          {
+            "id": "r000001",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 0,
+              "end": 6,
+              "text": "Иванов",
+              "labels": [
+                "PERSON_LAST_NAME"
+              ]
+            }
+          },
+          {
+            "id": "r000002",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 8,
+              "end": 15,
+              "text": "Иванова",
+              "labels": [
+                "PERSON_LAST_NAME"
+              ]
+            }
+          },
+          {
+            "id": "r000003",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 17,
+              "end": 24,
+              "text": "Иванову",
+              "labels": [
+                "PERSON_LAST_NAME"
+              ]
+            }
+          },
+          {
+            "id": "r000004",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 26,
+              "end": 33,
+              "text": "Иванову",
+              "labels": [
+                "PERSON_LAST_NAME"
+              ]
+            }
+          },
+          {
+            "id": "r000005",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 34,
+              "end": 39,
+              "text": "Ивану",
+              "labels": [
+                "PERSON_FIRST_NAME"
+              ]
+            }
+          },
+          {
+            "id": "r000006",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 40,
+              "end": 49,
+              "text": "Ивановичу",
+              "labels": [
+                "PERSON_MIDDLE_NAME"
+              ]
+            }
+          },
+          {
+            "id": "r000007",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 51,
+              "end": 57,
+              "text": "Иванов",
+              "labels": [
+                "PERSON_LAST_NAME"
+              ]
+            }
+          },
+          {
+            "id": "r000008",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 64,
+              "end": 71,
+              "text": "Иванову",
+              "labels": [
+                "PERSON_LAST_NAME"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

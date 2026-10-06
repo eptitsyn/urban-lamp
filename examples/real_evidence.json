@@ -1,0 +1,1592 @@
+{
+  "schema_version": 1,
+  "offset_unit": "unicode_code_points",
+  "occurrences": [
+    {
+      "entity_id": "sender-1",
+      "entity_type": "sender",
+      "field_name": "full_name",
+      "matched_text": "Сидорову Сергею Петровичу",
+      "source_value": "Сидорову Сергею Петровичу",
+      "score": 0.95,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "sender-1",
+              "entity_type": "sender",
+              "field_name": "inn",
+              "value": "7701234567",
+              "weight": 1.0,
+              "profile": "tax_id"
+            },
+            "span": {
+              "start": 68,
+              "end": 78
+            },
+            "matched_text": "7701234567",
+            "score": {
+              "value": 1.0
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "sender-1",
+              "entity_type": "sender",
+              "field_name": "organization_name",
+              "value": "ООО «Ромашка»",
+              "weight": 0.9,
+              "profile": "text"
+            },
+            "span": {
+              "start": 49,
+              "end": 62
+            },
+            "matched_text": "ООО «Ромашка»",
+            "score": {
+              "value": 0.9
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "sender-1",
+              "entity_type": "sender",
+              "field_name": "position",
+              "value": "директор",
+              "weight": 0.45,
+              "profile": "text"
+            },
+            "span": {
+              "start": 40,
+              "end": 48
+            },
+            "matched_text": "директор",
+            "score": {
+              "value": 0.45
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.95
+        }
+      },
+      "region_id": "r000001",
+      "start": 13,
+      "end": 38
+    },
+    {
+      "entity_id": "sender-1",
+      "entity_type": "sender",
+      "field_name": "position",
+      "matched_text": "директор",
+      "source_value": "директор",
+      "score": 0.7,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "sender-1",
+              "entity_type": "sender",
+              "field_name": "inn",
+              "value": "7701234567",
+              "weight": 1.0,
+              "profile": "tax_id"
+            },
+            "span": {
+              "start": 68,
+              "end": 78
+            },
+            "matched_text": "7701234567",
+            "score": {
+              "value": 1.0
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "sender-1",
+              "entity_type": "sender",
+              "field_name": "full_name",
+              "value": "Сидорову Сергею Петровичу",
+              "weight": 0.95,
+              "profile": "name"
+            },
+            "span": {
+              "start": 13,
+              "end": 38
+            },
+            "matched_text": "Сидорову Сергею Петровичу",
+            "score": {
+              "value": 0.95
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "sender-1",
+              "entity_type": "sender",
+              "field_name": "organization_name",
+              "value": "ООО «Ромашка»",
+              "weight": 0.9,
+              "profile": "text"
+            },
+            "span": {
+              "start": 49,
+              "end": 62
+            },
+            "matched_text": "ООО «Ромашка»",
+            "score": {
+              "value": 0.9
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.7
+        }
+      },
+      "region_id": "r000002",
+      "start": 40,
+      "end": 48
+    },
+    {
+      "entity_id": "org-1",
+      "entity_type": "legal_entity",
+      "field_name": "name",
+      "matched_text": "ООО «Ромашка»",
+      "source_value": "ООО «Ромашка»",
+      "score": 1,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "org-1",
+              "entity_type": "legal_entity",
+              "field_name": "inn",
+              "value": "7701234567",
+              "weight": 1.0,
+              "profile": "tax_id"
+            },
+            "span": {
+              "start": 68,
+              "end": 78
+            },
+            "matched_text": "7701234567",
+            "score": {
+              "value": 1.0
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 1
+        }
+      },
+      "region_id": "r000003",
+      "start": 49,
+      "end": 62
+    },
+    {
+      "entity_id": "sender-1",
+      "entity_type": "sender",
+      "field_name": "organization_name",
+      "matched_text": "ООО «Ромашка»",
+      "source_value": "ООО «Ромашка»",
+      "score": 1,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "sender-1",
+              "entity_type": "sender",
+              "field_name": "inn",
+              "value": "7701234567",
+              "weight": 1.0,
+              "profile": "tax_id"
+            },
+            "span": {
+              "start": 68,
+              "end": 78
+            },
+            "matched_text": "7701234567",
+            "score": {
+              "value": 1.0
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "sender-1",
+              "entity_type": "sender",
+              "field_name": "full_name",
+              "value": "Сидорову Сергею Петровичу",
+              "weight": 0.95,
+              "profile": "name"
+            },
+            "span": {
+              "start": 13,
+              "end": 38
+            },
+            "matched_text": "Сидорову Сергею Петровичу",
+            "score": {
+              "value": 0.95
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "sender-1",
+              "entity_type": "sender",
+              "field_name": "position",
+              "value": "директор",
+              "weight": 0.45,
+              "profile": "text"
+            },
+            "span": {
+              "start": 40,
+              "end": 48
+            },
+            "matched_text": "директор",
+            "score": {
+              "value": 0.45
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 1
+        }
+      },
+      "region_id": "r000004",
+      "start": 49,
+      "end": 62
+    },
+    {
+      "entity_id": "org-1",
+      "entity_type": "legal_entity",
+      "field_name": "inn",
+      "matched_text": "7701234567",
+      "source_value": "7701234567",
+      "score": 1,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "org-1",
+              "entity_type": "legal_entity",
+              "field_name": "name",
+              "value": "ООО «Ромашка»",
+              "weight": 0.9,
+              "profile": "text"
+            },
+            "span": {
+              "start": 49,
+              "end": 62
+            },
+            "matched_text": "ООО «Ромашка»",
+            "score": {
+              "value": 0.9
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 1
+        }
+      },
+      "region_id": "r000005",
+      "start": 68,
+      "end": 78
+    },
+    {
+      "entity_id": "sender-1",
+      "entity_type": "sender",
+      "field_name": "inn",
+      "matched_text": "7701234567",
+      "source_value": "7701234567",
+      "score": 1,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "sender-1",
+              "entity_type": "sender",
+              "field_name": "full_name",
+              "value": "Сидорову Сергею Петровичу",
+              "weight": 0.95,
+              "profile": "name"
+            },
+            "span": {
+              "start": 13,
+              "end": 38
+            },
+            "matched_text": "Сидорову Сергею Петровичу",
+            "score": {
+              "value": 0.95
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "sender-1",
+              "entity_type": "sender",
+              "field_name": "organization_name",
+              "value": "ООО «Ромашка»",
+              "weight": 0.9,
+              "profile": "text"
+            },
+            "span": {
+              "start": 49,
+              "end": 62
+            },
+            "matched_text": "ООО «Ромашка»",
+            "score": {
+              "value": 0.9
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "sender-1",
+              "entity_type": "sender",
+              "field_name": "position",
+              "value": "директор",
+              "weight": 0.45,
+              "profile": "text"
+            },
+            "span": {
+              "start": 40,
+              "end": 48
+            },
+            "matched_text": "директор",
+            "score": {
+              "value": 0.45
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 1
+        }
+      },
+      "region_id": "r000006",
+      "start": 68,
+      "end": 78
+    },
+    {
+      "entity_id": "sender-1",
+      "entity_type": "sender",
+      "field_name": "return_address",
+      "matched_text": "Москва, ул. Лесная, д. 10",
+      "source_value": "Москва, ул. Лесная, д. 10",
+      "score": 0.85,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.85
+        }
+      },
+      "region_id": "r000007",
+      "start": 96,
+      "end": 121
+    },
+    {
+      "entity_id": "sender-1",
+      "entity_type": "sender",
+      "field_name": "email",
+      "matched_text": "sender@example.org",
+      "source_value": "sender@example.org",
+      "score": 0.95,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.95
+        }
+      },
+      "region_id": "r000008",
+      "start": 130,
+      "end": 148
+    },
+    {
+      "entity_id": "person-1",
+      "entity_type": "person",
+      "field_name": "last_name",
+      "matched_text": "Иванова",
+      "source_value": "Иванова",
+      "score": 0.8125,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "person-1",
+              "entity_type": "person",
+              "field_name": "birth_date",
+              "value": "01.01.1980",
+              "weight": 0.65,
+              "profile": "date"
+            },
+            "span": {
+              "start": 199,
+              "end": 209
+            },
+            "matched_text": "01.01.1980",
+            "score": {
+              "value": 0.65
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "person-1",
+              "entity_type": "person",
+              "field_name": "middle_name",
+              "value": "Ивановича",
+              "weight": 0.5,
+              "profile": "name"
+            },
+            "span": {
+              "start": 174,
+              "end": 183
+            },
+            "matched_text": "Ивановича",
+            "score": {
+              "value": 0.5
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "person-1",
+              "entity_type": "person",
+              "field_name": "first_name",
+              "value": "Ивана",
+              "weight": 0.5,
+              "profile": "name"
+            },
+            "span": {
+              "start": 168,
+              "end": 173
+            },
+            "matched_text": "Ивана",
+            "score": {
+              "value": 0.5
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.8125
+        }
+      },
+      "region_id": "r000009",
+      "start": 160,
+      "end": 167
+    },
+    {
+      "entity_id": "person-1",
+      "entity_type": "person",
+      "field_name": "first_name",
+      "matched_text": "Ивана",
+      "source_value": "Ивана",
+      "score": 0.6625,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "person-1",
+              "entity_type": "person",
+              "field_name": "birth_date",
+              "value": "01.01.1980",
+              "weight": 0.65,
+              "profile": "date"
+            },
+            "span": {
+              "start": 199,
+              "end": 209
+            },
+            "matched_text": "01.01.1980",
+            "score": {
+              "value": 0.65
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "person-1",
+              "entity_type": "person",
+              "field_name": "last_name",
+              "value": "Иванова",
+              "weight": 0.65,
+              "profile": "name"
+            },
+            "span": {
+              "start": 160,
+              "end": 167
+            },
+            "matched_text": "Иванова",
+            "score": {
+              "value": 0.65
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "person-1",
+              "entity_type": "person",
+              "field_name": "middle_name",
+              "value": "Ивановича",
+              "weight": 0.5,
+              "profile": "name"
+            },
+            "span": {
+              "start": 174,
+              "end": 183
+            },
+            "matched_text": "Ивановича",
+            "score": {
+              "value": 0.5
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.6625
+        }
+      },
+      "region_id": "r000010",
+      "start": 168,
+      "end": 173
+    },
+    {
+      "entity_id": "person-1",
+      "entity_type": "person",
+      "field_name": "middle_name",
+      "matched_text": "Ивановича",
+      "source_value": "Ивановича",
+      "score": 0.6625,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "person-1",
+              "entity_type": "person",
+              "field_name": "birth_date",
+              "value": "01.01.1980",
+              "weight": 0.65,
+              "profile": "date"
+            },
+            "span": {
+              "start": 199,
+              "end": 209
+            },
+            "matched_text": "01.01.1980",
+            "score": {
+              "value": 0.65
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "person-1",
+              "entity_type": "person",
+              "field_name": "last_name",
+              "value": "Иванова",
+              "weight": 0.65,
+              "profile": "name"
+            },
+            "span": {
+              "start": 160,
+              "end": 167
+            },
+            "matched_text": "Иванова",
+            "score": {
+              "value": 0.65
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "person-1",
+              "entity_type": "person",
+              "field_name": "first_name",
+              "value": "Ивана",
+              "weight": 0.5,
+              "profile": "name"
+            },
+            "span": {
+              "start": 168,
+              "end": 173
+            },
+            "matched_text": "Ивана",
+            "score": {
+              "value": 0.5
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.6625
+        }
+      },
+      "region_id": "r000011",
+      "start": 174,
+      "end": 183
+    },
+    {
+      "entity_id": "person-1",
+      "entity_type": "person",
+      "field_name": "birth_date",
+      "matched_text": "01.01.1980",
+      "source_value": "01.01.1980",
+      "score": 0.8125,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "person-1",
+              "entity_type": "person",
+              "field_name": "last_name",
+              "value": "Иванова",
+              "weight": 0.65,
+              "profile": "name"
+            },
+            "span": {
+              "start": 160,
+              "end": 167
+            },
+            "matched_text": "Иванова",
+            "score": {
+              "value": 0.65
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "person-1",
+              "entity_type": "person",
+              "field_name": "middle_name",
+              "value": "Ивановича",
+              "weight": 0.5,
+              "profile": "name"
+            },
+            "span": {
+              "start": 174,
+              "end": 183
+            },
+            "matched_text": "Ивановича",
+            "score": {
+              "value": 0.5
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "person-1",
+              "entity_type": "person",
+              "field_name": "first_name",
+              "value": "Ивана",
+              "weight": 0.5,
+              "profile": "name"
+            },
+            "span": {
+              "start": 168,
+              "end": 173
+            },
+            "matched_text": "Ивана",
+            "score": {
+              "value": 0.5
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.8125
+        }
+      },
+      "region_id": "r000012",
+      "start": 199,
+      "end": 209
+    },
+    {
+      "entity_id": "person-1",
+      "entity_type": "person",
+      "field_name": "previous_last_name",
+      "matched_text": "Петров",
+      "source_value": "Петров",
+      "score": 0.65,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.65
+        }
+      },
+      "region_id": "r000013",
+      "start": 231,
+      "end": 237
+    },
+    {
+      "entity_id": "person-1",
+      "entity_type": "person",
+      "field_name": "previous_last_name",
+      "matched_text": "Петров",
+      "source_value": "Петров",
+      "score": 0.65,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.65
+        }
+      },
+      "region_id": "r000014",
+      "start": 255,
+      "end": 261
+    },
+    {
+      "entity_id": "document-1",
+      "entity_type": "document",
+      "field_name": "document_type",
+      "matched_text": "паспорт",
+      "source_value": "паспорт",
+      "score": 0.645,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "document-1",
+              "entity_type": "document",
+              "field_name": "series_number",
+              "value": "4501 987654",
+              "weight": 0.98,
+              "profile": "identifier"
+            },
+            "span": {
+              "start": 285,
+              "end": 296
+            },
+            "matched_text": "4501 987654",
+            "score": {
+              "value": 0.98
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "document-1",
+              "entity_type": "document",
+              "field_name": "number",
+              "value": "987654",
+              "weight": 0.9,
+              "profile": "identifier"
+            },
+            "span": {
+              "start": 290,
+              "end": 296
+            },
+            "matched_text": "987654",
+            "score": {
+              "value": 0.9
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "document-1",
+              "entity_type": "document",
+              "field_name": "series",
+              "value": "4501",
+              "weight": 0.4,
+              "profile": "identifier"
+            },
+            "span": {
+              "start": 285,
+              "end": 289
+            },
+            "matched_text": "4501",
+            "score": {
+              "value": 0.4
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.645
+        }
+      },
+      "region_id": "r000015",
+      "start": 277,
+      "end": 284
+    },
+    {
+      "entity_id": "document-1",
+      "entity_type": "document",
+      "field_name": "series",
+      "matched_text": "4501",
+      "source_value": "4501",
+      "score": 0.625,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "document-1",
+              "entity_type": "document",
+              "field_name": "number",
+              "value": "987654",
+              "weight": 0.9,
+              "profile": "identifier"
+            },
+            "span": {
+              "start": 290,
+              "end": 296
+            },
+            "matched_text": "987654",
+            "score": {
+              "value": 0.9
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "document-1",
+              "entity_type": "document",
+              "field_name": "document_type",
+              "value": "паспорт",
+              "weight": 0.4,
+              "profile": "text"
+            },
+            "span": {
+              "start": 277,
+              "end": 284
+            },
+            "matched_text": "паспорт",
+            "score": {
+              "value": 0.4
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.625
+        }
+      },
+      "region_id": "r000016",
+      "start": 285,
+      "end": 289
+    },
+    {
+      "entity_id": "document-1",
+      "entity_type": "document",
+      "field_name": "number",
+      "matched_text": "987654",
+      "source_value": "987654",
+      "score": 1,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "document-1",
+              "entity_type": "document",
+              "field_name": "document_type",
+              "value": "паспорт",
+              "weight": 0.4,
+              "profile": "text"
+            },
+            "span": {
+              "start": 277,
+              "end": 284
+            },
+            "matched_text": "паспорт",
+            "score": {
+              "value": 0.4
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "document-1",
+              "entity_type": "document",
+              "field_name": "series",
+              "value": "4501",
+              "weight": 0.4,
+              "profile": "identifier"
+            },
+            "span": {
+              "start": 285,
+              "end": 289
+            },
+            "matched_text": "4501",
+            "score": {
+              "value": 0.4
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 1
+        }
+      },
+      "region_id": "r000017",
+      "start": 290,
+      "end": 296
+    },
+    {
+      "entity_id": "letter-1",
+      "entity_type": "misc",
+      "field_name": "incoming_letter_number",
+      "matched_text": "ВХ-2026/001",
+      "source_value": "ВХ-2026/001",
+      "score": 1,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "letter-1",
+              "entity_type": "misc",
+              "field_name": "incoming_letter_date",
+              "value": "29.09.2026",
+              "weight": 0.65,
+              "profile": "date"
+            },
+            "span": {
+              "start": 329,
+              "end": 339
+            },
+            "matched_text": "29.09.2026",
+            "score": {
+              "value": 0.65
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 1
+        }
+      },
+      "region_id": "r000018",
+      "start": 314,
+      "end": 325
+    },
+    {
+      "entity_id": "letter-1",
+      "entity_type": "misc",
+      "field_name": "incoming_letter_date",
+      "matched_text": "29.09.2026",
+      "source_value": "29.09.2026",
+      "score": 0.875,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "letter-1",
+              "entity_type": "misc",
+              "field_name": "case_number",
+              "value": "А40-12345/2026",
+              "weight": 0.9,
+              "profile": "reference"
+            },
+            "span": {
+              "start": 352,
+              "end": 366
+            },
+            "matched_text": "А40-12345/2026",
+            "score": {
+              "value": 0.9
+            },
+            "method": "exact",
+            "edit_distance": 0
+          },
+          {
+            "alias": {
+              "entity_id": "letter-1",
+              "entity_type": "misc",
+              "field_name": "incoming_letter_number",
+              "value": "ВХ-2026/001",
+              "weight": 0.9,
+              "profile": "reference"
+            },
+            "span": {
+              "start": 314,
+              "end": 325
+            },
+            "matched_text": "ВХ-2026/001",
+            "score": {
+              "value": 0.9
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 0.875
+        }
+      },
+      "region_id": "r000019",
+      "start": 329,
+      "end": 339
+    },
+    {
+      "entity_id": "letter-1",
+      "entity_type": "misc",
+      "field_name": "case_number",
+      "matched_text": "А40-12345/2026",
+      "source_value": "А40-12345/2026",
+      "score": 1,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "letter-1",
+              "entity_type": "misc",
+              "field_name": "incoming_letter_date",
+              "value": "29.09.2026",
+              "weight": 0.65,
+              "profile": "date"
+            },
+            "span": {
+              "start": 329,
+              "end": 339
+            },
+            "matched_text": "29.09.2026",
+            "score": {
+              "value": 0.65
+            },
+            "method": "exact",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 1
+        }
+      },
+      "region_id": "r000020",
+      "start": 352,
+      "end": 366
+    },
+    {
+      "entity_id": "letter-1",
+      "entity_type": "misc",
+      "field_name": "preliminary_response_due_date",
+      "matched_text": "10.10.2026",
+      "source_value": "10.10.2026",
+      "score": 0.65,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.65
+        }
+      },
+      "region_id": "r000021",
+      "start": 393,
+      "end": 403
+    },
+    {
+      "entity_id": "letter-1",
+      "entity_type": "misc",
+      "field_name": "reply_email",
+      "matched_text": "reply@example.org",
+      "source_value": "reply@example.org",
+      "score": 0.95,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.95
+        }
+      },
+      "region_id": "r000022",
+      "start": 417,
+      "end": 434
+    },
+    {
+      "entity_id": "letter-1",
+      "entity_type": "misc",
+      "field_name": "reply_address",
+      "matched_text": "Москва, ул. Полевая, д. 5",
+      "source_value": "Москва, ул. Полевая, д. 5",
+      "score": 0.85,
+      "method": "exact",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [],
+        "score": {
+          "value": 0.85
+        }
+      },
+      "region_id": "r000023",
+      "start": 436,
+      "end": 461
+    }
+  ],
+  "rejected": [
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "last_name",
+          "value": "Иванов",
+          "weight": 0.65,
+          "profile": "name"
+        },
+        "span": {
+          "start": 160,
+          "end": 167
+        },
+        "matched_text": "Иванова",
+        "score": {
+          "value": 0.5571428571428572
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "last_name",
+          "value": "Иванове",
+          "weight": 0.65,
+          "profile": "name"
+        },
+        "span": {
+          "start": 160,
+          "end": 167
+        },
+        "matched_text": "Иванова",
+        "score": {
+          "value": 0.5571428571428572
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "last_name",
+          "value": "Иванову",
+          "weight": 0.65,
+          "profile": "name"
+        },
+        "span": {
+          "start": 160,
+          "end": 167
+        },
+        "matched_text": "Иванова",
+        "score": {
+          "value": 0.5571428571428572
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "previous_last_name",
+          "value": "Петрова",
+          "weight": 0.65,
+          "profile": "name"
+        },
+        "span": {
+          "start": 231,
+          "end": 237
+        },
+        "matched_text": "Петров",
+        "score": {
+          "value": 0.5571428571428572
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "previous_last_name",
+          "value": "Петрова",
+          "weight": 0.65,
+          "profile": "name"
+        },
+        "span": {
+          "start": 255,
+          "end": 261
+        },
+        "matched_text": "Петров",
+        "score": {
+          "value": 0.5571428571428572
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "previous_last_name",
+          "value": "Петрове",
+          "weight": 0.65,
+          "profile": "name"
+        },
+        "span": {
+          "start": 231,
+          "end": 237
+        },
+        "matched_text": "Петров",
+        "score": {
+          "value": 0.5571428571428572
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "previous_last_name",
+          "value": "Петрове",
+          "weight": 0.65,
+          "profile": "name"
+        },
+        "span": {
+          "start": 255,
+          "end": 261
+        },
+        "matched_text": "Петров",
+        "score": {
+          "value": 0.5571428571428572
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "previous_last_name",
+          "value": "Петрову",
+          "weight": 0.65,
+          "profile": "name"
+        },
+        "span": {
+          "start": 231,
+          "end": 237
+        },
+        "matched_text": "Петров",
+        "score": {
+          "value": 0.5571428571428572
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "previous_last_name",
+          "value": "Петрову",
+          "weight": 0.65,
+          "profile": "name"
+        },
+        "span": {
+          "start": 255,
+          "end": 261
+        },
+        "matched_text": "Петров",
+        "score": {
+          "value": 0.5571428571428572
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "middle_name",
+          "value": "Иванович",
+          "weight": 0.5,
+          "profile": "name"
+        },
+        "span": {
+          "start": 174,
+          "end": 183
+        },
+        "matched_text": "Ивановича",
+        "score": {
+          "value": 0.4444444444444444
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "middle_name",
+          "value": "Ивановиче",
+          "weight": 0.5,
+          "profile": "name"
+        },
+        "span": {
+          "start": 174,
+          "end": 183
+        },
+        "matched_text": "Ивановича",
+        "score": {
+          "value": 0.4444444444444444
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "middle_name",
+          "value": "Ивановичу",
+          "weight": 0.5,
+          "profile": "name"
+        },
+        "span": {
+          "start": 174,
+          "end": 183
+        },
+        "matched_text": "Ивановича",
+        "score": {
+          "value": 0.4444444444444444
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "first_name",
+          "value": "Иван",
+          "weight": 0.5,
+          "profile": "name"
+        },
+        "span": {
+          "start": 168,
+          "end": 173
+        },
+        "matched_text": "Ивана",
+        "score": {
+          "value": 0.4
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "first_name",
+          "value": "Иване",
+          "weight": 0.5,
+          "profile": "name"
+        },
+        "span": {
+          "start": 168,
+          "end": 173
+        },
+        "matched_text": "Ивана",
+        "score": {
+          "value": 0.4
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "person-1",
+          "entity_type": "person",
+          "field_name": "first_name",
+          "value": "Ивану",
+          "weight": 0.5,
+          "profile": "name"
+        },
+        "span": {
+          "start": 168,
+          "end": 173
+        },
+        "matched_text": "Ивана",
+        "score": {
+          "value": 0.4
+        },
+        "method": "bitap",
+        "edit_distance": 1
+      },
+      "reason": "duplicate alias or method"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "document-1",
+          "entity_type": "document",
+          "field_name": "series_number",
+          "value": "4501 987654",
+          "weight": 0.98,
+          "profile": "identifier"
+        },
+        "span": {
+          "start": 285,
+          "end": 296
+        },
+        "matched_text": "4501 987654",
+        "score": {
+          "value": 0.98
+        },
+        "method": "exact",
+        "edit_distance": 0
+      },
+      "reason": "overlap with stronger occurrence"
+    },
+    {
+      "candidate": {
+        "alias": {
+          "entity_id": "sender-1",
+          "entity_type": "sender",
+          "field_name": "full_name",
+          "value": "Сидорову Сергею",
+          "weight": 0.855,
+          "profile": "name"
+        },
+        "span": {
+          "start": 13,
+          "end": 28
+        },
+        "matched_text": "Сидорову Сергею",
+        "score": {
+          "value": 0.855
+        },
+        "method": "exact",
+        "edit_distance": 0
+      },
+      "reason": "overlap with stronger occurrence"
+    }
+  ]
+}

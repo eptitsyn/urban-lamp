@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "offset_unit": "unicode_code_points",
+  "occurrences": [
+    {
+      "entity_id": "c1",
+      "entity_type": "car",
+      "field_name": "license_plate",
+      "matched_text": "А 123 ВС 77",
+      "source_value": "А123ВС77",
+      "score": 1,
+      "method": "normalized",
+      "edit_distance": 0,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "c1",
+              "entity_type": "car",
+              "field_name": "vin",
+              "value": "X7LHSRDVN12345678",
+              "weight": 1.0,
+              "profile": "vin"
+            },
+            "span": {
+              "start": 29,
+              "end": 46
+            },
+            "matched_text": "X7LHSR0VN12345678",
+            "score": {
+              "value": 0.9411764705882353
+            },
+            "method": "bitap",
+            "edit_distance": 1
+          }
+        ],
+        "score": {
+          "value": 1
+        }
+      },
+      "region_id": "r000001",
+      "start": 11,
+      "end": 22
+    },
+    {
+      "entity_id": "c1",
+      "entity_type": "car",
+      "field_name": "vin",
+      "matched_text": "X7LHSR0VN12345678",
+      "source_value": "X7LHSRDVN12345678",
+      "score": 1,
+      "method": "bitap",
+      "edit_distance": 1,
+      "evidence": {
+        "supporting_matches": [
+          {
+            "alias": {
+              "entity_id": "c1",
+              "entity_type": "car",
+              "field_name": "license_plate",
+              "value": "А123ВС77",
+              "weight": 0.95,
+              "profile": "plate"
+            },
+            "span": {
+              "start": 11,
+              "end": 22
+            },
+            "matched_text": "А 123 ВС 77",
+            "score": {
+              "value": 0.95
+            },
+            "method": "normalized",
+            "edit_distance": 0
+          }
+        ],
+        "score": {
+          "value": 1
+        }
+      },
+      "region_id": "r000002",
+      "start": 29,
+      "end": 46
+    }
+  ],
+  "rejected": []
+}

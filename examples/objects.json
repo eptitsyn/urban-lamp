@@ -1,0 +1,5 @@
+{
+  "people": [{"id": "p1", "first_name": "Иван", "last_name": "Петров"}],
+  "cars": [{"id": "c1", "vin": "X7LHSRDVN12345678", "license_plate": "А123ВС77"}],
+  "documents": [{"id": "d1", "document_type": "passport", "number": "987654"}]
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "data": {
+      "text": "Иван Петров: автомобиль А123ВС77, VIN X7LHSRDVN12345678. Паспорт 987654. А123ВС77.\n"
+    },
+    "predictions": [
+      {
+        "model_version": "entity-marker-0.4-domain-schema",
+        "result": [
+          {
+            "id": "r000001",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 0,
+              "end": 4,
+              "text": "Иван",
+              "labels": [
+                "PERSON_FIRST_NAME"
+              ]
+            }
+          },
+          {
+            "id": "r000002",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 5,
+              "end": 11,
+              "text": "Петров",
+              "labels": [
+                "PERSON_LAST_NAME"
+              ]
+            }
+          },
+          {
+            "id": "r000003",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 24,
+              "end": 32,
+              "text": "А123ВС77",
+              "labels": [
+                "CAR_LICENSE_PLATE"
+              ]
+            }
+          },
+          {
+            "id": "r000004",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 38,
+              "end": 55,
+              "text": "X7LHSRDVN12345678",
+              "labels": [
+                "CAR_VIN"
+              ]
+            }
+          },
+          {
+            "id": "r000005",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 65,
+              "end": 71,
+              "text": "987654",
+              "labels": [
+                "DOCUMENT_NUMBER"
+              ]
+            }
+          },
+          {
+            "id": "r000006",
+            "from_name": "entities",
+            "to_name": "text",
+            "type": "labels",
+            "value": {
+              "start": 73,
+              "end": 81,
+              "text": "А123ВС77",
+              "labels": [
+                "CAR_LICENSE_PLATE"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
