@@ -16,6 +16,103 @@ ROOT = Path(__file__).resolve().parents[1]
 
 @pytest.mark.parametrize("command", ["mark", "mark-batch"])
 @pytest.mark.parametrize("fuzzy", [False, True])
+@pytest.mark.parametrize("with_sender", [False, True])
+def test_every_surname_mention_is_exported(
+    tmp_path: Path, command: str, fuzzy: bool, with_sender: bool
+) -> None:
+    mentions = [
+        ("Иванов", "last_name"),
+        ("Иванова", "last_name"),
+        ("Иванову", "last_name"),
+        ("Ивановым", "last_name"),
+        ("Иванове", "last_name"),
+        ("ИВАНОВ", "last_name"),
+        ("Иванов Иван Иванович", "last_name"),
+        ("Иванова Ивана Ивановича", "last_name"),
+        ("иванов   иван   иванович", "last_name"),
+        ("Иванову И.И.", "last_name"),
+        ("Иванов И. И.", "last_name"),
+        ("Петров", "previous_last_name"),
+        ("Петрову Ивану Ивановичу", "previous_last_name"),
+        ("Петрова И.И.", "previous_last_name"),
+        ("Иванов", "last_name"),
+    ]
+    text = "😀\r\n"
+    expected = []
+    for mention, field in mentions:
+        surname = mention.split()[0]
+        expected.append((field, surname, len(text), len(text) + len(surname)))
+        text += mention + ";\r\n"
+    text += "Ивановский; СуперИванов."
+    text_path = tmp_path / "v.txt"
+    text_path.write_bytes(text.encode("utf-8"))
+    person = {
+        "id": "p",
+        "Имя": "Иван",
+        "Фамилия": "Иванов",
+        "Отчество": "Иванович",
+        "Предыдущая фамилия": "Петров",
+    }
+    if command == "mark":
+        person["previous_last_name"] = person.pop("Предыдущая фамилия")
+        objects = tmp_path / "objects.json"
+        objects.write_text(
+            json.dumps(
+                {
+                    "people": [person],
+                    "senders": [{"id": "s", "full_name": "Иванов Иван Иванович"}]
+                    if with_sender
+                    else [],
+                }
+            ),
+            encoding="utf-8",
+        )
+        args = [command, "--objects", str(objects), "--text", str(text_path)]
+    else:
+        batch = tmp_path / "input.csv"
+        row = {
+            "versionId": "v",
+            "Субъект страхования ФЛ": json.dumps([person]),
+            "ФИО подписанта документа": "Иванов Иван Иванович" if with_sender else "",
+        }
+        with batch.open("w", encoding="utf-8", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=list(row), delimiter=";")
+            writer.writeheader()
+            writer.writerow(row)
+        args = [command, "--input", str(batch), "--txts-dir", str(tmp_path)]
+    report_path = tmp_path / "report.json"
+    args.extend(["--evidence-output", str(report_path)])
+    if not fuzzy:
+        args.append("--disable-fuzzy")
+    result = CliRunner().invoke(app, args)
+    assert result.exit_code == 0, result.output
+    task = json.loads(result.stdout)[0]
+    regions = task["predictions"][0]["result"]
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    if command == "mark-batch":
+        report = report[0]
+    surnames = [
+        o
+        for o in report["occurrences"]
+        if o["entity_type"] == "person" and o["field_name"] in {"last_name", "previous_last_name"}
+    ]
+    assert [
+        (o["field_name"], o["matched_text"], o["start"], o["end"]) for o in surnames
+    ] == expected
+    assert [
+        (r["value"]["labels"][0], r["value"]["text"], r["value"]["start"], r["value"]["end"])
+        for r in regions
+        if r["value"]["labels"][0] in {"PERSON_LAST_NAME", "PERSON_PREVIOUS_LAST_NAME"}
+    ] == [(f"PERSON_{field.upper()}", value, start, end) for field, value, start, end in expected]
+    assert bool([r for r in regions if r["value"]["labels"] == ["SENDER_FULL_NAME"]]) == with_sender
+    for region, occurrence in zip(regions, report["occurrences"], strict=True):
+        assert region["id"] == occurrence["region_id"]
+        value = region["value"]
+        assert text[value["start"] : value["end"]] == value["text"]
+
+
+@pytest.mark.parametrize("command", ["mark", "mark-batch"])
+@pytest.mark.parametrize("fuzzy", [False, True])
 @pytest.mark.parametrize("year", ["25", "2025"])
 def test_repeated_case_numbers_and_emails_keep_separate_regions(
     tmp_path: Path, command: str, fuzzy: bool, year: str

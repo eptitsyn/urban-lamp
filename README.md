@@ -258,7 +258,10 @@ components as score bonuses. Weak isolated names and unresolved competing
 identities are rejected; entity ID sorting never establishes identity.
 
 The overlap policy retains identical spans in distinct entity roles, such as a
-legal entity and a sender sharing an INN. Otherwise the flat policy prioritizes exact, then normalized, then fuzzy matches;
+legal entity and a sender sharing an INN. Person name components contained within
+`SENDER_FULL_NAME` also retain their separate regions, so a sender annotation does
+not hide `PERSON_LAST_NAME` or the other name components. Otherwise the flat policy
+prioritizes exact, then normalized, then fuzzy matches;
 then score, edit distance, span length, and deterministic ordering. Consequently,
 an exact document number can beat an enclosing normalized series/number region.
 Rejected candidates remain in the evidence report. Every non-overlapping repeated
