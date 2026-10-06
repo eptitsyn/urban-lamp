@@ -229,6 +229,11 @@ Birth dates support one OCR edit after horizontal spaces are removed. For exampl
 stored `20.01.1973` matches `20.01 1 1973` as a Bitap substitution of `.` with `1`.
 The reported region includes the original spaces. The same one-edit rule also
 permits digit substitutions; `--disable-fuzzy` or `--max-errors 0` disables it.
+Year/birth suffixes such as `г`, `г.`, `г.р.`, `год`, `года`, `году`, and
+`г. рождения` are recognized after dates, with or without a space. For example,
+`20.01 1 1973г.р. место рожд:` marks only `20.01 1 1973`; the suffix consumes
+no edit and is excluded from the region. Suffixes remain in the original text,
+but are never included in the date annotation, even as fuzzy insertions.
 Line breaks and excessive gaps remain barriers. Other date fields retain
 exact/normalized matching.
 

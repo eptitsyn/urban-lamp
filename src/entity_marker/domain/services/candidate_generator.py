@@ -1,4 +1,5 @@
 import logging
+import re
 import unicodedata
 
 from entity_marker.domain.models.matches import (
@@ -15,6 +16,9 @@ from entity_marker.domain.ports.matching import ApproximateTextMatcher, ExactTex
 from entity_marker.domain.ports.normalization import TextNormalizer
 
 logger = logging.getLogger(__name__)
+_DATE_SUFFIX_PATTERN = r"г(?:од(?:а|у|ом)?)?\.?(?:[ \t]*р(?:ождения)?\.?)?(?!\w)"
+_DATE_SUFFIX = re.compile(_DATE_SUFFIX_PATTERN, re.IGNORECASE)
+_DATE_ENDS_WITH_SUFFIX = re.compile(r"\d[ \t]*" + _DATE_SUFFIX_PATTERN + r"$", re.IGNORECASE)
 
 
 def _word(char: str) -> bool:
@@ -29,8 +33,22 @@ def valid_boundary(text: str, span: TextSpan) -> bool:
 
 
 def valid_field_boundary(text: str, span: TextSpan, alias: EntityAlias) -> bool:
-    if not valid_boundary(text, span):
+    if alias.profile == NormalizationProfile.DATE and _DATE_ENDS_WITH_SUFFIX.search(
+        text[span.start : span.end]
+    ):
+        # A fuzzy insertion must not turn a year suffix into part of the date.
         return False
+    if not valid_boundary(text, span):
+        # Russian year/birth abbreviations may immediately follow the year.
+        # Relax only the right boundary; the suffix stays outside the date span.
+        date_suffix = (
+            alias.profile == NormalizationProfile.DATE
+            and (span.start == 0 or not _word(text[span.start - 1]))
+            and text[span.end - 1].isdigit()
+            and _DATE_SUFFIX.match(text, span.end) is not None
+        )
+        if not date_suffix:
+            return False
     if alias.profile == NormalizationProfile.EMAIL:
         # Do not find a known mailbox inside another local part or subdomain.
         if span.start and text[span.start - 1] in ".%+-@":

@@ -16,6 +16,62 @@ from entity_marker.domain.policies.matching import MatchingConfig
 
 
 @pytest.mark.parametrize(
+    "suffix",
+    [
+        "г.р. место рожд:",
+        "Г.Р. место рожд:",
+        "г. р.",
+        "г.",
+        "г",
+        "год",
+        "года",
+        "году",
+        "г. рождения",
+        "гр",
+        " г.",
+        " года рождения",
+    ],
+)
+@pytest.mark.parametrize(
+    ("value", "method", "distance"),
+    [
+        ("20.01.1973", MatchMethod.EXACT, 0),
+        ("20. 01. 1973", MatchMethod.NORMALIZED, 0),
+        ("20.01 1 1973", MatchMethod.BITAP, 1),
+    ],
+)
+def test_attached_date_suffix_is_outside_region(
+    suffix: str, value: str, method: MatchMethod, distance: int
+) -> None:
+    text = "😀 Дата рождения: " + value + suffix
+    catalog = ObjectCatalog(people=(Person("p", birth_date=date(1973, 1, 20)),))
+    result = build_handler().handle(MarkOccurrences(SourceText(text), catalog))
+    assert len(result.occurrences) == 1
+    occurrence = result.occurrences[0]
+    assert occurrence.matched_text == value
+    assert occurrence.method == method
+    assert occurrence.edit_distance == distance
+    assert occurrence.span.start == text.index(value)
+    assert occurrence.span.end == text.index(value) + len(value)
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "X20.01 1 1973г.р.",
+        "120.01 1 1973г.р.",
+        "20.01 1 1973гражданин",
+        "20.01 1 1973г_р",
+        "20.01 1 1973year",
+    ],
+)
+def test_date_suffix_exception_does_not_relax_other_word_boundaries(text: str) -> None:
+    catalog = ObjectCatalog(people=(Person("p", birth_date=date(1973, 1, 20)),))
+    result = build_handler().handle(MarkOccurrences(SourceText(text), catalog))
+    assert not result.occurrences
+
+
+@pytest.mark.parametrize(
     "text",
     [
         "20.01 1 1973",
@@ -71,10 +127,11 @@ def test_other_date_fields_remain_exact_or_normalized() -> None:
 
 @pytest.mark.parametrize("command", ["mark", "mark-batch"])
 @pytest.mark.parametrize("options", [[], ["--disable-fuzzy"], ["--max-errors", "0"]])
+@pytest.mark.parametrize("suffix", ["", "г.р. место рожд:"])
 def test_cli_repeated_exact_and_ocr_birth_dates(
-    tmp_path: Path, command: str, options: list[str]
+    tmp_path: Path, command: str, options: list[str], suffix: str
 ) -> None:
-    text = "😀\r\n20.01.1973; 20.01 1 1973; 20.01 1 1973."
+    text = f"😀\r\n20.01.1973{suffix}; 20.01 1 1973{suffix}; 20.01 1 1973{suffix}."
     (tmp_path / "v.txt").write_bytes(text.encode("utf-8"))
     if command == "mark":
         objects = tmp_path / "objects.json"
