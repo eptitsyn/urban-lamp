@@ -113,6 +113,7 @@ source = { editable = "." }
 dependencies = [
     { name = "pydantic" },
     { name = "pymorphy3" },
+    { name = "rich" },
     { name = "typer" },
 ]
 
@@ -127,6 +128,7 @@ dev = [
 requires-dist = [
     { name = "pydantic", specifier = ">=2,<3" },
     { name = "pymorphy3", specifier = ">=2,<3" },
+    { name = "rich", specifier = ">=13,<16" },
     { name = "typer", specifier = ">=0.12,<1" },
 ]
 

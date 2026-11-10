@@ -22,7 +22,7 @@ from entity_marker.domain.models.entities import (
 )
 
 NonBlank = Annotated[str, StringConstraints(min_length=1, pattern=r"\S")]
-TaxId = Annotated[str, StringConstraints(pattern=r"^(?:[0-9]{10}|[0-9]{12})$")]
+TaxId = str
 
 
 def parse_date(value: object) -> object:

@@ -1,3 +1,5 @@
+from collections.abc import Callable
+
 from entity_marker.domain.aliases.generators import PersonAliasGenerator, generate_aliases
 from entity_marker.domain.models.entities import ObjectCatalog
 from entity_marker.domain.models.matches import (
@@ -23,9 +25,14 @@ class OccurrenceMarker:
         self.resolver = resolver
         self.overlaps = overlaps
 
-    def mark(self, source: SourceText, catalog: ObjectCatalog) -> MarkingResult:
+    def mark(
+        self,
+        source: SourceText,
+        catalog: ObjectCatalog,
+        progress: Callable[[int, int], None] | None = None,
+    ) -> MarkingResult:
         aliases = generate_aliases(catalog, self.generator.config, self.person_aliases)
-        candidates = self.generator.generate(source, aliases)
+        candidates = self.generator.generate(source, aliases, progress)
         accepted, rejected = self.resolver.resolve(candidates, source)
         kept, overlaps = self.overlaps.resolve(accepted)
         for item in overlaps:

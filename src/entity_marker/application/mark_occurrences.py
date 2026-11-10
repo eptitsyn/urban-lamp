@@ -1,3 +1,4 @@
+from collections.abc import Callable
 from dataclasses import dataclass
 
 from entity_marker.domain.models.entities import ObjectCatalog
@@ -16,5 +17,9 @@ class MarkOccurrencesHandler:
     def __init__(self, marker: OccurrenceMarker) -> None:
         self.marker = marker
 
-    def handle(self, command: MarkOccurrences) -> MarkingResult:
-        return self.marker.mark(command.source, command.objects)
+    def handle(
+        self,
+        command: MarkOccurrences,
+        progress: Callable[[int, int], None] | None = None,
+    ) -> MarkingResult:
+        return self.marker.mark(command.source, command.objects, progress)

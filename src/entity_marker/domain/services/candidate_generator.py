@@ -1,6 +1,7 @@
 import logging
 import re
 import unicodedata
+from collections.abc import Callable
 
 from entity_marker.domain.models.matches import (
     ApproximateMatch,
@@ -136,7 +137,10 @@ class CandidateGenerator:
         self.config = config
 
     def generate(
-        self, source: SourceText, aliases: tuple[EntityAlias, ...]
+        self,
+        source: SourceText,
+        aliases: tuple[EntityAlias, ...],
+        progress: Callable[[int, int], None] | None = None,
     ) -> tuple[MatchCandidate, ...]:
         texts: dict[NormalizationProfile, NormalizedText] = {}
         patterns: dict[tuple[NormalizationProfile, str], str] = {}
@@ -144,7 +148,9 @@ class CandidateGenerator:
         normalized_cache: dict[tuple[NormalizationProfile, str], list[TextSpan]] = {}
         fuzzy_cache: dict[tuple[NormalizationProfile, str, int], list[ApproximateMatch]] = {}
         candidates: list[MatchCandidate] = []
-        for alias in aliases:
+        for completed, alias in enumerate(aliases):
+            if progress is not None:
+                progress(completed, len(aliases))
             logger.debug("Alias: %s", alias)
             if alias.value not in exact_cache:
                 exact_cache[alias.value] = self.exact.find(source.text, alias.value)
@@ -193,6 +199,8 @@ class CandidateGenerator:
                 candidates.append(
                     self._candidate(alias, source, span, MatchMethod.BITAP, match.distance, quality)
                 )
+        if progress is not None:
+            progress(len(aliases), len(aliases))
         return tuple(candidates)
 
     @staticmethod

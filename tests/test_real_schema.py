@@ -44,10 +44,16 @@ def test_duplicate_ids_in_new_groups(group: str) -> None:
         parse_objects(json.dumps({group: [{"id": "x"}, {"id": "x"}]}))
 
 
-@pytest.mark.parametrize("inn", [1234567890, "123", "123456789x", "1234567890123"])
-def test_invalid_tax_id(inn: object) -> None:
+@pytest.mark.parametrize("group", ["legal_entities", "senders"])
+@pytest.mark.parametrize("inn", ["123", "123456789x", "1234567890123", "", "12 34"])
+def test_tax_id_format_is_not_validated(group: str, inn: str) -> None:
+    catalog = parse_objects(json.dumps({group: [{"id": "x", "ИНН": inn}]}))
+    assert getattr(catalog, group)[0].inn == inn
+
+
+def test_tax_id_must_be_a_string() -> None:
     with pytest.raises(ValueError):
-        parse_objects(json.dumps({"Юр Лицо": [{"id": "x", "ИНН": inn}]}))
+        parse_objects(json.dumps({"Юр Лицо": [{"id": "x", "ИНН": 1234567890}]}))
 
 
 def test_leading_zero_tax_id_preserved() -> None:

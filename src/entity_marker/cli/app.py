@@ -9,6 +9,7 @@ import typer
 
 from entity_marker.application.mark_occurrences import MarkOccurrences
 from entity_marker.bootstrap import build_handler
+from entity_marker.cli.progress import processing_progress
 from entity_marker.domain.models.text import SourceText
 from entity_marker.domain.policies.matching import MatchingConfig
 from entity_marker.infrastructure.serialization.batch_input import read_batch_rows
@@ -51,6 +52,10 @@ def mark(
     disable_fuzzy: Annotated[
         bool, typer.Option(help="Keep exact and normalized matching only.")
     ] = False,
+    progress: Annotated[
+        bool | None,
+        typer.Option("--progress/--no-progress", help="Show progress and ETA; auto in terminals."),
+    ] = None,
     pretty: Annotated[bool, typer.Option(help="Indent output JSON.")] = False,
     output_format: Annotated[
         OutputFormat, typer.Option("--format", help="Output format.")
@@ -78,7 +83,13 @@ def mark(
             raise ValueError("Input text must not be empty")
         source = SourceText(content)
         config = MatchingConfig(fuzzy_enabled=not disable_fuzzy, max_errors=max_errors)
-        result = build_handler(config).handle(MarkOccurrences(source, catalog))
+        with processing_progress(progress) as display:
+            task = display.add_task("Matching aliases", total=None)
+
+            def update(completed: int, total: int) -> None:
+                display.update(task, completed=completed, total=total)
+
+            result = build_handler(config).handle(MarkOccurrences(source, catalog), update)
         payload = (
             export_predictions(source, result.occurrences, pretty=pretty)
             if output_format == OutputFormat.LABEL_STUDIO
@@ -122,6 +133,10 @@ def mark_batch(
     disable_fuzzy: Annotated[
         bool, typer.Option(help="Keep exact and normalized matching only.")
     ] = False,
+    progress: Annotated[
+        bool | None,
+        typer.Option("--progress/--no-progress", help="Show progress and ETA; auto in terminals."),
+    ] = None,
     pretty: Annotated[bool, typer.Option(help="Indent output JSON.")] = False,
     output_format: Annotated[
         OutputFormat, typer.Option("--format", help="Output format.")
@@ -147,34 +162,35 @@ def mark_batch(
         tasks = []
         reports = []
         skipped = 0
-        for row in rows:
-            try:
+        with processing_progress(progress) as display:
+            for row in display.track(rows, description="Processing CSV rows"):
                 try:
-                    content = read_utf8(row.text_path)
-                except FileNotFoundError:
-                    skipped += 1
-                    logging.getLogger("entity_marker").warning(
-                        "%s: skipping row; text file not found: %s", row.context, row.text_path
-                    )
-                    continue
-                if not content:
-                    raise ValueError("Input text must not be empty")
-                source = SourceText(content)
-                result = handler.handle(MarkOccurrences(source, row.catalog))
-            except (ValueError, OSError) as exc:
-                raise ValueError(f"{row.context}: {exc}") from exc
-            if output_format == OutputFormat.LABEL_STUDIO:
-                task = json.loads(export_predictions(source, result.occurrences))[0]
-                task["data"].update(row.metadata)
-                tasks.append(task)
-            if evidence_output is not None or output_format == OutputFormat.OCCURRENCES:
-                reports.append({**row.metadata, **json.loads(export_evidence(result))})
-            logging.getLogger("entity_marker").info(
-                "%s: accepted %d occurrences; rejected %d candidates",
-                row.context,
-                len(result.occurrences),
-                len(result.rejected),
-            )
+                    try:
+                        content = read_utf8(row.text_path)
+                    except FileNotFoundError:
+                        skipped += 1
+                        logging.getLogger("entity_marker").warning(
+                            "%s: skipping row; text file not found: %s", row.context, row.text_path
+                        )
+                        continue
+                    if not content:
+                        raise ValueError("Input text must not be empty")
+                    source = SourceText(content)
+                    result = handler.handle(MarkOccurrences(source, row.catalog))
+                except (ValueError, OSError) as exc:
+                    raise ValueError(f"{row.context}: {exc}") from exc
+                if output_format == OutputFormat.LABEL_STUDIO:
+                    task = json.loads(export_predictions(source, result.occurrences))[0]
+                    task["data"].update(row.metadata)
+                    tasks.append(task)
+                if evidence_output is not None or output_format == OutputFormat.OCCURRENCES:
+                    reports.append({**row.metadata, **json.loads(export_evidence(result))})
+                logging.getLogger("entity_marker").info(
+                    "%s: accepted %d occurrences; rejected %d candidates",
+                    row.context,
+                    len(result.occurrences),
+                    len(result.rejected),
+                )
         payload = json.dumps(
             tasks if output_format == OutputFormat.LABEL_STUDIO else reports,
             ensure_ascii=False,
