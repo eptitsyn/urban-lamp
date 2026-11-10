@@ -23,7 +23,8 @@ def files(tmp_path: Path) -> tuple[Path, Path]:
     return objects, text
 
 
-def test_report_region_links_and_json_only_stdout(tmp_path: Path) -> None:
+@pytest.mark.parametrize("output_format", ["label-studio", "annotations"])
+def test_report_region_links_and_json_only_stdout(tmp_path: Path, output_format: str) -> None:
     objects, text = files(tmp_path)
     report = tmp_path / "evidence.json"
     result = runner.invoke(
@@ -34,6 +35,8 @@ def test_report_region_links_and_json_only_stdout(tmp_path: Path) -> None:
             str(objects),
             "--text",
             str(text),
+            "--format",
+            output_format,
             "--evidence-output",
             str(report),
             "-vv",
@@ -42,7 +45,9 @@ def test_report_region_links_and_json_only_stdout(tmp_path: Path) -> None:
     assert result.exit_code == 0, result.output
     task = json.loads(result.stdout)[0]
     evidence = json.loads(report.read_text())
-    regions = task["predictions"][0]["result"]
+    key = "annotations" if output_format == "annotations" else "predictions"
+    assert ("predictions" if key == "annotations" else "annotations") not in task
+    regions = task[key][0]["result"]
     assert len(regions) == len(evidence["occurrences"]) == 2
     for region, occurrence in zip(regions, evidence["occurrences"], strict=True):
         assert region["id"] == occurrence["region_id"]

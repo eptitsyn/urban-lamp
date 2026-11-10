@@ -235,7 +235,7 @@ def test_bad_text_does_not_write_partial_batch(tmp_path: Path, bad_text: bytes) 
     assert not evidence.exists()
 
 
-@pytest.mark.parametrize("output_format", ["label-studio", "occurrences"])
+@pytest.mark.parametrize("output_format", ["label-studio", "occurrences", "annotations"])
 @pytest.mark.parametrize("has_text", [True, False])
 def test_missing_text_rows_are_skipped(tmp_path: Path, output_format: str, has_text: bool) -> None:
     path = write_csv(
@@ -266,7 +266,7 @@ def test_missing_text_rows_are_skipped(tmp_path: Path, output_format: str, has_t
     assert "versionId=missing" in result.stderr
     assert "skipping row; text file not found" in result.stderr
     if has_text:
-        metadata = payload[0]["data"] if output_format == "label-studio" else payload[0]
+        metadata = payload[0] if output_format == "occurrences" else payload[0]["data"]
         assert metadata["versionId"] == reports[0]["versionId"] == "available"
         assert reports[0]["occurrences"][0]["matched_text"] == "В456ЕК99"
 
@@ -377,3 +377,45 @@ def test_csv_field_limit_restored_on_failure(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="versionId"):
         read_batch_rows([path])
     assert csv.field_size_limit() == previous
+
+
+def test_batch_annotations_keeps_unmatched_rows(tmp_path: Path) -> None:
+    path = write_csv(
+        tmp_path / "input.csv", [car_row("one", "А123ВС77"), car_row("two", "В456ЕК99")]
+    )
+    (tmp_path / "txts").mkdir()
+    (tmp_path / "txts/one.txt").write_text("😀 А123ВС77 и А123ВС77", encoding="utf-8")
+    (tmp_path / "txts/two.txt").write_text("Нет совпадений", encoding="utf-8")
+    output = tmp_path / "annotations.json"
+    evidence = tmp_path / "evidence.json"
+    result = runner.invoke(
+        app,
+        [
+            "mark-batch",
+            "--input",
+            str(path),
+            "--format",
+            "annotations",
+            "--output",
+            str(output),
+            "--evidence-output",
+            str(evidence),
+            "--pretty",
+            "--no-progress",
+        ],
+    )
+    assert result.exit_code == 0, result.output
+    assert not result.stdout
+    tasks = json.loads(output.read_text())
+    reports = json.loads(evidence.read_text())
+    assert len(tasks) == len(reports) == 2
+    for task, report in zip(tasks, reports, strict=True):
+        assert "predictions" not in task
+        assert task["data"]["versionId"] == report["versionId"]
+        regions = task["annotations"][0]["result"]
+        assert [r["id"] for r in regions] == [o["region_id"] for o in report["occurrences"]]
+        for region in regions:
+            value = region["value"]
+            assert task["data"]["text"][value["start"] : value["end"]] == value["text"]
+    assert len(tasks[0]["annotations"][0]["result"]) == 2
+    assert tasks[1]["annotations"] == [{"result": []}]

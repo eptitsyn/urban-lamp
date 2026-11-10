@@ -8,6 +8,22 @@ from entity_marker.domain.models.text import SourceText
 def export_predictions(
     source: SourceText, occurrences: Sequence[ObjectOccurrence], *, pretty: bool = False
 ) -> str:
+    return _export_tasks(source, occurrences, annotations=False, pretty=pretty)
+
+
+def export_annotations(
+    source: SourceText, occurrences: Sequence[ObjectOccurrence], *, pretty: bool = False
+) -> str:
+    return _export_tasks(source, occurrences, annotations=True, pretty=pretty)
+
+
+def _export_tasks(
+    source: SourceText,
+    occurrences: Sequence[ObjectOccurrence],
+    *,
+    annotations: bool,
+    pretty: bool,
+) -> str:
     results = [
         {
             "id": f"r{index:06d}",
@@ -27,8 +43,10 @@ def export_predictions(
         [
             {
                 "data": {"text": source.text},
-                "predictions": [
-                    {"model_version": "entity-marker-0.4-domain-schema", "result": results}
+                ("annotations" if annotations else "predictions"): [
+                    {"result": results}
+                    if annotations
+                    else {"model_version": "entity-marker-0.4-domain-schema", "result": results}
                 ],
             }
         ],

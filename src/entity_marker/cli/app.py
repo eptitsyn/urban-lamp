@@ -16,7 +16,10 @@ from entity_marker.infrastructure.serialization.batch_input import read_batch_ro
 from entity_marker.infrastructure.serialization.evidence_report import export_evidence
 from entity_marker.infrastructure.serialization.files import read_utf8, write_utf8_atomic
 from entity_marker.infrastructure.serialization.input_dto import parse_objects
-from entity_marker.infrastructure.serialization.label_studio import export_predictions
+from entity_marker.infrastructure.serialization.label_studio import (
+    export_annotations,
+    export_predictions,
+)
 
 app = typer.Typer(help="Mark known entity occurrences for Label Studio.")
 
@@ -24,6 +27,7 @@ app = typer.Typer(help="Mark known entity occurrences for Label Studio.")
 class OutputFormat(StrEnum):
     LABEL_STUDIO = "label-studio"
     OCCURRENCES = "occurrences"
+    ANNOTATIONS = "annotations"
 
 
 def configure_logging(verbosity: int) -> None:
@@ -54,7 +58,10 @@ def mark(
     ] = False,
     progress: Annotated[
         bool | None,
-        typer.Option("--progress/--no-progress", help="Show progress and ETA; auto in terminals."),
+        typer.Option(
+            "--progress/--no-progress",
+            help="Show progress and ETA; auto in terminals or with --output.",
+        ),
     ] = None,
     pretty: Annotated[bool, typer.Option(help="Indent output JSON.")] = False,
     output_format: Annotated[
@@ -83,18 +90,22 @@ def mark(
             raise ValueError("Input text must not be empty")
         source = SourceText(content)
         config = MatchingConfig(fuzzy_enabled=not disable_fuzzy, max_errors=max_errors)
-        with processing_progress(progress) as display:
+        with processing_progress(progress, output_file=output is not None) as display:
             task = display.add_task("Matching aliases", total=None)
 
             def update(completed: int, total: int) -> None:
                 display.update(task, completed=completed, total=total)
 
             result = build_handler(config).handle(MarkOccurrences(source, catalog), update)
-        payload = (
-            export_predictions(source, result.occurrences, pretty=pretty)
-            if output_format == OutputFormat.LABEL_STUDIO
-            else export_evidence(result, pretty=pretty)
-        )
+        if output_format == OutputFormat.OCCURRENCES:
+            payload = export_evidence(result, pretty=pretty)
+        else:
+            exporter = (
+                export_annotations
+                if output_format == OutputFormat.ANNOTATIONS
+                else export_predictions
+            )
+            payload = exporter(source, result.occurrences, pretty=pretty)
         if evidence_output is not None:
             write_utf8_atomic(evidence_output, export_evidence(result, pretty=pretty))
         if output is None:
@@ -135,7 +146,10 @@ def mark_batch(
     ] = False,
     progress: Annotated[
         bool | None,
-        typer.Option("--progress/--no-progress", help="Show progress and ETA; auto in terminals."),
+        typer.Option(
+            "--progress/--no-progress",
+            help="Show progress and ETA; auto in terminals or with --output.",
+        ),
     ] = None,
     pretty: Annotated[bool, typer.Option(help="Indent output JSON.")] = False,
     output_format: Annotated[
@@ -148,21 +162,25 @@ def mark_batch(
     """Match each CSV row against txts/<versionId>.txt using only that row's objects."""
     configure_logging(verbose)
     try:
-        rows = read_batch_rows(inputs, txts_dir)
-        input_paths = {path.resolve() for path in inputs}
-        input_paths.update(row.text_path.resolve() for row in rows)
-        destinations = [path.resolve() for path in (output, evidence_output) if path is not None]
-        if len(set(destinations)) != len(destinations) or any(
-            path in input_paths for path in destinations
-        ):
-            raise ValueError("Output paths must differ from input paths and from each other")
-        handler = build_handler(
-            MatchingConfig(fuzzy_enabled=not disable_fuzzy, max_errors=max_errors)
-        )
-        tasks = []
-        reports = []
-        skipped = 0
-        with processing_progress(progress) as display:
+        with processing_progress(progress, output_file=output is not None) as display:
+            loading = display.add_task("Loading CSV rows", total=None)
+            rows = read_batch_rows(inputs, txts_dir)
+            input_paths = {path.resolve() for path in inputs}
+            input_paths.update(row.text_path.resolve() for row in rows)
+            destinations = [
+                path.resolve() for path in (output, evidence_output) if path is not None
+            ]
+            if len(set(destinations)) != len(destinations) or any(
+                path in input_paths for path in destinations
+            ):
+                raise ValueError("Output paths must differ from input paths and from each other")
+            handler = build_handler(
+                MatchingConfig(fuzzy_enabled=not disable_fuzzy, max_errors=max_errors)
+            )
+            tasks = []
+            reports = []
+            skipped = 0
+            display.remove_task(loading)
             for row in display.track(rows, description="Processing CSV rows"):
                 try:
                     try:
@@ -179,8 +197,13 @@ def mark_batch(
                     result = handler.handle(MarkOccurrences(source, row.catalog))
                 except (ValueError, OSError) as exc:
                     raise ValueError(f"{row.context}: {exc}") from exc
-                if output_format == OutputFormat.LABEL_STUDIO:
-                    task = json.loads(export_predictions(source, result.occurrences))[0]
+                if output_format != OutputFormat.OCCURRENCES:
+                    exporter = (
+                        export_annotations
+                        if output_format == OutputFormat.ANNOTATIONS
+                        else export_predictions
+                    )
+                    task = json.loads(exporter(source, result.occurrences))[0]
                     task["data"].update(row.metadata)
                     tasks.append(task)
                 if evidence_output is not None or output_format == OutputFormat.OCCURRENCES:
@@ -192,7 +215,7 @@ def mark_batch(
                     len(result.rejected),
                 )
         payload = json.dumps(
-            tasks if output_format == OutputFormat.LABEL_STUDIO else reports,
+            reports if output_format == OutputFormat.OCCURRENCES else tasks,
             ensure_ascii=False,
             indent=2 if pretty else None,
         )
