@@ -103,7 +103,10 @@ def mark(
 @app.command()
 def mark_batch(
     inputs: Annotated[
-        list[Path], typer.Option("--input", help="Semicolon CSV export; repeat for multiple files.")
+        list[Path],
+        typer.Option(
+            "--input", help="CSV export (auto-detects , or ;); repeat for multiple files."
+        ),
     ],
     txts_dir: Annotated[
         Path | None,

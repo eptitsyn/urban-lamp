@@ -31,6 +31,72 @@ def car_row(version: str, plate: str) -> dict[str, str]:
     return {"versionId": version, CARS: json.dumps([{"Гос. номер": plate}])}
 
 
+@pytest.mark.parametrize(
+    ("cell", "expected"),
+    [
+        ('ООО "Ромашка"', 'ООО "Ромашка"'),
+        ('"ООО ""Ромашка"""', 'ООО "Ромашка"'),
+        ('"""Ромашка"""', '"Ромашка"'),
+        ('""""', '"'),
+        ('"ООО ""Ромашка; Восток""\r\nфилиал"', 'ООО "Ромашка; Восток"\r\nфилиал'),
+        ("\"«Ромашка» и 'Восток'\"", "«Ромашка» и 'Восток'"),
+        ('"C:\\reports\\""Ромашка"".pdf"', 'C:\\reports\\"Ромашка".pdf'),
+    ],
+)
+def test_literal_csv_quotes_preserve_values_and_row_boundaries(
+    tmp_path: Path, cell: str, expected: str
+) -> None:
+    path = tmp_path / "quoted.csv"
+    # Literal CSV fixtures also check the reader independently of csv.DictWriter.
+    path.write_bytes(
+        (
+            f"\ufeffversionId;fileName;Отправитель\r\none;{cell};{cell}\r\ntwo;next.pdf;Петров\r\n"
+        ).encode()
+    )
+    first, second = read_batch_rows([path])
+    assert first.identifiers["fileName"] == expected
+    assert first.catalog.senders[0].full_name == expected
+    assert second.version_id == "two"
+    assert second.identifiers["fileName"] == "next.pdf"
+    assert second.catalog.senders[0].full_name == "Петров"
+    assert (first.row_number, second.row_number) == (2, 3)
+
+
+def test_json_quotes_in_csv_survive_matching_and_serialization(tmp_path: Path) -> None:
+    name = 'ООО "Ромашка; Восток"'
+    filename = 'Письмо "о выплате";\r\nкопия.pdf'
+    path = write_csv(
+        tmp_path / "quoted.csv",
+        [
+            {
+                "versionId": "v",
+                "fileName": filename,
+                LEGAL_ENTITIES: json.dumps([{"Полное наименование": name}], ensure_ascii=False),
+            }
+        ],
+    )
+    assert read_batch_rows([path])[0].catalog.legal_entities[0].name == name
+    text = f'😀\r\nПолучатель: {name}.\r\nТема: "выплата".'
+    (tmp_path / "txts").mkdir()
+    (tmp_path / "txts/v.txt").write_bytes(text.encode("utf-8"))
+    evidence = tmp_path / "evidence.json"
+    result = runner.invoke(
+        app,
+        ["mark-batch", "--input", str(path), "--disable-fuzzy", "--evidence-output", str(evidence)],
+    )
+    assert result.exit_code == 0, result.output
+    (task,) = json.loads(result.stdout)
+    assert task["data"]["fileName"] == filename
+    assert task["data"]["text"] == text
+    (region,) = task["predictions"][0]["result"]
+    assert region["value"]["text"] == name
+    assert text[region["value"]["start"] : region["value"]["end"]] == name
+    (report,) = json.loads(evidence.read_text())
+    (occurrence,) = report["occurrences"]
+    assert occurrence["matched_text"] == name
+    assert text[occurrence["start"] : occurrence["end"]] == name
+
+
 def test_export_mapping_preserves_identifiers_and_empty_values() -> None:
     catalog = catalog_from_row(
         {
@@ -247,6 +313,7 @@ def test_invalid_entity_cells_have_row_context(tmp_path: Path, value: str) -> No
         "versionId;fileId\na\n",
         "versionId\na;b\n",
         'versionId\n"unterminated',
+        'versionId;fileName\nv;"Письмо "цитата".pdf"\n',
     ],
 )
 def test_malformed_csv(tmp_path: Path, content: str) -> None:

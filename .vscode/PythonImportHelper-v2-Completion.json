@@ -116,6 +116,14 @@
         "documentation": {}
     },
     {
+        "label": "replace",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
         "label": "ObjectCatalog",
         "importPath": "entity_marker.domain.models.entities",
         "description": "entity_marker.domain.models.entities",
@@ -228,6 +236,14 @@
         "documentation": {}
     },
     {
+        "label": "EntityType",
+        "importPath": "entity_marker.domain.models.entities",
+        "description": "entity_marker.domain.models.entities",
+        "isExtraImport": true,
+        "detail": "entity_marker.domain.models.entities",
+        "documentation": {}
+    },
+    {
         "label": "Person",
         "importPath": "entity_marker.domain.models.entities",
         "description": "entity_marker.domain.models.entities",
@@ -293,6 +309,38 @@
     },
     {
         "label": "Sender",
+        "importPath": "entity_marker.domain.models.entities",
+        "description": "entity_marker.domain.models.entities",
+        "isExtraImport": true,
+        "detail": "entity_marker.domain.models.entities",
+        "documentation": {}
+    },
+    {
+        "label": "Document",
+        "importPath": "entity_marker.domain.models.entities",
+        "description": "entity_marker.domain.models.entities",
+        "isExtraImport": true,
+        "detail": "entity_marker.domain.models.entities",
+        "documentation": {}
+    },
+    {
+        "label": "Misc",
+        "importPath": "entity_marker.domain.models.entities",
+        "description": "entity_marker.domain.models.entities",
+        "isExtraImport": true,
+        "detail": "entity_marker.domain.models.entities",
+        "documentation": {}
+    },
+    {
+        "label": "ObjectCatalog",
+        "importPath": "entity_marker.domain.models.entities",
+        "description": "entity_marker.domain.models.entities",
+        "isExtraImport": true,
+        "detail": "entity_marker.domain.models.entities",
+        "documentation": {}
+    },
+    {
+        "label": "Person",
         "importPath": "entity_marker.domain.models.entities",
         "description": "entity_marker.domain.models.entities",
         "isExtraImport": true,
@@ -612,6 +660,14 @@
         "documentation": {}
     },
     {
+        "label": "MatchMethod",
+        "importPath": "entity_marker.domain.models.matches",
+        "description": "entity_marker.domain.models.matches",
+        "isExtraImport": true,
+        "detail": "entity_marker.domain.models.matches",
+        "documentation": {}
+    },
+    {
         "label": "NormalizationProfile",
         "importPath": "entity_marker.domain.models.matches",
         "description": "entity_marker.domain.models.matches",
@@ -820,7 +876,23 @@
         "documentation": {}
     },
     {
+        "label": "SourceText",
+        "importPath": "entity_marker.domain.models.text",
+        "description": "entity_marker.domain.models.text",
+        "isExtraImport": true,
+        "detail": "entity_marker.domain.models.text",
+        "documentation": {}
+    },
+    {
         "label": "TextSpan",
+        "importPath": "entity_marker.domain.models.text",
+        "description": "entity_marker.domain.models.text",
+        "isExtraImport": true,
+        "detail": "entity_marker.domain.models.text",
+        "documentation": {}
+    },
+    {
+        "label": "SourceText",
         "importPath": "entity_marker.domain.models.text",
         "description": "entity_marker.domain.models.text",
         "isExtraImport": true,
@@ -915,6 +987,22 @@
         "description": "enum",
         "isExtraImport": true,
         "detail": "enum",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
         "documentation": {}
     },
     {
@@ -1095,6 +1183,38 @@
         "documentation": {}
     },
     {
+        "label": "MarkOccurrences",
+        "importPath": "entity_marker.application.mark_occurrences",
+        "description": "entity_marker.application.mark_occurrences",
+        "isExtraImport": true,
+        "detail": "entity_marker.application.mark_occurrences",
+        "documentation": {}
+    },
+    {
+        "label": "MarkOccurrences",
+        "importPath": "entity_marker.application.mark_occurrences",
+        "description": "entity_marker.application.mark_occurrences",
+        "isExtraImport": true,
+        "detail": "entity_marker.application.mark_occurrences",
+        "documentation": {}
+    },
+    {
+        "label": "build_handler",
+        "importPath": "entity_marker.bootstrap",
+        "description": "entity_marker.bootstrap",
+        "isExtraImport": true,
+        "detail": "entity_marker.bootstrap",
+        "documentation": {}
+    },
+    {
+        "label": "build_handler",
+        "importPath": "entity_marker.bootstrap",
+        "description": "entity_marker.bootstrap",
+        "isExtraImport": true,
+        "detail": "entity_marker.bootstrap",
+        "documentation": {}
+    },
+    {
         "label": "build_handler",
         "importPath": "entity_marker.bootstrap",
         "description": "entity_marker.bootstrap",
@@ -1160,6 +1280,14 @@
     },
     {
         "label": "allowed_distance",
+        "importPath": "entity_marker.domain.policies.matching",
+        "description": "entity_marker.domain.policies.matching",
+        "isExtraImport": true,
+        "detail": "entity_marker.domain.policies.matching",
+        "documentation": {}
+    },
+    {
+        "label": "MatchingConfig",
         "importPath": "entity_marker.domain.policies.matching",
         "description": "entity_marker.domain.policies.matching",
         "isExtraImport": true,
@@ -1319,6 +1447,14 @@
         "documentation": {}
     },
     {
+        "label": "parse_objects",
+        "importPath": "entity_marker.infrastructure.serialization.input_dto",
+        "description": "entity_marker.infrastructure.serialization.input_dto",
+        "isExtraImport": true,
+        "detail": "entity_marker.infrastructure.serialization.input_dto",
+        "documentation": {}
+    },
+    {
         "label": "export_predictions",
         "importPath": "entity_marker.infrastructure.serialization.label_studio",
         "description": "entity_marker.infrastructure.serialization.label_studio",
@@ -1327,6 +1463,15 @@
         "documentation": {}
     },
     {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
         "label": "date",
         "importPath": "datetime",
         "description": "datetime",
@@ -1360,6 +1505,14 @@
     },
     {
         "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "date",
         "importPath": "datetime",
         "description": "datetime",
         "isExtraImport": true,
@@ -1800,6 +1953,38 @@
         "description": "typer.testing",
         "isExtraImport": true,
         "detail": "typer.testing",
+        "documentation": {}
+    },
+    {
+        "label": "CliRunner",
+        "importPath": "typer.testing",
+        "description": "typer.testing",
+        "isExtraImport": true,
+        "detail": "typer.testing",
+        "documentation": {}
+    },
+    {
+        "label": "CliRunner",
+        "importPath": "typer.testing",
+        "description": "typer.testing",
+        "isExtraImport": true,
+        "detail": "typer.testing",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "entity_marker.cli.app",
+        "description": "entity_marker.cli.app",
+        "isExtraImport": true,
+        "detail": "entity_marker.cli.app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "importPath": "entity_marker.cli.app",
+        "description": "entity_marker.cli.app",
+        "isExtraImport": true,
+        "detail": "entity_marker.cli.app",
         "documentation": {}
     },
     {
@@ -2285,7 +2470,7 @@
         "kind": 6,
         "importPath": "src.entity_marker.domain.policies.matching",
         "description": "src.entity_marker.domain.policies.matching",
-        "peekOfCode": "class PersonMatchingPolicy:\n    def allowed_distance(self, field_name: str, value: str) -> int:\n        if field_name == \"birth_date\":\n            return 0\n        if len(value) < 4:\n            return 0\n        return (\n            2\n            if field_name in (\"full_name\", \"last_name\", \"previous_full_name\", \"previous_last_name\")\n            and len(value) >= 10",
+        "peekOfCode": "class PersonMatchingPolicy:\n    def allowed_distance(self, field_name: str, value: str) -> int:\n        if field_name == \"birth_date\":\n            return int(len(value) >= 8)\n        if len(value) < 4:\n            return 0\n        return (\n            2\n            if field_name in (\"full_name\", \"last_name\", \"previous_full_name\", \"previous_last_name\")\n            and len(value) >= 10",
         "detail": "src.entity_marker.domain.policies.matching",
         "documentation": {}
     },
@@ -2303,7 +2488,7 @@
         "kind": 6,
         "importPath": "src.entity_marker.domain.policies.matching",
         "description": "src.entity_marker.domain.policies.matching",
-        "peekOfCode": "class DocumentMatchingPolicy:\n    def allowed_distance(self, field_name: str, value: str) -> int:\n        return int(field_name in (\"number\", \"series_number\") and len(value) >= 6)\ndef allowed_distance(alias: EntityAlias, normalized: str, config: MatchingConfig) -> int:\n    # Initials are weak identity signals: never repair a wrong initial by fuzzy matching.\n    if alias.field_name in (\"full_name\", \"previous_full_name\") and \".\" in alias.value:\n        return 0\n    if not config.fuzzy_enabled or len(normalized) < config.min_fuzzy_pattern_length:\n        return 0\n    # Contacts, tax IDs, dates and case/letter numbers are identity-bearing:",
+        "peekOfCode": "class DocumentMatchingPolicy:\n    def allowed_distance(self, field_name: str, value: str) -> int:\n        return int(field_name in (\"number\", \"series_number\") and len(value) >= 6)\ndef allowed_distance(alias: EntityAlias, normalized: str, config: MatchingConfig) -> int:\n    # Initials are weak identity signals: never repair a wrong initial by fuzzy matching.\n    if alias.field_name in (\"full_name\", \"previous_full_name\") and \".\" in alias.value:\n        return 0\n    if not config.fuzzy_enabled or len(normalized) < config.min_fuzzy_pattern_length:\n        return 0\n    # Contacts, tax IDs, correspondence dates and letter numbers stay exact/normalized.",
         "detail": "src.entity_marker.domain.policies.matching",
         "documentation": {}
     },
@@ -2312,7 +2497,7 @@
         "kind": 2,
         "importPath": "src.entity_marker.domain.policies.matching",
         "description": "src.entity_marker.domain.policies.matching",
-        "peekOfCode": "def allowed_distance(alias: EntityAlias, normalized: str, config: MatchingConfig) -> int:\n    # Initials are weak identity signals: never repair a wrong initial by fuzzy matching.\n    if alias.field_name in (\"full_name\", \"previous_full_name\") and \".\" in alias.value:\n        return 0\n    if not config.fuzzy_enabled or len(normalized) < config.min_fuzzy_pattern_length:\n        return 0\n    # Contacts, tax IDs, dates and case/letter numbers are identity-bearing:\n    # a single changed character can designate an entirely different record.\n    if alias.field_name in (\n        \"inn\",",
+        "peekOfCode": "def allowed_distance(alias: EntityAlias, normalized: str, config: MatchingConfig) -> int:\n    # Initials are weak identity signals: never repair a wrong initial by fuzzy matching.\n    if alias.field_name in (\"full_name\", \"previous_full_name\") and \".\" in alias.value:\n        return 0\n    if not config.fuzzy_enabled or len(normalized) < config.min_fuzzy_pattern_length:\n        return 0\n    # Contacts, tax IDs, correspondence dates and letter numbers stay exact/normalized.\n    if alias.field_name in (\n        \"inn\",\n        \"email\",",
         "detail": "src.entity_marker.domain.policies.matching",
         "documentation": {}
     },
@@ -2375,7 +2560,7 @@
         "kind": 2,
         "importPath": "src.entity_marker.domain.services.candidate_generator",
         "description": "src.entity_marker.domain.services.candidate_generator",
-        "peekOfCode": "def valid_boundary(text: str, span: TextSpan) -> bool:\n    return not (\n        (span.start > 0 and _word(text[span.start - 1]))\n        or (span.end < len(text) and _word(text[span.end]))\n    )\ndef valid_field_boundary(text: str, span: TextSpan, alias: EntityAlias) -> bool:\n    if not valid_boundary(text, span):\n        return False\n    if alias.profile == NormalizationProfile.EMAIL:\n        # Do not find a known mailbox inside another local part or subdomain.",
+        "peekOfCode": "def valid_boundary(text: str, span: TextSpan) -> bool:\n    return not (\n        (span.start > 0 and _word(text[span.start - 1]))\n        or (span.end < len(text) and _word(text[span.end]))\n    )\ndef valid_field_boundary(text: str, span: TextSpan, alias: EntityAlias) -> bool:\n    if alias.profile == NormalizationProfile.DATE and _DATE_ENDS_WITH_SUFFIX.search(\n        text[span.start : span.end]\n    ):\n        # A fuzzy insertion must not turn a year suffix into part of the date.",
         "detail": "src.entity_marker.domain.services.candidate_generator",
         "documentation": {}
     },
@@ -2384,7 +2569,7 @@
         "kind": 2,
         "importPath": "src.entity_marker.domain.services.candidate_generator",
         "description": "src.entity_marker.domain.services.candidate_generator",
-        "peekOfCode": "def valid_field_boundary(text: str, span: TextSpan, alias: EntityAlias) -> bool:\n    if not valid_boundary(text, span):\n        return False\n    if alias.profile == NormalizationProfile.EMAIL:\n        # Do not find a known mailbox inside another local part or subdomain.\n        if span.start and text[span.start - 1] in \".%+-@\":\n            return False\n        if span.end < len(text):\n            following = text[span.end]\n            if following in \"@%+-\":",
+        "peekOfCode": "def valid_field_boundary(text: str, span: TextSpan, alias: EntityAlias) -> bool:\n    if alias.profile == NormalizationProfile.DATE and _DATE_ENDS_WITH_SUFFIX.search(\n        text[span.start : span.end]\n    ):\n        # A fuzzy insertion must not turn a year suffix into part of the date.\n        return False\n    if not valid_boundary(text, span):\n        # Russian year/birth abbreviations may immediately follow the year.\n        # Relax only the right boundary; the suffix stays outside the date span.\n        date_suffix = (",
         "detail": "src.entity_marker.domain.services.candidate_generator",
         "documentation": {}
     },
@@ -2393,7 +2578,34 @@
         "kind": 5,
         "importPath": "src.entity_marker.domain.services.candidate_generator",
         "description": "src.entity_marker.domain.services.candidate_generator",
-        "peekOfCode": "logger = logging.getLogger(__name__)\ndef _word(char: str) -> bool:\n    return char.isalnum() or char == \"_\" or unicodedata.category(char).startswith(\"M\")\ndef valid_boundary(text: str, span: TextSpan) -> bool:\n    return not (\n        (span.start > 0 and _word(text[span.start - 1]))\n        or (span.end < len(text) and _word(text[span.end]))\n    )\ndef valid_field_boundary(text: str, span: TextSpan, alias: EntityAlias) -> bool:\n    if not valid_boundary(text, span):",
+        "peekOfCode": "logger = logging.getLogger(__name__)\n_DATE_SUFFIX_PATTERN = r\"г(?:од(?:а|у|ом)?)?\\.?(?:[ \\t]*р(?:ождения)?\\.?)?(?!\\w)\"\n_DATE_SUFFIX = re.compile(_DATE_SUFFIX_PATTERN, re.IGNORECASE)\n_DATE_ENDS_WITH_SUFFIX = re.compile(r\"\\d[ \\t]*\" + _DATE_SUFFIX_PATTERN + r\"$\", re.IGNORECASE)\ndef _word(char: str) -> bool:\n    return char.isalnum() or char == \"_\" or unicodedata.category(char).startswith(\"M\")\ndef valid_boundary(text: str, span: TextSpan) -> bool:\n    return not (\n        (span.start > 0 and _word(text[span.start - 1]))\n        or (span.end < len(text) and _word(text[span.end]))",
+        "detail": "src.entity_marker.domain.services.candidate_generator",
+        "documentation": {}
+    },
+    {
+        "label": "_DATE_SUFFIX_PATTERN",
+        "kind": 5,
+        "importPath": "src.entity_marker.domain.services.candidate_generator",
+        "description": "src.entity_marker.domain.services.candidate_generator",
+        "peekOfCode": "_DATE_SUFFIX_PATTERN = r\"г(?:од(?:а|у|ом)?)?\\.?(?:[ \\t]*р(?:ождения)?\\.?)?(?!\\w)\"\n_DATE_SUFFIX = re.compile(_DATE_SUFFIX_PATTERN, re.IGNORECASE)\n_DATE_ENDS_WITH_SUFFIX = re.compile(r\"\\d[ \\t]*\" + _DATE_SUFFIX_PATTERN + r\"$\", re.IGNORECASE)\ndef _word(char: str) -> bool:\n    return char.isalnum() or char == \"_\" or unicodedata.category(char).startswith(\"M\")\ndef valid_boundary(text: str, span: TextSpan) -> bool:\n    return not (\n        (span.start > 0 and _word(text[span.start - 1]))\n        or (span.end < len(text) and _word(text[span.end]))\n    )",
+        "detail": "src.entity_marker.domain.services.candidate_generator",
+        "documentation": {}
+    },
+    {
+        "label": "_DATE_SUFFIX",
+        "kind": 5,
+        "importPath": "src.entity_marker.domain.services.candidate_generator",
+        "description": "src.entity_marker.domain.services.candidate_generator",
+        "peekOfCode": "_DATE_SUFFIX = re.compile(_DATE_SUFFIX_PATTERN, re.IGNORECASE)\n_DATE_ENDS_WITH_SUFFIX = re.compile(r\"\\d[ \\t]*\" + _DATE_SUFFIX_PATTERN + r\"$\", re.IGNORECASE)\ndef _word(char: str) -> bool:\n    return char.isalnum() or char == \"_\" or unicodedata.category(char).startswith(\"M\")\ndef valid_boundary(text: str, span: TextSpan) -> bool:\n    return not (\n        (span.start > 0 and _word(text[span.start - 1]))\n        or (span.end < len(text) and _word(text[span.end]))\n    )\ndef valid_field_boundary(text: str, span: TextSpan, alias: EntityAlias) -> bool:",
+        "detail": "src.entity_marker.domain.services.candidate_generator",
+        "documentation": {}
+    },
+    {
+        "label": "_DATE_ENDS_WITH_SUFFIX",
+        "kind": 5,
+        "importPath": "src.entity_marker.domain.services.candidate_generator",
+        "description": "src.entity_marker.domain.services.candidate_generator",
+        "peekOfCode": "_DATE_ENDS_WITH_SUFFIX = re.compile(r\"\\d[ \\t]*\" + _DATE_SUFFIX_PATTERN + r\"$\", re.IGNORECASE)\ndef _word(char: str) -> bool:\n    return char.isalnum() or char == \"_\" or unicodedata.category(char).startswith(\"M\")\ndef valid_boundary(text: str, span: TextSpan) -> bool:\n    return not (\n        (span.start > 0 and _word(text[span.start - 1]))\n        or (span.end < len(text) and _word(text[span.end]))\n    )\ndef valid_field_boundary(text: str, span: TextSpan, alias: EntityAlias) -> bool:\n    if alias.profile == NormalizationProfile.DATE and _DATE_ENDS_WITH_SUFFIX.search(",
         "detail": "src.entity_marker.domain.services.candidate_generator",
         "documentation": {}
     },
@@ -2447,7 +2659,7 @@
         "kind": 6,
         "importPath": "src.entity_marker.domain.services.overlap_resolver",
         "description": "src.entity_marker.domain.services.overlap_resolver",
-        "peekOfCode": "class OverlapResolver:\n    \"\"\"Greedy overlap policy; identical spans in distinct domain roles are retained.\"\"\"\n    def resolve(\n        self, occurrences: list[ObjectOccurrence]\n    ) -> tuple[tuple[ObjectOccurrence, ...], tuple[ObjectOccurrence, ...]]:\n        ranked = sorted(\n            occurrences,\n            key=lambda item: (\n                METHOD_PRIORITY[item.method],\n                -item.score.value,",
+        "peekOfCode": "class OverlapResolver:\n    \"\"\"Greedy overlap policy with compatible domain-role annotations retained.\"\"\"\n    def resolve(\n        self, occurrences: list[ObjectOccurrence]\n    ) -> tuple[tuple[ObjectOccurrence, ...], tuple[ObjectOccurrence, ...]]:\n        ranked = sorted(\n            occurrences,\n            key=lambda item: (\n                METHOD_PRIORITY[item.method],\n                -item.score.value,",
         "detail": "src.entity_marker.domain.services.overlap_resolver",
         "documentation": {}
     },
@@ -2456,7 +2668,7 @@
         "kind": 2,
         "importPath": "src.entity_marker.domain.services.overlap_resolver",
         "description": "src.entity_marker.domain.services.overlap_resolver",
-        "peekOfCode": "def occurrence_order(item: ObjectOccurrence) -> tuple[int, int, str, str, str]:\n    return item.span.start, item.span.end, item.entity_type.value, item.entity_id, item.field_name\nclass OverlapResolver:\n    \"\"\"Greedy overlap policy; identical spans in distinct domain roles are retained.\"\"\"\n    def resolve(\n        self, occurrences: list[ObjectOccurrence]\n    ) -> tuple[tuple[ObjectOccurrence, ...], tuple[ObjectOccurrence, ...]]:\n        ranked = sorted(\n            occurrences,\n            key=lambda item: (",
+        "peekOfCode": "def occurrence_order(item: ObjectOccurrence) -> tuple[int, int, str, str, str]:\n    return item.span.start, item.span.end, item.entity_type.value, item.entity_id, item.field_name\ndef _compatible_roles(first: ObjectOccurrence, second: ObjectOccurrence) -> bool:\n    if first.entity_type == second.entity_type:\n        return False\n    if first.span == second.span:\n        return True\n    person, sender = (first, second) if first.entity_type == EntityType.PERSON else (second, first)\n    # A sender's full name and a person's name components describe different roles.\n    return (",
         "detail": "src.entity_marker.domain.services.overlap_resolver",
         "documentation": {}
     },
@@ -2465,7 +2677,7 @@
         "kind": 5,
         "importPath": "src.entity_marker.domain.services.overlap_resolver",
         "description": "src.entity_marker.domain.services.overlap_resolver",
-        "peekOfCode": "logger = logging.getLogger(__name__)\ndef occurrence_order(item: ObjectOccurrence) -> tuple[int, int, str, str, str]:\n    return item.span.start, item.span.end, item.entity_type.value, item.entity_id, item.field_name\nclass OverlapResolver:\n    \"\"\"Greedy overlap policy; identical spans in distinct domain roles are retained.\"\"\"\n    def resolve(\n        self, occurrences: list[ObjectOccurrence]\n    ) -> tuple[tuple[ObjectOccurrence, ...], tuple[ObjectOccurrence, ...]]:\n        ranked = sorted(\n            occurrences,",
+        "peekOfCode": "logger = logging.getLogger(__name__)\ndef occurrence_order(item: ObjectOccurrence) -> tuple[int, int, str, str, str]:\n    return item.span.start, item.span.end, item.entity_type.value, item.entity_id, item.field_name\ndef _compatible_roles(first: ObjectOccurrence, second: ObjectOccurrence) -> bool:\n    if first.entity_type == second.entity_type:\n        return False\n    if first.span == second.span:\n        return True\n    person, sender = (first, second) if first.entity_type == EntityType.PERSON else (second, first)\n    # A sender's full name and a person's name components describe different roles.",
         "detail": "src.entity_marker.domain.services.overlap_resolver",
         "documentation": {}
     },
@@ -2510,7 +2722,7 @@
         "kind": 6,
         "importPath": "src.entity_marker.infrastructure.morphology.russian",
         "description": "src.entity_marker.infrastructure.morphology.russian",
-        "peekOfCode": "class _Analyzer(Protocol):\n    def parse(self, word: str) -> list[_Parse]: ...\nclass RussianPersonInflector:\n    \"\"\"Dictionary-backed singular name forms, never arbitrary suffix replacement.\n    Only parses tagged Name/Surn/Patr are eligible. Unrecognized or ambiguous\n    components stay unchanged. Case forms are aligned, not a Cartesian product.\n    Dictionaries are loaded lazily and no network access occurs during matching.\n    \"\"\"\n    def __init__(self) -> None:\n        self._analyzer: _Analyzer | None = None",
+        "peekOfCode": "class _Analyzer(Protocol):\n    def parse(self, word: str) -> list[_Parse]: ...\nclass RussianPersonInflector:\n    \"\"\"Dictionary-backed name forms with predicted surname paradigms as fallback.\n    Only parses tagged Name/Surn/Patr are eligible. Surnames absent from the\n    dictionary may use the analyzer's Surn predictions. Unsupported or ambiguous\n    components stay unchanged. Case forms are aligned, not a Cartesian product.\n    Dictionaries are loaded lazily and no network access occurs during matching.\n    \"\"\"\n    def __init__(self) -> None:",
         "detail": "src.entity_marker.infrastructure.morphology.russian",
         "documentation": {}
     },
@@ -2519,7 +2731,7 @@
         "kind": 6,
         "importPath": "src.entity_marker.infrastructure.morphology.russian",
         "description": "src.entity_marker.infrastructure.morphology.russian",
-        "peekOfCode": "class RussianPersonInflector:\n    \"\"\"Dictionary-backed singular name forms, never arbitrary suffix replacement.\n    Only parses tagged Name/Surn/Patr are eligible. Unrecognized or ambiguous\n    components stay unchanged. Case forms are aligned, not a Cartesian product.\n    Dictionaries are loaded lazily and no network access occurs during matching.\n    \"\"\"\n    def __init__(self) -> None:\n        self._analyzer: _Analyzer | None = None\n        self._parse_cache: dict[tuple[str, str], tuple[_Parse, ...]] = {}\n    def _parses(self, word: str, role: str) -> tuple[_Parse, ...]:",
+        "peekOfCode": "class RussianPersonInflector:\n    \"\"\"Dictionary-backed name forms with predicted surname paradigms as fallback.\n    Only parses tagged Name/Surn/Patr are eligible. Surnames absent from the\n    dictionary may use the analyzer's Surn predictions. Unsupported or ambiguous\n    components stay unchanged. Case forms are aligned, not a Cartesian product.\n    Dictionaries are loaded lazily and no network access occurs during matching.\n    \"\"\"\n    def __init__(self) -> None:\n        self._analyzer: _Analyzer | None = None\n        self._parse_cache: dict[tuple[str, str], tuple[_Parse, ...]] = {}",
         "detail": "src.entity_marker.infrastructure.morphology.russian",
         "documentation": {}
     },
@@ -2780,7 +2992,7 @@
         "kind": 2,
         "importPath": "tests.test_batch",
         "description": "tests.test_batch",
-        "peekOfCode": "def write_csv(path: Path, rows: list[dict[str, str]]) -> Path:\n    fields = list(dict.fromkeys(key for row in rows for key in row))\n    with path.open(\"w\", encoding=\"utf-8-sig\", newline=\"\") as stream:\n        writer = csv.DictWriter(stream, fieldnames=fields, delimiter=\";\")\n        writer.writeheader()\n        writer.writerows(rows)\n    return path\ndef car_row(version: str, plate: str) -> dict[str, str]:\n    return {\"versionId\": version, CARS: json.dumps([{\"Гос. номер\": plate}])}\ndef test_export_mapping_preserves_identifiers_and_empty_values() -> None:",
+        "peekOfCode": "def write_csv(path: Path, rows: list[dict[str, str]]) -> Path:\n    fields = list(dict.fromkeys(key for row in rows for key in row))\n    with path.open(\"w\", encoding=\"utf-8-sig\", newline=\"\") as stream:\n        writer = csv.DictWriter(stream, fieldnames=fields, delimiter=\";\")\n        writer.writeheader()\n        writer.writerows(rows)\n    return path\ndef car_row(version: str, plate: str) -> dict[str, str]:\n    return {\"versionId\": version, CARS: json.dumps([{\"Гос. номер\": plate}])}\n@pytest.mark.parametrize(",
         "detail": "tests.test_batch",
         "documentation": {}
     },
@@ -2789,7 +3001,25 @@
         "kind": 2,
         "importPath": "tests.test_batch",
         "description": "tests.test_batch",
-        "peekOfCode": "def car_row(version: str, plate: str) -> dict[str, str]:\n    return {\"versionId\": version, CARS: json.dumps([{\"Гос. номер\": plate}])}\ndef test_export_mapping_preserves_identifiers_and_empty_values() -> None:\n    catalog = catalog_from_row(\n        {\n            PEOPLE: json.dumps(\n                [\n                    {\n                        \"Фамилия\": \"Иванов\",\n                        \"Имя\": \"Иван\",",
+        "peekOfCode": "def car_row(version: str, plate: str) -> dict[str, str]:\n    return {\"versionId\": version, CARS: json.dumps([{\"Гос. номер\": plate}])}\n@pytest.mark.parametrize(\n    (\"cell\", \"expected\"),\n    [\n        ('ООО \"Ромашка\"', 'ООО \"Ромашка\"'),\n        ('\"ООО \"\"Ромашка\"\"\"', 'ООО \"Ромашка\"'),\n        ('\"\"\"Ромашка\"\"\"', '\"Ромашка\"'),\n        ('\"\"\"\"', '\"'),\n        ('\"ООО \"\"Ромашка; Восток\"\"\\r\\nфилиал\"', 'ООО \"Ромашка; Восток\"\\r\\nфилиал'),",
+        "detail": "tests.test_batch",
+        "documentation": {}
+    },
+    {
+        "label": "test_literal_csv_quotes_preserve_values_and_row_boundaries",
+        "kind": 2,
+        "importPath": "tests.test_batch",
+        "description": "tests.test_batch",
+        "peekOfCode": "def test_literal_csv_quotes_preserve_values_and_row_boundaries(\n    tmp_path: Path, cell: str, expected: str\n) -> None:\n    path = tmp_path / \"quoted.csv\"\n    # Literal CSV fixtures also check the reader independently of csv.DictWriter.\n    path.write_bytes(\n        (\n            f\"\\ufeffversionId;fileName;Отправитель\\r\\none;{cell};{cell}\\r\\ntwo;next.pdf;Петров\\r\\n\"\n        ).encode()\n    )",
+        "detail": "tests.test_batch",
+        "documentation": {}
+    },
+    {
+        "label": "test_json_quotes_in_csv_survive_matching_and_serialization",
+        "kind": 2,
+        "importPath": "tests.test_batch",
+        "description": "tests.test_batch",
+        "peekOfCode": "def test_json_quotes_in_csv_survive_matching_and_serialization(tmp_path: Path) -> None:\n    name = 'ООО \"Ромашка; Восток\"'\n    filename = 'Письмо \"о выплате\";\\r\\nкопия.pdf'\n    path = write_csv(\n        tmp_path / \"quoted.csv\",\n        [\n            {\n                \"versionId\": \"v\",\n                \"fileName\": filename,\n                LEGAL_ENTITIES: json.dumps([{\"Полное наименование\": name}], ensure_ascii=False),",
         "detail": "tests.test_batch",
         "documentation": {}
     },
@@ -2917,6 +3147,69 @@
         "description": "tests.test_batch",
         "peekOfCode": "runner = CliRunner()\ndef write_csv(path: Path, rows: list[dict[str, str]]) -> Path:\n    fields = list(dict.fromkeys(key for row in rows for key in row))\n    with path.open(\"w\", encoding=\"utf-8-sig\", newline=\"\") as stream:\n        writer = csv.DictWriter(stream, fieldnames=fields, delimiter=\";\")\n        writer.writeheader()\n        writer.writerows(rows)\n    return path\ndef car_row(version: str, plate: str) -> dict[str, str]:\n    return {\"versionId\": version, CARS: json.dumps([{\"Гос. номер\": plate}])}",
         "detail": "tests.test_batch",
+        "documentation": {}
+    },
+    {
+        "label": "test_attached_date_suffix_is_outside_region",
+        "kind": 2,
+        "importPath": "tests.test_birth_date_ocr",
+        "description": "tests.test_birth_date_ocr",
+        "peekOfCode": "def test_attached_date_suffix_is_outside_region(\n    suffix: str, value: str, method: MatchMethod, distance: int\n) -> None:\n    text = \"😀 Дата рождения: \" + value + suffix\n    catalog = ObjectCatalog(people=(Person(\"p\", birth_date=date(1973, 1, 20)),))\n    result = build_handler().handle(MarkOccurrences(SourceText(text), catalog))\n    assert len(result.occurrences) == 1\n    occurrence = result.occurrences[0]\n    assert occurrence.matched_text == value\n    assert occurrence.method == method",
+        "detail": "tests.test_birth_date_ocr",
+        "documentation": {}
+    },
+    {
+        "label": "test_date_suffix_exception_does_not_relax_other_word_boundaries",
+        "kind": 2,
+        "importPath": "tests.test_birth_date_ocr",
+        "description": "tests.test_birth_date_ocr",
+        "peekOfCode": "def test_date_suffix_exception_does_not_relax_other_word_boundaries(text: str) -> None:\n    catalog = ObjectCatalog(people=(Person(\"p\", birth_date=date(1973, 1, 20)),))\n    result = build_handler().handle(MarkOccurrences(SourceText(text), catalog))\n    assert not result.occurrences\n@pytest.mark.parametrize(\n    \"text\",\n    [\n        \"20.01 1 1973\",\n        \"20.O1.1973\",\n        \"20.01.1974\",",
+        "detail": "tests.test_birth_date_ocr",
+        "documentation": {}
+    },
+    {
+        "label": "test_birth_date_allows_one_ocr_edit",
+        "kind": 2,
+        "importPath": "tests.test_birth_date_ocr",
+        "description": "tests.test_birth_date_ocr",
+        "peekOfCode": "def test_birth_date_allows_one_ocr_edit(text: str) -> None:\n    catalog = ObjectCatalog(people=(Person(\"p\", birth_date=date(1973, 1, 20)),))\n    result = build_handler().handle(MarkOccurrences(SourceText(text), catalog))\n    assert len(result.occurrences) == 1\n    occurrence = result.occurrences[0]\n    assert occurrence.field_name == \"birth_date\"\n    assert occurrence.matched_text == text\n    assert occurrence.method == MatchMethod.BITAP\n    assert occurrence.edit_distance == 1\n    assert text[occurrence.span.start : occurrence.span.end] == text",
+        "detail": "tests.test_birth_date_ocr",
+        "documentation": {}
+    },
+    {
+        "label": "test_birth_date_ocr_keeps_gap_boundaries_and_error_budget",
+        "kind": 2,
+        "importPath": "tests.test_birth_date_ocr",
+        "description": "tests.test_birth_date_ocr",
+        "peekOfCode": "def test_birth_date_ocr_keeps_gap_boundaries_and_error_budget(text: str) -> None:\n    catalog = ObjectCatalog(people=(Person(\"p\", birth_date=date(1973, 1, 20)),))\n    result = build_handler().handle(MarkOccurrences(SourceText(text), catalog))\n    assert not result.occurrences\ndef test_other_date_fields_remain_exact_or_normalized() -> None:\n    catalog = ObjectCatalog(\n        documents=(Document(\"d\", issue_date=date(1973, 1, 20)),),\n        miscellaneous=(\n            Misc(\n                \"m\",",
+        "detail": "tests.test_birth_date_ocr",
+        "documentation": {}
+    },
+    {
+        "label": "test_other_date_fields_remain_exact_or_normalized",
+        "kind": 2,
+        "importPath": "tests.test_birth_date_ocr",
+        "description": "tests.test_birth_date_ocr",
+        "peekOfCode": "def test_other_date_fields_remain_exact_or_normalized() -> None:\n    catalog = ObjectCatalog(\n        documents=(Document(\"d\", issue_date=date(1973, 1, 20)),),\n        miscellaneous=(\n            Misc(\n                \"m\",\n                incoming_letter_date=date(1973, 1, 20),\n                preliminary_response_due_date=date(1973, 1, 20),\n            ),\n        ),",
+        "detail": "tests.test_birth_date_ocr",
+        "documentation": {}
+    },
+    {
+        "label": "test_cli_repeated_exact_and_ocr_birth_dates",
+        "kind": 2,
+        "importPath": "tests.test_birth_date_ocr",
+        "description": "tests.test_birth_date_ocr",
+        "peekOfCode": "def test_cli_repeated_exact_and_ocr_birth_dates(\n    tmp_path: Path, command: str, options: list[str], suffix: str\n) -> None:\n    text = f\"😀\\r\\n20.01.1973{suffix}; 20.01 1 1973{suffix}; 20.01 1 1973{suffix}.\"\n    (tmp_path / \"v.txt\").write_bytes(text.encode(\"utf-8\"))\n    if command == \"mark\":\n        objects = tmp_path / \"objects.json\"\n        objects.write_text(json.dumps({\"people\": [{\"id\": \"p\", \"birth_date\": \"1973-01-20\"}]}))\n        args = [command, \"--objects\", str(objects), \"--text\", str(tmp_path / \"v.txt\")]\n    else:",
+        "detail": "tests.test_birth_date_ocr",
+        "documentation": {}
+    },
+    {
+        "label": "test_birth_date_minimum_fuzzy_length_is_respected",
+        "kind": 2,
+        "importPath": "tests.test_birth_date_ocr",
+        "description": "tests.test_birth_date_ocr",
+        "peekOfCode": "def test_birth_date_minimum_fuzzy_length_is_respected() -> None:\n    catalog = ObjectCatalog(people=(Person(\"p\", birth_date=date(1973, 1, 20)),))\n    result = build_handler(MatchingConfig(min_fuzzy_pattern_length=11)).handle(\n        MarkOccurrences(SourceText(\"20.01 1 1973\"), catalog)\n    )\n    assert not result.occurrences",
+        "detail": "tests.test_birth_date_ocr",
         "documentation": {}
     },
     {
@@ -3095,7 +3388,43 @@
         "kind": 2,
         "importPath": "tests.test_morphology",
         "description": "tests.test_morphology",
-        "peekOfCode": "def test_unknown_name_preserved() -> None:\n    person = Person(\"p\", \"Xyzzy\", \"Qwertxyz\")\n    assert RussianPersonInflector().forms(person) == (person,)\n@pytest.mark.parametrize(\n    (\"person\", \"text\"),\n    [\n        (Person(\"p\", \"Иван\", \"Шевченко\"), \"Шевченко Ивану\"),\n        (Person(\"p\", \"Анна\", \"Шевченко\"), \"Шевченко Анне\"),\n        (Person(\"p\", \"Саша\", \"Иванов\", \"Иванович\"), \"Иванову Саше Ивановичу\"),\n        (Person(\"p\", \"Саша\", \"Иванова\", \"Ивановна\"), \"Ивановой Саше Ивановне\"),",
+        "peekOfCode": "def test_unknown_name_preserved() -> None:\n    person = Person(\"p\", \"Xyzzy\", \"Qwertxyz\")\n    assert RussianPersonInflector().forms(person) == (person,)\n@pytest.mark.parametrize(\"surname\", [\"Шиндецова\", \"Шиндецовой\", \"ШИНДЕЦОВА\"])\n@pytest.mark.parametrize(\"fuzzy\", [False, True])\ndef test_predicted_surname_cases_are_separate_occurrences(surname: str, fuzzy: bool) -> None:\n    text = \"😀 Шиндецова; Шиндецовой; Шиндецову; Шиндецовой.\"\n    result = build_handler(MatchingConfig(fuzzy_enabled=fuzzy)).handle(\n        MarkOccurrences(SourceText(text), ObjectCatalog(people=(Person(\"p\", last_name=surname),)))\n    )",
+        "detail": "tests.test_morphology",
+        "documentation": {}
+    },
+    {
+        "label": "test_predicted_surname_cases_are_separate_occurrences",
+        "kind": 2,
+        "importPath": "tests.test_morphology",
+        "description": "tests.test_morphology",
+        "peekOfCode": "def test_predicted_surname_cases_are_separate_occurrences(surname: str, fuzzy: bool) -> None:\n    text = \"😀 Шиндецова; Шиндецовой; Шиндецову; Шиндецовой.\"\n    result = build_handler(MatchingConfig(fuzzy_enabled=fuzzy)).handle(\n        MarkOccurrences(SourceText(text), ObjectCatalog(people=(Person(\"p\", last_name=surname),)))\n    )\n    assert [o.matched_text for o in result.occurrences] == [\n        \"Шиндецова\",\n        \"Шиндецовой\",\n        \"Шиндецову\",\n        \"Шиндецовой\",",
+        "detail": "tests.test_morphology",
+        "documentation": {}
+    },
+    {
+        "label": "test_predicted_surname_gender_and_aligned_cases",
+        "kind": 2,
+        "importPath": "tests.test_morphology",
+        "description": "tests.test_morphology",
+        "peekOfCode": "def test_predicted_surname_gender_and_aligned_cases() -> None:\n    inflector = RussianPersonInflector()\n    feminine = inflector.forms(Person(\"f\", \"Анна\", \"Шиндецова\", \"Ивановна\"))\n    assert {p.last_name for p in feminine} == {\"Шиндецова\", \"Шиндецовой\", \"Шиндецову\"}\n    assert any(\n        p.first_name == \"Анне\" and p.last_name == \"Шиндецовой\" and p.middle_name == \"Ивановне\"\n        for p in feminine\n    )\n    masculine = inflector.forms(Person(\"m\", \"Иван\", \"Шиндецов\", \"Иванович\"))\n    assert {p.last_name for p in masculine} == {",
+        "detail": "tests.test_morphology",
+        "documentation": {}
+    },
+    {
+        "label": "test_predicted_previous_surname_and_sender_forms",
+        "kind": 2,
+        "importPath": "tests.test_morphology",
+        "description": "tests.test_morphology",
+        "peekOfCode": "def test_predicted_previous_surname_and_sender_forms() -> None:\n    catalog = ObjectCatalog(\n        people=(Person(\"p\", \"Анна\", \"Иванова\", \"Ивановна\", previous_last_name=\"Шиндецова\"),),\n        senders=(Sender(\"s\", full_name=\"Шиндецова Анна Ивановна\"),),\n    )\n    text = \"Шиндецовой Анне Ивановне\"\n    result = build_handler(MatchingConfig(fuzzy_enabled=False)).handle(\n        MarkOccurrences(SourceText(text), catalog)\n    )\n    assert {(o.entity_type.value, o.field_name, o.matched_text) for o in result.occurrences} == {",
+        "detail": "tests.test_morphology",
+        "documentation": {}
+    },
+    {
+        "label": "test_fuzzy_matching_uses_predicted_surname_cases",
+        "kind": 2,
+        "importPath": "tests.test_morphology",
+        "description": "tests.test_morphology",
+        "peekOfCode": "def test_fuzzy_matching_uses_predicted_surname_cases() -> None:\n    catalog = ObjectCatalog(people=(Person(\"p\", \"Анна\", \"Шиндецова\", \"Ивановна\"),))\n    text = \"Шинлецовой Анне Ивановне\"\n    result = build_handler().handle(MarkOccurrences(SourceText(text), catalog))\n    surname = next(o for o in result.occurrences if o.field_name == \"last_name\")\n    assert surname.matched_text == \"Шинлецовой\"\n    assert surname.source_value == \"Шиндецовой\"\n    assert surname.method == MatchMethod.BITAP\n    assert surname.edit_distance == 1\n@pytest.mark.parametrize(",
         "detail": "tests.test_morphology",
         "documentation": {}
     },
@@ -3248,7 +3577,7 @@
         "kind": 2,
         "importPath": "tests.test_pipeline",
         "description": "tests.test_pipeline",
-        "peekOfCode": "def test_weak_first_name_and_short_values() -> None:\n    assert not mark(\"Иван\", ObjectCatalog(people=(Person(\"p\", first_name=\"Иван\"),))).occurrences\n    assert not mark(\"124\", ObjectCatalog(documents=(Document(\"d\", number=\"123\"),))).occurrences\ndef test_series_number_normalization() -> None:\n    catalog = ObjectCatalog(documents=(Document(\"d\", series=\"4501\", number=\"123456\"),))\n    result = mark(\"Паспорт 45 01 № 123456\", catalog)\n    # Exact number wins over normalized enclosing identifier under the flat overlap policy.\n    assert any(m.field_name == \"number\" for m in result.occurrences)\n    assert any(d.candidate.alias.field_name == \"series_number\" for d in result.rejected)\ndef test_dates_are_exact_only() -> None:",
+        "peekOfCode": "def test_weak_first_name_and_short_values() -> None:\n    assert not mark(\"Иван\", ObjectCatalog(people=(Person(\"p\", first_name=\"Иван\"),))).occurrences\n    assert not mark(\"124\", ObjectCatalog(documents=(Document(\"d\", number=\"123\"),))).occurrences\ndef test_series_number_normalization() -> None:\n    catalog = ObjectCatalog(documents=(Document(\"d\", series=\"4501\", number=\"123456\"),))\n    result = mark(\"Паспорт 45 01 № 123456\", catalog)\n    # Exact number wins over normalized enclosing identifier under the flat overlap policy.\n    assert any(m.field_name == \"number\" for m in result.occurrences)\n    assert any(d.candidate.alias.field_name == \"series_number\" for d in result.rejected)\ndef test_birth_dates_exact_mode_rejects_changed_digits() -> None:",
         "detail": "tests.test_pipeline",
         "documentation": {}
     },
@@ -3257,16 +3586,16 @@
         "kind": 2,
         "importPath": "tests.test_pipeline",
         "description": "tests.test_pipeline",
-        "peekOfCode": "def test_series_number_normalization() -> None:\n    catalog = ObjectCatalog(documents=(Document(\"d\", series=\"4501\", number=\"123456\"),))\n    result = mark(\"Паспорт 45 01 № 123456\", catalog)\n    # Exact number wins over normalized enclosing identifier under the flat overlap policy.\n    assert any(m.field_name == \"number\" for m in result.occurrences)\n    assert any(d.candidate.alias.field_name == \"series_number\" for d in result.rejected)\ndef test_dates_are_exact_only() -> None:\n    catalog = ObjectCatalog(people=(Person(\"p\", birth_date=date(1980, 1, 1)),))\n    assert mark(\"01.01.1980\", catalog).occurrences[0].field_name == \"birth_date\"\n    assert not mark(\"01.01.1981\", catalog).occurrences",
+        "peekOfCode": "def test_series_number_normalization() -> None:\n    catalog = ObjectCatalog(documents=(Document(\"d\", series=\"4501\", number=\"123456\"),))\n    result = mark(\"Паспорт 45 01 № 123456\", catalog)\n    # Exact number wins over normalized enclosing identifier under the flat overlap policy.\n    assert any(m.field_name == \"number\" for m in result.occurrences)\n    assert any(d.candidate.alias.field_name == \"series_number\" for d in result.rejected)\ndef test_birth_dates_exact_mode_rejects_changed_digits() -> None:\n    catalog = ObjectCatalog(people=(Person(\"p\", birth_date=date(1980, 1, 1)),))\n    assert mark(\"01.01.1980\", catalog).occurrences[0].field_name == \"birth_date\"\n    assert not mark(\"01.01.1981\", catalog, MatchingConfig(fuzzy_enabled=False)).occurrences",
         "detail": "tests.test_pipeline",
         "documentation": {}
     },
     {
-        "label": "test_dates_are_exact_only",
+        "label": "test_birth_dates_exact_mode_rejects_changed_digits",
         "kind": 2,
         "importPath": "tests.test_pipeline",
         "description": "tests.test_pipeline",
-        "peekOfCode": "def test_dates_are_exact_only() -> None:\n    catalog = ObjectCatalog(people=(Person(\"p\", birth_date=date(1980, 1, 1)),))\n    assert mark(\"01.01.1980\", catalog).occurrences[0].field_name == \"birth_date\"\n    assert not mark(\"01.01.1981\", catalog).occurrences\ndef test_disabled_fuzzy_retains_normalized_matches() -> None:\n    catalog = ObjectCatalog(cars=(Car(\"c\", \"X7LHSRDVN12345678\", \"А123ВС77\"),))\n    text = \"А 123 ВС 77 X7LHSR0VN12345678\"\n    for config in (MatchingConfig(fuzzy_enabled=False), MatchingConfig(max_errors=0)):\n        result = mark(text, catalog, config)\n        assert [m.method for m in result.occurrences] == [MatchMethod.NORMALIZED]",
+        "peekOfCode": "def test_birth_dates_exact_mode_rejects_changed_digits() -> None:\n    catalog = ObjectCatalog(people=(Person(\"p\", birth_date=date(1980, 1, 1)),))\n    assert mark(\"01.01.1980\", catalog).occurrences[0].field_name == \"birth_date\"\n    assert not mark(\"01.01.1981\", catalog, MatchingConfig(fuzzy_enabled=False)).occurrences\ndef test_disabled_fuzzy_retains_normalized_matches() -> None:\n    catalog = ObjectCatalog(cars=(Car(\"c\", \"X7LHSRDVN12345678\", \"А123ВС77\"),))\n    text = \"А 123 ВС 77 X7LHSR0VN12345678\"\n    for config in (MatchingConfig(fuzzy_enabled=False), MatchingConfig(max_errors=0)):\n        result = mark(text, catalog, config)\n        assert [m.method for m in result.occurrences] == [MatchMethod.NORMALIZED]",
         "detail": "tests.test_pipeline",
         "documentation": {}
     },
@@ -3428,16 +3757,16 @@
         "kind": 2,
         "importPath": "tests.test_real_schema",
         "description": "tests.test_real_schema",
-        "peekOfCode": "def test_tax_id_normalization_without_fuzzy() -> None:\n    catalog = ObjectCatalog(legal_entities=(LegalEntity(\"l\", inn=\"7701234567\"),))\n    result = mark(\"77 01 234567\", catalog, fuzzy=True)\n    assert [o.matched_text for o in result.occurrences] == [\"77 01 234567\"]\n    assert not mark(\"7701234568\", catalog, fuzzy=True).occurrences\n@pytest.mark.parametrize(\"text\", [\"А40-12345/2027\", \"А40-12345/2026-2\", \"XА40-12345/2026\"])\ndef test_case_numbers_not_fuzzed_or_matched_inside_larger_values(text: str) -> None:\n    catalog = ObjectCatalog(miscellaneous=(Misc(\"m\", case_number=\"А40-12345/2026\"),))\n    assert not mark(text, catalog, fuzzy=True).occurrences\ndef test_case_number_spacing_and_address_normalization() -> None:",
+        "peekOfCode": "def test_tax_id_normalization_without_fuzzy() -> None:\n    catalog = ObjectCatalog(legal_entities=(LegalEntity(\"l\", inn=\"7701234567\"),))\n    result = mark(\"77 01 234567\", catalog, fuzzy=True)\n    assert [o.matched_text for o in result.occurrences] == [\"77 01 234567\"]\n    assert not mark(\"7701234568\", catalog, fuzzy=True).occurrences\n@pytest.mark.parametrize(\"text\", [\"А40-12345/2027\", \"А40-12345/2026-2\", \"XА40-12345/2026\"])\ndef test_case_numbers_exact_mode_rejects_changes_and_larger_values(text: str) -> None:\n    catalog = ObjectCatalog(miscellaneous=(Misc(\"m\", case_number=\"А40-12345/2026\"),))\n    assert not mark(text, catalog, fuzzy=False).occurrences\ndef test_case_number_spacing_and_address_normalization() -> None:",
         "detail": "tests.test_real_schema",
         "documentation": {}
     },
     {
-        "label": "test_case_numbers_not_fuzzed_or_matched_inside_larger_values",
+        "label": "test_case_numbers_exact_mode_rejects_changes_and_larger_values",
         "kind": 2,
         "importPath": "tests.test_real_schema",
         "description": "tests.test_real_schema",
-        "peekOfCode": "def test_case_numbers_not_fuzzed_or_matched_inside_larger_values(text: str) -> None:\n    catalog = ObjectCatalog(miscellaneous=(Misc(\"m\", case_number=\"А40-12345/2026\"),))\n    assert not mark(text, catalog, fuzzy=True).occurrences\ndef test_case_number_spacing_and_address_normalization() -> None:\n    catalog = ObjectCatalog(\n        miscellaneous=(\n            Misc(\"m\", case_number=\"А40-12345/2026\", reply_address=\"Москва, ул. Лесная, д. 10\"),\n        )\n    )\n    text = \"А40 - 12345 / 2026; москва,  ул. лесная, д. 10\"",
+        "peekOfCode": "def test_case_numbers_exact_mode_rejects_changes_and_larger_values(text: str) -> None:\n    catalog = ObjectCatalog(miscellaneous=(Misc(\"m\", case_number=\"А40-12345/2026\"),))\n    assert not mark(text, catalog, fuzzy=False).occurrences\ndef test_case_number_spacing_and_address_normalization() -> None:\n    catalog = ObjectCatalog(\n        miscellaneous=(\n            Misc(\"m\", case_number=\"А40-12345/2026\", reply_address=\"Москва, ул. Лесная, д. 10\"),\n        )\n    )\n    text = \"А40 - 12345 / 2026; москва,  ул. лесная, д. 10\"",
         "detail": "tests.test_real_schema",
         "documentation": {}
     },
@@ -3447,6 +3776,78 @@
         "importPath": "tests.test_real_schema",
         "description": "tests.test_real_schema",
         "peekOfCode": "def test_case_number_spacing_and_address_normalization() -> None:\n    catalog = ObjectCatalog(\n        miscellaneous=(\n            Misc(\"m\", case_number=\"А40-12345/2026\", reply_address=\"Москва, ул. Лесная, д. 10\"),\n        )\n    )\n    text = \"А40 - 12345 / 2026; москва,  ул. лесная, д. 10\"\n    assert [o.matched_text for o in mark(text, catalog).occurrences] == [\n        \"А40 - 12345 / 2026\",\n        \"москва,  ул. лесная, д. 10\",",
+        "detail": "tests.test_real_schema",
+        "documentation": {}
+    },
+    {
+        "label": "test_case_number_two_and_four_digit_years",
+        "kind": 2,
+        "importPath": "tests.test_real_schema",
+        "description": "tests.test_real_schema",
+        "peekOfCode": "def test_case_number_two_and_four_digit_years(prefix: str, year: str, fuzzy: bool) -> None:\n    catalog = ObjectCatalog(miscellaneous=(Misc(\"m\", case_number=f\"{prefix}41-20769/{year}\"),))\n    mentions = [\n        f\"{prefix}41-20769/2025\",\n        f\"{prefix}41-20769/25\",\n        f\"{prefix.lower()}41 - 20769 / 2025\",\n        f\"{prefix.lower()}41 - 20769 / 25\",\n        \"20769/2025\",\n        \"20769/25\",\n        \"20769 / 2025\",",
+        "detail": "tests.test_real_schema",
+        "documentation": {}
+    },
+    {
+        "label": "test_case_year_aliases_exact_mode_does_not_change_other_digits",
+        "kind": 2,
+        "importPath": "tests.test_real_schema",
+        "description": "tests.test_real_schema",
+        "peekOfCode": "def test_case_year_aliases_exact_mode_does_not_change_other_digits(year: str, text: str) -> None:\n    catalog = ObjectCatalog(miscellaneous=(Misc(\"m\", case_number=f\"A41-20769/{year}\"),))\n    assert not mark(text, catalog, fuzzy=False).occurrences\ndef test_year_aliases_do_not_apply_to_incoming_letter_numbers() -> None:\n    catalog = ObjectCatalog(miscellaneous=(Misc(\"m\", incoming_letter_number=\"A41-20769/25\"),))\n    assert not mark(\"A41-20769/2025\", catalog, fuzzy=True).occurrences\n    assert not mark(\"20769/25\", catalog, fuzzy=True).occurrences\ndef test_case_number_without_court_keeps_identity_ambiguity_checks() -> None:\n    catalog = ObjectCatalog(\n        miscellaneous=(",
+        "detail": "tests.test_real_schema",
+        "documentation": {}
+    },
+    {
+        "label": "test_year_aliases_do_not_apply_to_incoming_letter_numbers",
+        "kind": 2,
+        "importPath": "tests.test_real_schema",
+        "description": "tests.test_real_schema",
+        "peekOfCode": "def test_year_aliases_do_not_apply_to_incoming_letter_numbers() -> None:\n    catalog = ObjectCatalog(miscellaneous=(Misc(\"m\", incoming_letter_number=\"A41-20769/25\"),))\n    assert not mark(\"A41-20769/2025\", catalog, fuzzy=True).occurrences\n    assert not mark(\"20769/25\", catalog, fuzzy=True).occurrences\ndef test_case_number_without_court_keeps_identity_ambiguity_checks() -> None:\n    catalog = ObjectCatalog(\n        miscellaneous=(\n            Misc(\"m1\", case_number=\"A41-20769/2025\"),\n            Misc(\"m2\", case_number=\"A42-20769/2025\"),\n        )",
+        "detail": "tests.test_real_schema",
+        "documentation": {}
+    },
+    {
+        "label": "test_case_number_without_court_keeps_identity_ambiguity_checks",
+        "kind": 2,
+        "importPath": "tests.test_real_schema",
+        "description": "tests.test_real_schema",
+        "peekOfCode": "def test_case_number_without_court_keeps_identity_ambiguity_checks() -> None:\n    catalog = ObjectCatalog(\n        miscellaneous=(\n            Misc(\"m1\", case_number=\"A41-20769/2025\"),\n            Misc(\"m2\", case_number=\"A42-20769/2025\"),\n        )\n    )\n    result = mark(\"20769/2025; 20769/25\", catalog)\n    assert not result.occurrences\n    assert any(d.reason == \"ambiguous entity identity\" for d in result.rejected)",
+        "detail": "tests.test_real_schema",
+        "documentation": {}
+    },
+    {
+        "label": "test_case_number_aliases_allow_one_fuzzy_edit",
+        "kind": 2,
+        "importPath": "tests.test_real_schema",
+        "description": "tests.test_real_schema",
+        "peekOfCode": "def test_case_number_aliases_allow_one_fuzzy_edit(text: str) -> None:\n    catalog = ObjectCatalog(miscellaneous=(Misc(\"m\", case_number=\"A41-20769/2025\"),))\n    result = mark(text, catalog, fuzzy=True)\n    assert len(result.occurrences) == 1\n    occurrence = result.occurrences[0]\n    assert occurrence.matched_text == text\n    assert occurrence.field_name == \"case_number\"\n    assert occurrence.method == MatchMethod.BITAP\n    assert occurrence.edit_distance == 1\n@pytest.mark.parametrize(",
+        "detail": "tests.test_real_schema",
+        "documentation": {}
+    },
+    {
+        "label": "test_case_number_fuzzy_controls_preserve_pattern_aliases",
+        "kind": 2,
+        "importPath": "tests.test_real_schema",
+        "description": "tests.test_real_schema",
+        "peekOfCode": "def test_case_number_fuzzy_controls_preserve_pattern_aliases(config: MatchingConfig) -> None:\n    text = \"A41-20769/2025; A41-20769/25; 20769/2025; 20769/25; A41-2O769/25\"\n    catalog = ObjectCatalog(miscellaneous=(Misc(\"m\", case_number=\"A41-20769/2025\"),))\n    result = build_handler(config).handle(MarkOccurrences(SourceText(text), catalog))\n    assert [o.matched_text for o in result.occurrences] == [\n        \"A41-20769/2025\",\n        \"A41-20769/25\",\n        \"20769/2025\",\n        \"20769/25\",\n    ]",
+        "detail": "tests.test_real_schema",
+        "documentation": {}
+    },
+    {
+        "label": "test_case_fuzzy_matching_retains_boundaries_and_distance_ceiling",
+        "kind": 2,
+        "importPath": "tests.test_real_schema",
+        "description": "tests.test_real_schema",
+        "peekOfCode": "def test_case_fuzzy_matching_retains_boundaries_and_distance_ceiling(text: str) -> None:\n    catalog = ObjectCatalog(miscellaneous=(Misc(\"m\", case_number=\"A41-20769/2025\"),))\n    result = build_handler(MatchingConfig(max_errors=2)).handle(\n        MarkOccurrences(SourceText(text), catalog)\n    )\n    assert not result.occurrences\ndef test_equally_close_case_numbers_remain_ambiguous_with_fuzzy_matching() -> None:\n    catalog = ObjectCatalog(\n        miscellaneous=(\n            Misc(\"m1\", case_number=\"A41-20769/2025\"),",
+        "detail": "tests.test_real_schema",
+        "documentation": {}
+    },
+    {
+        "label": "test_equally_close_case_numbers_remain_ambiguous_with_fuzzy_matching",
+        "kind": 2,
+        "importPath": "tests.test_real_schema",
+        "description": "tests.test_real_schema",
+        "peekOfCode": "def test_equally_close_case_numbers_remain_ambiguous_with_fuzzy_matching() -> None:\n    catalog = ObjectCatalog(\n        miscellaneous=(\n            Misc(\"m1\", case_number=\"A41-20769/2025\"),\n            Misc(\"m2\", case_number=\"A41-20767/2025\"),\n        )\n    )\n    result = mark(\"A41-20768/2025\", catalog, fuzzy=True)\n    assert not result.occurrences\n    assert any(d.reason == \"ambiguous entity identity\" for d in result.rejected)",
         "detail": "tests.test_real_schema",
         "documentation": {}
     },
@@ -3466,6 +3867,42 @@
         "description": "tests.test_real_schema",
         "peekOfCode": "ROOT = Path(__file__).resolve().parents[1]\ndef mark(text: str, catalog: ObjectCatalog, fuzzy: bool = False) -> MarkingResult:\n    return build_handler(MatchingConfig(fuzzy_enabled=fuzzy)).handle(\n        MarkOccurrences(SourceText(text), catalog)\n    )\ndef test_russian_and_english_schema() -> None:\n    payload = (ROOT / \"examples/real_objects.json\").read_text(encoding=\"utf-8\")\n    dto = ObjectCatalogDTO.model_validate_json(payload)\n    catalog = dto.to_domain()\n    assert parse_objects(dto.model_dump_json()) == catalog",
         "detail": "tests.test_real_schema",
+        "documentation": {}
+    },
+    {
+        "label": "test_every_surname_mention_is_exported",
+        "kind": 2,
+        "importPath": "tests.test_repeated_occurrences",
+        "description": "tests.test_repeated_occurrences",
+        "peekOfCode": "def test_every_surname_mention_is_exported(\n    tmp_path: Path, command: str, fuzzy: bool, with_sender: bool\n) -> None:\n    mentions = [\n        (\"Иванов\", \"last_name\"),\n        (\"Иванова\", \"last_name\"),\n        (\"Иванову\", \"last_name\"),\n        (\"Ивановым\", \"last_name\"),\n        (\"Иванове\", \"last_name\"),\n        (\"ИВАНОВ\", \"last_name\"),",
+        "detail": "tests.test_repeated_occurrences",
+        "documentation": {}
+    },
+    {
+        "label": "test_repeated_case_numbers_and_emails_keep_separate_regions",
+        "kind": 2,
+        "importPath": "tests.test_repeated_occurrences",
+        "description": "tests.test_repeated_occurrences",
+        "peekOfCode": "def test_repeated_case_numbers_and_emails_keep_separate_regions(\n    tmp_path: Path, command: str, fuzzy: bool, year: str\n) -> None:\n    case_number = f\"A41-20769/{year}\"\n    email = \"reply@example.org\"\n    mentions = [\"A41-20769/2025\", email, \"a41 - 20769 / 25\", \"REPLY@EXAMPLE.ORG\", \"A41-20769/25\"]\n    mentions.extend([\"20769/2025\", \"20769/25\", \"20769 / 2025\"])\n    damaged = [\"A41-2O769/2025\", \"A41-20768/25\", \"2076/2025\", \"207769/25\"]\n    text = \"😀\\r\\n\" + \"\\r\\nПовторное упоминание: \".join(mentions + damaged)\n    if fuzzy:",
+        "detail": "tests.test_repeated_occurrences",
+        "documentation": {}
+    },
+    {
+        "label": "test_all_example_labels_survive_repeated_passages",
+        "kind": 2,
+        "importPath": "tests.test_repeated_occurrences",
+        "description": "tests.test_repeated_occurrences",
+        "peekOfCode": "def test_all_example_labels_survive_repeated_passages(objects: str, source: str) -> None:\n    catalog = parse_objects((ROOT / \"examples\" / objects).read_text(encoding=\"utf-8\"))\n    passage = (ROOT / \"examples\" / source).read_text(encoding=\"utf-8\")\n    handler = build_handler()\n    single = handler.handle(MarkOccurrences(SourceText(passage), catalog))\n    assert single.occurrences\n    separator = \"\\n\" + \"—\" * 100 + \"\\n\"\n    text = separator.join([passage] * 3)\n    repeated = handler.handle(MarkOccurrences(SourceText(text), catalog))\n    assert [",
+        "detail": "tests.test_repeated_occurrences",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT",
+        "kind": 5,
+        "importPath": "tests.test_repeated_occurrences",
+        "description": "tests.test_repeated_occurrences",
+        "peekOfCode": "ROOT = Path(__file__).resolve().parents[1]\n@pytest.mark.parametrize(\"command\", [\"mark\", \"mark-batch\"])\n@pytest.mark.parametrize(\"fuzzy\", [False, True])\n@pytest.mark.parametrize(\"with_sender\", [False, True])\ndef test_every_surname_mention_is_exported(\n    tmp_path: Path, command: str, fuzzy: bool, with_sender: bool\n) -> None:\n    mentions = [\n        (\"Иванов\", \"last_name\"),\n        (\"Иванова\", \"last_name\"),",
+        "detail": "tests.test_repeated_occurrences",
         "documentation": {}
     },
     {
@@ -3500,7 +3937,25 @@
         "kind": 2,
         "importPath": "tests.test_resolution",
         "description": "tests.test_resolution",
-        "peekOfCode": "def test_contained_tie_prefers_longer_span() -> None:\n    short = occurrence(2, 4, 0.9, MatchMethod.EXACT)\n    long = occurrence(0, 8, 0.9, MatchMethod.EXACT)\n    assert OverlapResolver().resolve([short, long])[0] == (long,)",
+        "peekOfCode": "def test_contained_tie_prefers_longer_span() -> None:\n    short = occurrence(2, 4, 0.9, MatchMethod.EXACT)\n    long = occurrence(0, 8, 0.9, MatchMethod.EXACT)\n    assert OverlapResolver().resolve([short, long])[0] == (long,)\n@pytest.mark.parametrize(\"field\", [\"first_name\", \"last_name\", \"middle_name\", \"previous_last_name\"])\n@pytest.mark.parametrize(\"person_score\", [0.7, 1.0])\ndef test_person_components_and_sender_full_name_coexist(field: str, person_score: float) -> None:\n    person = replace(\n        occurrence(2, 8, person_score, MatchMethod.EXACT),\n        entity_type=EntityType.PERSON,",
+        "detail": "tests.test_resolution",
+        "documentation": {}
+    },
+    {
+        "label": "test_person_components_and_sender_full_name_coexist",
+        "kind": 2,
+        "importPath": "tests.test_resolution",
+        "description": "tests.test_resolution",
+        "peekOfCode": "def test_person_components_and_sender_full_name_coexist(field: str, person_score: float) -> None:\n    person = replace(\n        occurrence(2, 8, person_score, MatchMethod.EXACT),\n        entity_type=EntityType.PERSON,\n        field_name=field,\n    )\n    sender = replace(\n        occurrence(0, 20, 0.95, MatchMethod.EXACT),\n        entity_type=EntityType.SENDER,\n        field_name=\"full_name\",",
+        "detail": "tests.test_resolution",
+        "documentation": {}
+    },
+    {
+        "label": "test_partial_person_sender_overlap_still_conflicts",
+        "kind": 2,
+        "importPath": "tests.test_resolution",
+        "description": "tests.test_resolution",
+        "peekOfCode": "def test_partial_person_sender_overlap_still_conflicts() -> None:\n    person = replace(\n        occurrence(0, 8, 0.7, MatchMethod.EXACT),\n        entity_type=EntityType.PERSON,\n        field_name=\"last_name\",\n    )\n    sender = replace(\n        occurrence(2, 20, 0.95, MatchMethod.EXACT),\n        entity_type=EntityType.SENDER,\n        field_name=\"full_name\",",
         "detail": "tests.test_resolution",
         "documentation": {}
     },

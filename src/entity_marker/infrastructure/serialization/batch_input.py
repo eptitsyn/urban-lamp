@@ -1,4 +1,4 @@
-"""Adapt semicolon CSV exports to the existing, code-defined object catalog."""
+"""Adapt comma or semicolon CSV exports to the code-defined object catalog."""
 
 import csv
 import json
@@ -8,6 +8,7 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from typing import TextIO
 
 from entity_marker.domain.models.entities import ObjectCatalog
 from entity_marker.infrastructure.serialization.input_dto import ObjectCatalogDTO
@@ -15,6 +16,39 @@ from entity_marker.infrastructure.serialization.input_dto import ObjectCatalogDT
 PEOPLE = "Субъект страхования ФЛ"
 LEGAL_ENTITIES = "Субъект страхования ЮЛ"
 CARS = "Субъект страхования ТС"
+
+# Only columns consumed by the catalog need aliases; other export fields are ignored.
+COLUMN_ALIASES = {
+    "InsuranceSubjects": PEOPLE,
+    "InsuranceSubjectsOrganization": LEGAL_ENTITIES,
+    "InsuranceSubjectsVehicle": CARS,
+    "PartnerKindName": "Вид контрагента",
+    "PartnerName": "Контрагент",
+    "SignerName": "ФИО подписанта документа",
+    "Sender": "Отправитель",
+    "SignerPosition": "Должность",
+    "OutgoingOrganizationEmail": "Email отправителя",
+    "SenderAddress": "Адрес отправителя",
+    "FullNumber": "Порядковый номер",
+    "CourtCase": "№ дела",
+    "RegDate": "Дата регистрации",
+    "AnswerDeadline": "Срок предоставления ответа",
+    "EmailForAnswer": "Email для ответа",
+    "AddressForAnswer": "Адрес для ответа",
+}
+
+
+def _normalize_columns(row: dict[str, str]) -> dict[str, str]:
+    normalized = dict(row)
+    for alias, column in COLUMN_ALIASES.items():
+        if alias not in row:
+            continue
+        value = row[alias].strip()
+        existing = row.get(column, "").strip()
+        if value and existing and value != existing:
+            raise ValueError(f"Conflicting CSV columns: {alias} and {column}")
+        normalized[column] = existing or value
+    return normalized
 
 
 @dataclass(frozen=True)
@@ -80,6 +114,7 @@ def _date(value: str | None) -> str | None:
 
 
 def catalog_from_row(row: dict[str, str]) -> ObjectCatalog:
+    row = _normalize_columns(row)
     people = []
     documents = []
     for index, person in enumerate(_objects(row, PEOPLE), 1):
@@ -191,13 +226,28 @@ def _large_csv_fields() -> Iterator[None]:
         csv.field_size_limit(previous)
 
 
+def _csv_delimiter(stream: TextIO) -> str:
+    # Use the required header rather than data, which may contain JSON and newlines.
+    for delimiter in (";", ","):
+        try:
+            fields = csv.DictReader(stream, delimiter=delimiter, strict=True).fieldnames
+            if fields and "versionId" in fields:
+                return delimiter
+        except csv.Error:
+            continue
+        finally:
+            stream.seek(0)
+    # Preserve the existing validation errors for invalid or empty input.
+    return ";"
+
+
 def read_batch_rows(paths: list[Path], txts_dir: Path | None = None) -> list[BatchRow]:
     rows = []
     for path in paths:
         text_root = (txts_dir if txts_dir is not None else path.parent / "txts").resolve()
         try:
             with _large_csv_fields(), path.open(encoding="utf-8-sig", newline="") as stream:
-                reader = csv.DictReader(stream, delimiter=";", strict=True)
+                reader = csv.DictReader(stream, delimiter=_csv_delimiter(stream), strict=True)
                 fields = reader.fieldnames
                 if not fields or "versionId" not in fields:
                     raise ValueError("CSV header must contain versionId")

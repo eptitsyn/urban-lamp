@@ -1,12 +1,13 @@
 # Entity Marker
 
-Python 3.12+ CLI for finding occurrences of **known objects** in text and producing
-Label Studio predictions. Input objects have fixed schemas for legal entities,
-people, documents, senders, and correspondence metadata. The original car schema
-is also supported for compatibility. See [the real data schema in Russian](docs/SCHEMA.ru.md)
-and [the complete example](examples/real_objects.json). This is known-entity matching/linking, not open-ended NER.
+CLI для Python 3.12+, который находит упоминания **известных объектов** в тексте и формирует
+предсказания для Label Studio. Входные объекты имеют фиксированные схемы для юридических лиц,
+физических лиц, документов, отправителей и метаданных корреспонденции. Для совместимости
+также поддерживается исходная схема транспортных средств. См. [схему реальных данных на русском языке](docs/SCHEMA.ru.md)
+и [полный пример](examples/real_objects.json). Это сопоставление текста с известными сущностями,
+а не поиск произвольных именованных сущностей (NER).
 
-## Install and run
+## Установка и запуск
 
 ```bash
 uv sync
@@ -22,14 +23,14 @@ uv run entity-marker mark \
 cat examples/input.txt | uv run entity-marker mark --objects examples/objects.json
 ```
 
-Everything runs locally. Dependencies are Typer, Pydantic, and pymorphy3 with its Russian dictionaries.
-Dictionaries are installed by `uv sync`; matching needs no external APIs or
-database and performs no runtime downloads. `uv.lock` pins dependencies.
+Всё выполняется локально. Зависимости: Typer, Pydantic и pymorphy3 с русскими словарями.
+Словари устанавливаются командой `uv sync`; для сопоставления не нужны внешние API или
+база данных, а во время выполнения ничего не скачивается. Версии зависимостей закреплены в `uv.lock`.
 
-## Input
+## Входные данные
 
-`--text` is UTF-8 text. Without it, stdin is read as UTF-8. `--text` takes
-precedence over stdin. Empty input and invalid UTF-8 are errors.
+`--text` указывает файл с текстом в UTF-8. Если параметр не задан, текст читается из stdin
+в кодировке UTF-8. `--text` имеет приоритет над stdin. Пустой ввод и некорректный UTF-8 считаются ошибками.
 
 ```json
 {
@@ -45,20 +46,21 @@ precedence over stdin. Empty input and invalid UTF-8 are errors.
 }
 ```
 
-Groups default to empty lists. IDs are required and unique within their type;
-optional fields may be omitted or null. Empty/whitespace-only strings, unknown
-fields, and invalid dates are rejected, except that `email` and `reply_email`
-accept any string without email-format validation, including empty strings.
-Dates accept ISO `YYYY-MM-DD` and `DD.MM.YYYY` in input.
-Document type is searchable as weak evidence requiring local corroboration.
-Dates also accept `DD.MM.YYYY`; the Russian/English field mappings and identifier
-validation rules are documented in [SCHEMA.ru.md](docs/SCHEMA.ru.md).
+По умолчанию группы представлены пустыми списками. Идентификаторы обязательны и уникальны
+в пределах своего типа; необязательные поля можно пропустить или задать как null.
+Пустые строки, строки только из пробельных символов, неизвестные поля и некорректные даты
+отклоняются. Исключение — `email` и `reply_email`: они принимают любые строки, включая пустые,
+без проверки формата адреса электронной почты. Входные даты принимаются в форматах ISO
+`YYYY-MM-DD` и `DD.MM.YYYY`. Тип документа участвует в поиске как слабый признак,
+требующий подтверждения соседними совпадениями. Соответствия русских и английских полей,
+а также правила проверки идентификаторов описаны в [SCHEMA.ru.md](docs/SCHEMA.ru.md).
 
-## Multiple files and CSV rows
+## Несколько файлов и строки CSV
 
-Use `mark-batch` for semicolon-separated UTF-8 CSV exports like `new 4.csv`.
-Each CSV record supplies its own people, cars, legal entities, documents, sender,
-and correspondence metadata. Its `versionId` selects a separate UTF-8 text file:
+Для выгрузок CSV в UTF-8 с разделителем `,` или `;`, например `new 4.csv`,
+используйте `mark-batch`. Каждая запись CSV содержит собственные данные о физических лицах,
+транспортных средствах, юридических лицах, документах, отправителе и корреспонденции.
+Поле `versionId` определяет отдельный текстовый файл в UTF-8:
 
 ```text
 dataset/
@@ -77,58 +79,70 @@ uv run entity-marker mark-batch \
   --evidence-output evidence.json \
   --pretty
 
-# Repeat --input to process multiple CSVs in the given order.
+# Повторите --input, чтобы обработать несколько CSV в указанном порядке.
 uv run entity-marker mark-batch \
   --input dataset/first.csv --input dataset/second.csv \
   --output predictions.json
 
-# Runnable synthetic example included in this repository:
+# Готовый к запуску синтетический пример из репозитория:
 uv run entity-marker mark-batch --input examples/batch/input.csv --pretty
 ```
 
-Without `--txts-dir`, each CSV uses the `txts` folder beside that CSV.
-The command reads local `.txt` files only; `minioPath`, URLs, and PDF filenames
-are metadata, not instructions to download or extract documents.
-Standard CSV quoting, quoted multiline cells, CRLF, and an optional UTF-8 BOM
-are supported. CSV cells can exceed Python's default 131,072-character limit;
-the reader temporarily raises it to the platform-supported maximum.
-One *CSV record* is one input, even when a cell spans physical lines.
+Если `--txts-dir` не задан, для каждого CSV используется папка `txts` рядом с ним.
+Разделитель автоматически определяется по заголовку каждого файла; можно передавать
+CSV с разными разделителями в одном вызове.
+Поддерживаются русские и технические английские заголовки (`Sender`, `PartnerName`,
+`InsuranceSubjects` и другие); формат заголовков не зависит от разделителя.
+Команда читает только локальные файлы `.txt`; `minioPath`, URL и имена PDF-файлов
+считаются метаданными, а не указаниями скачать документы или извлечь из них текст.
+Поддерживаются стандартные правила кавычек CSV, многострочные ячейки в кавычках,
+переводы строк CRLF и необязательный BOM UTF-8. Ячейки CSV могут превышать стандартный
+лимит Python в 131 072 символа: при чтении он временно увеличивается до максимума,
+поддерживаемого платформой. Одна *запись CSV* — один входной объект обработки,
+даже если ячейка занимает несколько физических строк.
+Внутри ячейки CSV, заключённой в кавычки, каждую двойную кавычку нужно удваивать:
+`"ООО ""Ромашка"""` читается как `ООО "Ромашка"`. Ячейки с выбранным разделителем
+или переводами строк должны быть заключены в кавычки. Обратные косые черты сохраняются
+и не считаются символами экранирования CSV. Для ячеек с JSON сначала закодируйте значение
+в JSON, включая экранирование `\"`, а затем запишите полученную строку средством записи CSV,
+например `csv.DictWriter(delimiter=";")` из Python: оно автоматически обработает внешние кавычки CSV.
 
-The `Субъект страхования ФЛ`, `Субъект страхования ЮЛ`, and
-`Субъект страхования ТС` cells contain JSON arrays. Empty cells mean empty arrays;
-blank strings and JSON nulls in optional entity fields become missing values.
-Identifiers stay strings, preserving leading zeros. People's identity-document
-fields become document entities. See the [CSV field mapping](docs/SCHEMA.ru.md#csv-выгрузки).
+Ячейки `Субъект страхования ФЛ`, `Субъект страхования ЮЛ` и
+`Субъект страхования ТС` содержат массивы JSON. Пустые ячейки означают пустые массивы;
+пустые и состоящие только из пробелов строки, а также JSON null в необязательных полях
+сущностей трактуются как отсутствующие значения. Идентификаторы остаются строками,
+поэтому ведущие нули сохраняются. Поля документов, удостоверяющих личность физических лиц,
+преобразуются в сущности документов. См. [соответствие полей CSV](docs/SCHEMA.ru.md#csv-выгрузки).
 
-Output is one Label Studio task per record in a single JSON array. Each task's
-`data` contains the original `text`, `versionId`, `source_csv`, `source_row`
-(header is row 1), `text_file`, and any provided `cardId`, `fileId`, and `fileName`.
-Objects are never pooled across records. Entity IDs are generated from array
-positions within each record (`person-1`, `car-1`, etc.); identify them together
-with the source CSV and row. Repeated version IDs remain separate records.
-Evidence output is an array of reports carrying the same source metadata.
-Region IDs are local to each task/report pair. `--format occurrences` emits this
-report array as the primary output.
+Результат — единый массив JSON с одной задачей Label Studio на каждую запись.
+Поле `data` каждой задачи содержит исходный `text`, `versionId`, `source_csv`, `source_row`
+(заголовок считается строкой 1), `text_file`, а также `cardId`, `fileId` и `fileName`, если они заданы.
+Объекты из разных записей не объединяются. Идентификаторы сущностей создаются по позициям
+в массивах каждой записи (`person-1`, `car-1` и т. д.); для однозначной идентификации
+используйте их вместе с исходным CSV и номером строки. Повторяющиеся versionId остаются
+отдельными записями. Вывод подтверждающих данных — массив отчётов с теми же метаданными
+источника. Идентификаторы регионов локальны для каждой пары «задача — отчёт».
+`--format occurrences` выводит этот массив отчётов в качестве основного результата.
 
-`--max-errors`, `--disable-fuzzy`, `--pretty`, and `-v`/`-vv` work as in `mark`.
-Without `--output`, JSON goes to stdout. Invalid CSV/entity data, unsafe version
-IDs, and empty or invalid UTF-8 text files fail with exit code 2.
-Rows with missing `<versionId>.txt` files are skipped with a warning on stderr.
-If all text files are missing, the command succeeds with empty output arrays.
-All remaining rows must succeed before either output is written.
-Input/output collisions are checked against all CSV and text paths.
-Outputs are replaced atomically individually, not as a multi-file transaction.
-The combined batch output is held in memory, so split very large exports into
-smaller batches. The existing single-document `mark` command is unchanged.
+Параметры `--max-errors`, `--disable-fuzzy`, `--pretty` и `-v`/`-vv` работают так же, как в `mark`.
+Без `--output` JSON выводится в stdout. Некорректные данные CSV или сущностей, небезопасные
+versionId, пустые текстовые файлы и файлы с некорректным UTF-8 приводят к завершению с кодом 2.
+Записи без соответствующего файла `<versionId>.txt` пропускаются с предупреждением в stderr.
+Если отсутствуют все текстовые файлы, команда успешно завершается с пустыми выходными массивами.
+Все оставшиеся записи должны быть обработаны успешно до записи любого из выходных файлов.
+Совпадения входных и выходных путей проверяются для всех CSV и текстовых файлов.
+Каждый выходной файл заменяется атомарно, но общей транзакции для нескольких файлов нет.
+Общий результат пакетной обработки хранится в памяти, поэтому очень большие выгрузки
+следует разбивать на меньшие пакеты. Существующая команда `mark` для одного документа не изменена.
 
-## Output and Label Studio
+## Выходные данные и Label Studio
 
-Import prediction JSON into a project configured with
-[`examples/labeling_config.xml`](examples/labeling_config.xml). The output follows
-[Label Studio's prediction format](https://labelstud.io/guide/predictions), with
-`from_name="entities"`, `to_name="text"`, and field-specific labels.
+Импортируйте JSON с предсказаниями в проект, настроенный с помощью
+[`examples/labeling_config.xml`](examples/labeling_config.xml). Результат соответствует
+[формату предсказаний Label Studio](https://labelstud.io/guide/predictions):
+`from_name="entities"`, `to_name="text"` и отдельные метки для полей.
 
-For `VIN X7LHSR0VN12345678` and the known VIN `X7LHSRDVN12345678`:
+Для текста `VIN X7LHSR0VN12345678` и известного VIN `X7LHSRDVN12345678`:
 
 ```json
 [
@@ -157,97 +171,103 @@ For `VIN X7LHSR0VN12345678` and the known VIN `X7LHSRDVN12345678`:
 ]
 ```
 
-`--evidence-output evidence.json` writes entity IDs, source values, methods, edit
-distances, scores, local supporting matches, and resolution rejections. Its
-`region_id` links each accepted occurrence to the prediction result. Candidate
-spans rejected at boundary/gap filtering are not included in this report.
-`--format occurrences` emits this report as the primary output instead.
+`--evidence-output evidence.json` записывает идентификаторы сущностей, исходные значения,
+методы сопоставления, расстояния редактирования, оценки, соседние подтверждающие совпадения
+и причины отклонения при разрешении конфликтов. Поле `region_id` связывает каждое принятое
+вхождение с результатом предсказания. Фрагменты-кандидаты, отклонённые при фильтрации
+границ и промежутков, в этот отчёт не включаются.
+`--format occurrences` выводит этот отчёт в качестве основного результата.
 
-Offsets always use Python Unicode code-point slicing `[start:end]` into the
-**original** text. File reading preserves CRLF. The embedded text is unchanged;
-`original[start:end] == matched_text`. No normalized offsets are exported.
-The serializer is covered by Unicode/emoji tests; import/display in a running
-Label Studio installation has not been exercised here.
+Смещения всегда задаются в кодовых точках Unicode, как в срезе Python `[start:end]`,
+относительно **исходного** текста. При чтении файла сохраняются CRLF. Текст, включённый
+в результат, не изменяется; `original[start:end] == matched_text`.
+Смещения в нормализованном тексте не экспортируются. Сериализатор покрыт тестами
+с Unicode и эмодзи; импорт и отображение в запущенном экземпляре Label Studio здесь не проверялись.
 
-Output order is deterministic: start, end, entity type, entity ID, field.
-Without `--output`, JSON goes to stdout. Logs and errors go to stderr. Files are
-replaced atomically individually; multiple outputs are not a transaction.
-Input/output path collisions are rejected. Invalid input and I/O failures exit
-with code 2. A successful run with no matches exports an empty result list.
+Порядок результатов детерминирован: начало, конец, тип сущности, идентификатор сущности, поле.
+Без `--output` JSON выводится в stdout. Журналы и ошибки выводятся в stderr.
+Каждый файл заменяется атомарно; запись нескольких файлов не является общей транзакцией.
+Совпадения входных и выходных путей запрещены. Некорректный ввод и ошибки ввода-вывода
+приводят к завершению с кодом 2. При успешном выполнении без совпадений экспортируется пустой список результатов.
 
-## Matching
+## Сопоставление
 
 ```text
-objects → aliases → exact + normalized exact + Bitap candidates
-        → original spans and boundaries → local evidence
-        → identity/strength resolution → overlap resolution → predictions
+объекты → варианты записи → точные + нормализованные точные + кандидаты Bitap
+        → фрагменты исходного текста и границы → локальные подтверждения
+        → разрешение конфликтов по сущности и силе признаков → разрешение пересечений → предсказания
 ```
 
-- **Exact:** literal occurrences, including repeats and overlapping search hits.
-- **Normalized:** NFKC with mapped source ranges; names are case-folded with
-  `ё → е`; VINs and plates allow specified Latin/Cyrillic lookalikes; structured
-  identifiers allow spaces/hyphens and document identifiers allow `№`.
-- **Bitap:** approximate normalized matching with substitutions, insertions, and
-  deletions. Transposition is two edits. A positive-bit Shift-And automaton locates
-  ends, then an anchored reverse automaton recovers every valid start and its
-  minimum Levenshtein distance. Empty patterns and negative budgets are errors.
-  Budget zero is identical to literal matching at the matcher level.
+- **Точное:** буквальные вхождения, включая повторения и пересекающиеся совпадения при поиске.
+- **Нормализованное:** NFKC с сохранением соответствия исходным диапазонам; для имён
+  применяется приведение регистра через casefold и замена `ё → е`; для VIN и госномеров
+  допускаются заданные визуально похожие латинские и кириллические символы; структурированные
+  идентификаторы допускают пробелы и дефисы, а идентификаторы документов — символ `№`.
+- **Bitap:** приближённое сопоставление нормализованного текста с заменами, вставками
+  и удалениями. Перестановка двух символов считается двумя правками. Автомат Shift-And
+  с положительной битовой маской находит конечные позиции, затем обратный автомат,
+  привязанный к каждой из них, восстанавливает все допустимые начальные позиции
+  и минимальное расстояние Левенштейна для каждой. Пустые шаблоны и отрицательные
+  лимиты правок считаются ошибками. Нулевой лимит на уровне алгоритма сопоставления
+  эквивалентен буквальному поиску.
 
-Normalization records an original range for every emitted character, including
-Unicode expansion/composition. Partial matches inside expanded characters are
-rejected. Removed separator gaps are bounded; line breaks remain barriers.
-Matching inside larger words/identifiers is rejected. There is no global
-aggressive normalization across fields.
+При нормализации для каждого полученного символа сохраняется диапазон в исходном тексте,
+в том числе при развёртывании и композиции Unicode. Частичные совпадения внутри развёрнутых
+символов отклоняются. Длина промежутков от удалённых разделителей ограничена;
+переводы строк остаются границами поиска. Совпадения внутри более длинных слов
+и идентификаторов отклоняются. Общая агрессивная нормализация для всех полей не применяется.
 
-Person names are marked as separate `PERSON_FIRST_NAME`, `PERSON_LAST_NAME`, and
-`PERSON_MIDDLE_NAME` (patronymic) spans, including when all three appear together.
-For example, `Иванов Иван Иванович` produces three regions. Previous surnames use
-`PERSON_PREVIOUS_LAST_NAME`; person full-name regions are not generated. In
-`Иванов И.И.`, only the surname is marked. Birth dates retain ISO/dotted/slashed aliases.
+Компоненты ФИО размечаются отдельными фрагментами `PERSON_FIRST_NAME`, `PERSON_LAST_NAME`
+и `PERSON_MIDDLE_NAME` (отчество), в том числе когда все три идут подряд.
+Например, `Иванов Иван Иванович` даёт три региона. Для предыдущих фамилий используется
+`PERSON_PREVIOUS_LAST_NAME`; единые регионы полного ФИО физического лица не создаются.
+В `Иванов И.И.` размечается только фамилия. Для дат рождения сохраняются варианты
+записи в ISO, с точками и с косыми чертами.
 
-Russian morphology is enabled by default through the
-[pymorphy3](https://github.com/no-plagiarism/pymorphy3) infrastructure adapter.
-Dictionary-tagged first names, surnames, and patronymics are inflected into six
-singular cases, so `Иванову Ивану Ивановичу` produces three component matches linked
-to the same person. Senders retain their single `SENDER_FULL_NAME` field, with
-full-name aliases in two orders and compact/spaced initials for inflected surnames.
-For surnames absent from the dictionary, the analyzer's predicted surname
-paradigms are used as a fallback: `Шиндецова`, `Шиндецовой`, and `Шиндецову`
-match the same person. This also applies to previous surnames and sender names.
+Русская морфология включена по умолчанию через инфраструктурный адаптер
+[pymorphy3](https://github.com/no-plagiarism/pymorphy3). Имена, фамилии и отчества,
+распознанные словарём, склоняются по шести падежам единственного числа, поэтому
+`Иванову Ивану Ивановичу` даёт три совпадения компонентов, связанных с одним человеком.
+Для отправителей сохраняется единое поле `SENDER_FULL_NAME` с вариантами полного ФИО
+в двух порядках и с инициалами без пробелов или с пробелами при склоняемых фамилиях.
+Для фамилий, отсутствующих в словаре, используются предсказанные анализатором парадигмы
+склонения: `Шиндецова`, `Шиндецовой` и `Шиндецову` сопоставляются с одним человеком.
+Это также относится к предыдущим фамилиям и ФИО отправителей.
 
-Morphological aliases work with `--disable-fuzzy`; their match method is `exact`
-or `normalized` according to how the generated alias matches the text. The
-reported `source_value` is the matched alias, while `entity_id` links back to the
-original object. Sender initials aliases are exact/normalized only: wrong initials are
-not repaired using fuzzy edits. Components without a supported parse are kept unchanged. Gender
-hints from first name and patronymic constrain surname parses; uncertain identities
-such as a male `Иванов` and female `Иванова` sharing a form remain ambiguous. Car aliases include
-VIN, plate, body number, and chassis number. Documents include series, number,
-combined series/number, and issue-date aliases.
+Морфологические варианты работают и с `--disable-fuzzy`; метод совпадения — `exact`
+или `normalized` в зависимости от того, как сгенерированный вариант совпал с текстом.
+В `source_value` указывается совпавший вариант, а `entity_id` связывает его с исходным
+объектом. Варианты ФИО отправителя с инициалами допускают только точное и нормализованное
+сопоставление: ошибочные инициалы не исправляются нечёткими правками. Компоненты без
+поддерживаемого разбора остаются неизменными. Признаки пола из имени и отчества
+ограничивают разборы фамилии; неоднозначность сохраняется, если, например, мужская
+фамилия `Иванов` и женская `Иванова` имеют общую форму. Варианты транспортных средств
+включают VIN, госномер, номер кузова и номер шасси. Для документов используются серия,
+номер, объединённые серия и номер, а также варианты даты выдачи.
 
-Birth dates support one OCR edit after horizontal spaces are removed. For example,
-stored `20.01.1973` matches `20.01 1 1973` as a Bitap substitution of `.` with `1`.
-The reported region includes the original spaces. The same one-edit rule also
-permits digit substitutions; `--disable-fuzzy` or `--max-errors 0` disables it.
-Year/birth suffixes such as `г`, `г.`, `г.р.`, `год`, `года`, `году`, and
-`г. рождения` are recognized after dates, with or without a space. For example,
-`20.01 1 1973г.р. место рожд:` marks only `20.01 1 1973`; the suffix consumes
-no edit and is excluded from the region. Suffixes remain in the original text,
-but are never included in the date annotation, even as fuzzy insertions.
-Line breaks and excessive gaps remain barriers. Other date fields retain
-exact/normalized matching.
+Даты рождения допускают одну OCR-правку после удаления горизонтальных пробелов.
+Например, сохранённая дата `20.01.1973` совпадает с `20.01 1 1973` благодаря замене
+`.` на `1` в Bitap. Возвращаемый регион включает исходные пробелы. Это же правило
+допускает замену цифры; `--disable-fuzzy` или `--max-errors 0` отключает такие правки.
+После дат распознаются обозначения года и рождения: `г`, `г.`, `г.р.`, `год`, `года`,
+`году` и `г. рождения`, как с пробелом, так и без него. Например, в
+`20.01 1 1973г.р. место рожд:` размечается только `20.01 1 1973`; суффикс
+не расходует лимит правок и не входит в регион. Суффиксы сохраняются в исходном тексте,
+но никогда не включаются в разметку даты, даже как нечёткие вставки.
+Переводы строк и слишком большие промежутки остаются границами поиска.
+Для остальных полей дат сохраняется точное и нормализованное сопоставление.
 
-Fuzzy distance defaults to one, with domain limits:
+По умолчанию допускается одна нечёткая правка с учётом ограничений предметной области:
 
-| Field | Maximum edits |
+| Поле | Максимум правок |
 |---|---:|
-| VIN, plate, body/chassis identifiers of length ≥ 4 | 1 |
-| Names of length ≥ 4 | 1 |
-| Sender full names / surnames of length ≥ 10 | 2, if global ceiling permits |
-| Document number/combined identifier of length ≥ 6 | 1 |
-| Court case-number aliases of length ≥ 6 | 1 |
-| Birth-date aliases of length ≥ 8 | 1 |
-| Other dates, document series, shorter values | 0 |
+| VIN, госномер, номера кузова/шасси длиной ≥ 4 | 1 |
+| Имена и фамилии длиной ≥ 4 | 1 |
+| Полные ФИО / фамилии отправителей длиной ≥ 10 | 2, если позволяет общий лимит |
+| Номер документа / объединённый идентификатор длиной ≥ 6 | 1 |
+| Варианты номера судебного дела длиной ≥ 6 | 1 |
+| Варианты даты рождения длиной ≥ 8 | 1 |
+| Другие даты, серии документов, более короткие значения | 0 |
 
 ```bash
 uv run entity-marker mark --text input.txt --objects objects.json --max-errors 2
@@ -255,54 +275,57 @@ uv run entity-marker mark --text input.txt --objects objects.json --disable-fuzz
 uv run entity-marker mark --text input.txt --objects objects.json --format occurrences -vv
 ```
 
-`--max-errors` caps domain budgets, it does not override short-value restrictions.
-`--disable-fuzzy` and `--max-errors 0` retain normalization. Exact occurrences
-suppress redundant overlapping fuzzy candidates, while later OCR-damaged
-occurrences are still searched. Normalized texts, patterns, and search results
-are cached within each run. Identical aliases are deduplicated.
+`--max-errors` задаёт верхнюю границу лимитов предметной области, но не отменяет ограничения
+для коротких значений. `--disable-fuzzy` и `--max-errors 0` сохраняют нормализацию.
+Точные вхождения подавляют избыточные пересекающиеся нечёткие кандидаты, но поиск
+последующих вхождений с OCR-ошибками продолжается. Нормализованные тексты, шаблоны
+и результаты поиска кешируются в пределах одного запуска. Одинаковые варианты записи удаляются как дубликаты.
 
-## Evidence and resolution
+## Подтверждающие признаки и разрешение конфликтов
 
-Field/alias weights express discriminative power, not calibrated probabilities.
-Strong identifiers and sender full names receive higher weights than isolated given
-names. Similarity discounts weight by normalized edit distance.
+Веса полей и вариантов записи отражают их различительную способность, а не калиброванные
+вероятности. Сильные идентификаторы и полные ФИО отправителей получают больший вес,
+чем отдельные имена. Мера сходства уменьшает вес с учётом нормализованного расстояния редактирования.
 
-Evidence is grouped by entity and local mention: distinct non-overlapping fields,
-at most 80 characters apart, with no sentence/line boundary between them. Only
-the strongest support per field is retained. A bounded evidence bonus can raise
-weak candidates above the acceptance threshold. Composite aliases do not borrow
-components as score bonuses. Weak isolated names and unresolved competing
-identities are rejected; entity ID sorting never establishes identity.
+Подтверждения группируются по сущности и локальному упоминанию: это разные непересекающиеся
+поля на расстоянии не более 80 символов друг от друга, без границы предложения или строки
+между ними. Для каждого поля сохраняется только самое сильное подтверждение.
+Ограниченная добавка за подтверждающие признаки может поднять слабого кандидата выше
+порога принятия. Составные варианты записи не получают дополнительную оценку за собственные
+компоненты. Слабые изолированные имена и неразрешённые конкурирующие сущности отклоняются;
+сортировка по идентификатору сущности никогда не определяет, какой сущности принадлежит совпадение.
 
-The overlap policy retains identical spans in distinct entity roles, such as a
-legal entity and a sender sharing an INN. Person name components contained within
-`SENDER_FULL_NAME` also retain their separate regions, so a sender annotation does
-not hide `PERSON_LAST_NAME` or the other name components. Otherwise the flat policy
-prioritizes exact, then normalized, then fuzzy matches;
-then score, edit distance, span length, and deterministic ordering. Consequently,
-an exact document number can beat an enclosing normalized series/number region.
-Rejected candidates remain in the evidence report. Every non-overlapping repeated
-mention is retained: if a known case number appears three times, the output contains
-three `MISC_CASE_NUMBER` regions, each with its own offsets and region ID. This applies
-to all labels in both `mark` and `mark-batch`; labels and matched values are not
-deduplicated across text positions. Each mention still passes the matching and
-ambiguity checks above.
+Правила обработки пересечений сохраняют одинаковые фрагменты для разных ролей сущностей,
+например для юридического лица и отправителя с общим ИНН. Компоненты ФИО физического лица
+внутри `SENDER_FULL_NAME` также сохраняют отдельные регионы, поэтому разметка отправителя
+не скрывает `PERSON_LAST_NAME` и другие компоненты ФИО. В остальных случаях плоская
+разметка отдаёт приоритет точным, затем нормализованным, затем нечётким совпадениям;
+далее учитываются оценка, расстояние редактирования, длина фрагмента и детерминированный порядок.
+Поэтому точное совпадение номера документа может вытеснить содержащий его нормализованный
+регион серии и номера. Отклонённые кандидаты остаются в отчёте подтверждающих данных.
+Все непересекающиеся повторные упоминания сохраняются: если известный номер дела встречается
+трижды, результат содержит три региона `MISC_CASE_NUMBER`, каждый со своими смещениями
+и идентификатором. Это относится ко всем меткам в `mark` и `mark-batch`; одинаковые метки
+и совпавшие значения в разных позициях текста не удаляются как дубликаты.
+Каждое упоминание по-прежнему проходит описанные выше проверки сопоставления и неоднозначности.
 
-Case numbers in the form `A41-20769/2025` (Latin `A` or Cyrillic `А`) also accept
-the short year form `A41-20769/25`, in either direction, plus standalone forms
-without the court prefix: `20769/2025` and `20769/25`. Two-digit years denote
-2000–2099. These forms are generated as aliases and searched with the same
-exact, normalized, and Bitap matchers as other fuzzy-enabled fields. Case-number
-aliases of length ≥ 6 allow one insertion, deletion, or substitution, capped by
-`--max-errors`; for example, `A41-2O769/25` can match `A41-20769/2025` through its
-short-year alias. Each occurrence keeps its original text and offsets.
-`--disable-fuzzy` or `--max-errors 0` disables edits while retaining the generated
-forms. Boundaries prevent matching a bare suffix inside a longer number, and
-unresolved competing case identities remain ambiguous. Pattern aliases do not
-apply to incoming letter numbers or other reference formats.
+Для номеров дел вида `A41-20769/2025` (с латинской `A` или кириллической `А`)
+также принимается сокращённый год `A41-20769/25` в обоих направлениях, а также
+самостоятельные формы без префикса суда: `20769/2025` и `20769/25`.
+Двузначный год обозначает год из диапазона 2000–2099. Эти формы генерируются как варианты
+записи и ищутся теми же алгоритмами точного, нормализованного и Bitap-сопоставления,
+что и другие поля с поддержкой нечёткого поиска. Варианты номера дела длиной ≥ 6
+допускают одну вставку, удаление или замену с учётом ограничения `--max-errors`;
+например, `A41-2O769/25` может совпасть с `A41-20769/2025` через вариант с коротким годом.
+Каждое вхождение сохраняет исходный текст и смещения. `--disable-fuzzy` или `--max-errors 0`
+отключает правки, сохраняя сгенерированные формы. Проверка границ не позволяет сопоставить
+отдельный суффикс внутри более длинного номера; неразрешённые конкурирующие номера дел
+остаются неоднозначными. Эти правила генерации вариантов не применяются к номерам входящих
+писем и другим форматам регистрационных номеров.
 
-Rules live in immutable `MatchingConfig` and field policies. Python callers can
-supply custom thresholds, proximity limits, and field-weight overrides:
+Правила хранятся в неизменяемом `MatchingConfig` и политиках полей.
+При вызове из Python можно задавать собственные пороги, ограничения расстояния
+между подтверждениями и переопределения весов полей:
 
 ```python
 from entity_marker.bootstrap import build_handler
@@ -318,49 +341,51 @@ handler = build_handler(
 )
 ```
 
-`-v` logs counts; `-vv` logs aliases, candidates, and resolver decisions, including
-matched values. Logging is opt-in and never contaminates stdout JSON.
+`-v` выводит в журнал счётчики; `-vv` — варианты записи, кандидатов и решения
+при разрешении конфликтов, включая совпавшие значения. Журналирование включается явно
+и не добавляет посторонних данных в JSON, выводимый в stdout.
 
-## DDD architecture
+## Архитектура DDD
 
 ```text
-CLI → Application → Domain
-                       ↑
-                 Infrastructure
+CLI → Прикладной слой → Доменный слой
+                            ↑
+                      Инфраструктура
 ```
 
 ```text
 src/entity_marker/
 ├── domain/
-│   ├── models/           # Entities, spans, aliases, candidates, evidence
-│   ├── aliases/          # Person/car/document textual representations
-│   ├── policies/         # Field budgets, weights, immutable config
-│   ├── ports/            # Exact/approximate matcher and normalizer protocols
-│   └── services/         # Candidate generation, evidence and overlap resolution
-├── application/          # Mark command and handler, no I/O
+│   ├── models/           # Сущности, фрагменты, варианты записи, кандидаты, подтверждения
+│   ├── aliases/          # Текстовые представления физических лиц, ТС и документов
+│   ├── policies/         # Лимиты правок и веса полей, неизменяемая конфигурация
+│   ├── ports/            # Протоколы точного/приближённого сопоставления и нормализации
+│   └── services/         # Генерация кандидатов, обработка подтверждений и пересечений
+├── application/          # Команда разметки и обработчик без ввода-вывода
 ├── infrastructure/
-│   ├── matching/         # Exact and Bitap adapters
-│   ├── morphology/       # Russian dictionary-backed name inflection
-│   ├── normalization/    # Offset-preserving normalization adapter
-│   └── serialization/    # Pydantic input boundary, JSON exports, atomic file I/O
-├── cli/                  # Typer commands and errors
-├── bootstrap.py          # Constructor injection
+│   ├── matching/         # Адаптеры точного сопоставления и Bitap
+│   ├── morphology/       # Склонение русских ФИО с использованием словаря
+│   ├── normalization/    # Адаптер нормализации с сохранением исходных смещений
+│   └── serialization/    # Валидация входа Pydantic, экспорт JSON, атомарный файловый ввод-вывод
+├── cli/                  # Команды Typer и ошибки
+├── bootstrap.py          # Внедрение зависимостей через конструкторы
 └── __main__.py           # python -m entity_marker
 ```
 
-Domain models are immutable dataclasses, not dictionaries. Pydantic is used only
-at the input boundary. Domain/application code cannot import infrastructure,
-CLI, Typer, or Pydantic; a test enforces this. No repositories, web service, or
-unnecessary DDD infrastructure are introduced.
+Доменные модели — неизменяемые dataclass, а не словари. Pydantic используется только
+на границе входных данных. Код доменного и прикладного слоёв не может импортировать
+инфраструктуру, CLI, Typer или Pydantic; это проверяется тестом. Репозитории,
+веб-сервис и избыточная инфраструктура DDD не добавляются.
 
-To add an entity type: add its model and DTO mapping, enum member, alias generator,
-policy/weights, labels in the XML, and tests. Existing matcher adapters are shared.
-To add an algorithm: implement `ApproximateTextMatcher`, test its span/distance
-contract, and inject it in `bootstrap.py`; acceptance policies stay unchanged.
-Large-catalog exact search could later use a batch Aho–Corasick port without
-changing occurrence or evidence models.
+Чтобы добавить тип сущности, добавьте модель и преобразование DTO, элемент перечисления,
+генератор вариантов записи, политику и веса, метки в XML и тесты.
+Существующие адаптеры сопоставления используются повторно.
+Чтобы добавить алгоритм, реализуйте `ApproximateTextMatcher`, проверьте его контракт
+по фрагментам и расстояниям и подключите в `bootstrap.py`; политики принятия совпадений
+останутся прежними. В будущем для точного поиска по большим каталогам можно добавить
+порт пакетного поиска Ахо — Корасик без изменения моделей вхождений и подтверждений.
 
-## Validation and development
+## Проверки и разработка
 
 ```bash
 uv run pytest
@@ -371,34 +396,37 @@ uv build
 make clean
 ```
 
-Tests include 3,720 exhaustive Bitap/reference comparisons, long patterns,
-Unicode, each edit operation, original offsets, normalization, policies, aliases,
-ambiguity, local/remote evidence, overlap decisions, CLI options, and file errors.
+Тесты включают 3 720 исчерпывающих сравнений Bitap с эталонной реализацией,
+длинные шаблоны, Unicode, каждый вид правки, исходные смещения, нормализацию,
+политики, варианты записи, неоднозначность, близкие и удалённые подтверждения,
+решения по пересечениям, параметры CLI и файловые ошибки.
 
-For VS Code, install the recommended Python extensions, run `uv sync`, select
-**Entity Marker: mark example**, and press F5. The debugger uses `.venv`.
-To debug a CSV batch, select **Entity Marker: mark-batch CSV**, press F5, and
-enter the CSV path (default: `examples/batch/input.csv`). Paths can be absolute
-or relative to the workspace. Texts are read from `txts/<versionId>.txt` beside
-the CSV; add `--txts-dir` and your folder to the configuration's `args` to override
-that location. Predictions and progress logs appear in the integrated terminal.
-`make clean` removes caches/build outputs while preserving `.venv` and examples.
+Для VS Code установите рекомендуемые расширения Python, выполните `uv sync`,
+выберите **Entity Marker: mark example** и нажмите F5. Отладчик использует `.venv`.
+Для отладки пакета CSV выберите **Entity Marker: mark-batch CSV**, нажмите F5
+и введите путь к CSV (по умолчанию: `examples/batch/input.csv`). Пути могут быть
+абсолютными или относительными к рабочей папке. Тексты читаются из `txts/<versionId>.txt`
+рядом с CSV; чтобы изменить расположение, добавьте `--txts-dir` и путь к своей папке
+в `args` конфигурации. Предсказания и журнал хода обработки выводятся во встроенном терминале.
+`make clean` удаляет кеши и результаты сборки, сохраняя `.venv` и примеры.
 
-## Limits
+## Ограничения
 
-- Morphology covers dictionary-recognized Russian singular names and predicted
-  surname paradigms supplied by pymorphy3. First names and patronymics still require
-  dictionary entries. Unsupported components stay unchanged; conflicting gender
-  hints do not produce new forms. This is not arbitrary phrase analysis or entity
-  discovery.
-- Heuristic rules need evaluation/tuning on representative OCR data. A shared
-  identifier without sufficient local evidence remains ambiguous.
-- Output uses a flat overlap policy (except identical spans in distinct roles),
-  not nested annotations or document-wide
-  coreference. Independent fields separated by sentence boundaries do not combine.
-- Input text and candidates are held in memory. Bitap is intended for modest
-  catalogs and small error budgets. For text length n, pattern length m, budget k,
-  and H matching ends, work is O(n*k + H*(m+k)*k) big-integer operations plus sorting;
-  integer costs grow with m. Large budgets can yield quadratically many spans.
-- Input identifiers are nonblank strings; jurisdiction-specific VIN checksum,
-  license-plate, and document-format validators are not imposed.
+- Морфология охватывает словарные русские имена, фамилии и отчества в единственном числе,
+  а также предсказанные pymorphy3 парадигмы склонения фамилий. Для имён и отчеств по-прежнему
+  необходимы словарные записи. Неподдерживаемые компоненты остаются неизменными;
+  при противоречивых признаках пола новые формы не создаются. Это не анализ произвольных
+  фраз и не поиск неизвестных сущностей.
+- Эвристические правила требуют оценки и настройки на репрезентативных OCR-данных.
+  Общий идентификатор без достаточных локальных подтверждений остаётся неоднозначным.
+- Для вывода используется плоская политика пересечений, за исключением одинаковых
+  фрагментов в разных ролях, без вложенной разметки и разрешения кореференции
+  в масштабе документа. Независимые поля, разделённые границами предложений, не объединяются.
+- Входной текст и кандидаты хранятся в памяти. Bitap предназначен для небольших каталогов
+  и малых лимитов правок. При длине текста n, длине шаблона m, лимите k и H найденных
+  конечных позициях требуется O(n*k + H*(m+k)*k) операций над целыми числами произвольной
+  точности плюс сортировка; стоимость целочисленных операций растёт с m.
+  Большие лимиты правок могут приводить к квадратичному числу фрагментов.
+- Входные идентификаторы — непустые строки, не состоящие только из пробелов.
+  Проверки контрольной суммы VIN, формата госномеров и документов, зависящие
+  от конкретной юрисдикции, не применяются.
